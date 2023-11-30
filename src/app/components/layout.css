@@ -1,0 +1,7 @@
+.layout{
+    display: grid;
+    grid-template-areas: "toolbar" "content";
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    max-height: 100vh;
+  }
