@@ -1,4 +1,4 @@
-import {AppBar, Button, IconButton, Toolbar} from "@mui/material";
+import {AppBar, Box, Button, IconButton, Toolbar} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
@@ -23,7 +23,7 @@ export const Appbar = () => {
   };
 
   return (
-    <div>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 2 }} onClick={navigateHome}>
@@ -53,7 +53,7 @@ export const Appbar = () => {
           </div>
         </Toolbar>
       </AppBar>
-      </div>
+      </Box>
   );
 };
 

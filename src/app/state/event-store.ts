@@ -1,10 +1,10 @@
 
 import {autorun, makeAutoObservable, observable} from "mobx";
 import {RootStore} from "./root-store";
-import { EventDto } from "src/app/model/eventMini";
+import { EventMini } from "src/app/model/eventMini";
 
 export class EventStore {
-    public events: { [key: string]: EventDto } = observable({});
+    public events: { [key: string]: EventMini } = observable({});
 
     constructor(private rootStore: RootStore) {
         makeAutoObservable(this);
@@ -14,13 +14,13 @@ export class EventStore {
         });
     }
 
-    add(events: EventDto[]) {
+    add(events: EventMini[]) {
         events.forEach((e) => {
             this.events[e.id!] = e;
         });
     }
 
-    remove(events: EventDto[]) {
+    remove(events: EventMini[]) {
         events.forEach((e) => {
             delete this.events[e.id!];
         });

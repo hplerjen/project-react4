@@ -2,14 +2,12 @@ import {Link, Outlet} from "react-router-dom";
 
 import "./layout.css";
 import ButtonAppBar from "./button-app-bar";
-import ButtonUsage from "./button";
 
 export const Layout = () => {
   
   return (
     <div className="layout">
       <ButtonAppBar></ButtonAppBar>
-      <ButtonUsage></ButtonUsage>
       <nav>
         <ul>
           <li><Link to="/">Home</Link></li>
@@ -19,7 +17,6 @@ export const Layout = () => {
         </ul>
       </nav>
       <Outlet />
-      
     </div>
   );
 };
