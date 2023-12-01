@@ -8,6 +8,9 @@ export function EventDetail() {
       <h1>Welcome to EventDetails!</h1>
       <ul>id: {eventDetail.id}, title: {eventDetail.title}, description: {eventDetail.description}</ul>
     </div>
+
+  
+    
 );
 }
 

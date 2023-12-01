@@ -1,10 +1,10 @@
 import React from 'react'
 
 //FIXME observable
-const ShoppingCart = () => {
+const Cart = () => {
   return (
     <div>Welcome to ShoppingCart</div>
   )
 }
 
-export default ShoppingCart
+export default Cart

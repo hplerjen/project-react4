@@ -3,15 +3,17 @@ import { useRootStore } from "../state/root-store";
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { List, ListItem, ListItemButton } from "@mui/material";
+import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export const EventList2 = observer(() => {
+export const EventList = observer(() => {
   const store = useRootStore();
-
+  const navigate = useNavigate();
 
   const deleteItem = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     store.eventService.remove(id);
+    navigate("/event");
   };
 
   return (
@@ -22,7 +24,11 @@ export const EventList2 = observer(() => {
                             disablePadding
                             key={eventM.id}
                             className="event"
-                          >
+                          > 
+                            <ListItemText primary={eventM.id} />
+                            <ListItemText primary={eventM.title} />
+                            <ListItemText primary={eventM.description} />
+
                           <ListItemButton>
                             <IconButton
                                 onClick={(e) => deleteItem(e, eventM.id!)}>

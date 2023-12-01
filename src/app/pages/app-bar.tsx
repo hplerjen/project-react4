@@ -1,7 +1,9 @@
-import {AppBar, Box, Button, IconButton, Toolbar} from "@mui/material";
+import {AppBar, Avatar, Box, Button, IconButton, Toolbar} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { AccountCircle } from "@mui/icons-material";
 
 export const Appbar = () => {
   const navigate = useNavigate();
@@ -14,12 +16,20 @@ export const Appbar = () => {
     navigate("/event");
   };
 
+  const navigateEventNew= () => {
+    navigate("/event-new");
+  };
+
   const navigateProducts= () => {
     navigate("/product");
   };
 
   const navigateCart= () => {
     navigate("/shoppingcart");
+  };
+
+  const navigateUser= () => {
+    navigate("/user");
   };
 
   return (
@@ -30,11 +40,21 @@ export const Appbar = () => {
             <HomeIcon />
           </IconButton>
 
+          <Avatar alt="Hans-Peter Lerjen" src="/public/images/avatar.jpg" />
+          <Avatar alt="Joik" src="/public/images/joik.jpg" />
+
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Button data-testid="event" sx={{ textTransform: "none" }} color="inherit"
+            <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
                     onClick={navigateEvents}>
               Events
+            </Button>
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Button data-testid="eventNew" sx={{ textTransform: "none" }} color="inherit"
+                    startIcon={ <LinkIcon /> }
+                    onClick={navigateEventNew}>
+              Add new Event
             </Button>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -46,10 +66,17 @@ export const Appbar = () => {
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="cart" sx={{ textTransform: "none" }} color="inherit"
-                    startIcon={ <LinkIcon /> }
+                    startIcon={ <ShoppingCartIcon /> }
                     onClick={navigateCart}>
               Shopping Cart
             </Button>
+            <div style={{ display: "flex", alignItems: "center" }}>
+            <Button data-testid="login_register" sx={{ textTransform: "none" }} color="inherit"
+                    startIcon={ <AccountCircle /> }
+                    onClick={navigateUser}>
+            </Button>
+          
+          </div>
           </div>
         </Toolbar>
       </AppBar>
