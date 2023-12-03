@@ -1,9 +1,9 @@
-import { ProductDto } from "./productMini";
+import { ProductMini } from "./productMini";
 
 export class OrderDto  {
     id?: string
     costumerId: number
-    productAmount : {Product: ProductDto , amount: number}[]
+    productAmount : {Product: ProductMini , amount: number}[]
     postageCosts : number
     totalCosts: number
   

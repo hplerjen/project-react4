@@ -1,9 +1,9 @@
-import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, Firestore, getDocs, query, QueryConstraint, updateDoc,} from "firebase/firestore";
+import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, getDocs, query, QueryConstraint, updateDoc,} from "firebase/firestore";
 import { EventMini } from "../model/eventMini";
 import { RootStore } from "../state/root-store";
 
 export class EventService {
-  private collectionName = "events2";
+  private collectionName = "events3";
 
   public constructor(private rootStore: RootStore, protected db: Firestore) {
     
@@ -26,22 +26,28 @@ export class EventService {
   }
 
   async add(event: EventMini) {
-    return await addDoc(this.collection, event as DocumentData);
+    await addDoc(this.collection, event as DocumentData);
+    await this.getDocs();
   }
 
+  //FIXME
   async update(event: EventMini) {
     const doc = await this.getDoc(event.id!);
-    return await updateDoc(doc, event as DocumentData);
+    await updateDoc(doc, event as DocumentData);
+    await this.getDocs();
   }
 
   async remove(id: string) {
-    await deleteDoc(await this.getDoc(id));
+    const docRef : DocumentReference<EventMini, EventMini> = await this.getDoc(id);
+    await deleteDoc(docRef);
+    await this.getDocs();
   }
 
   async getDocs(){
     const q = query(this.collection);
     const querySnapshot = await getDocs(q);
-    const events = querySnapshot.docs.map((doc) => (new EventMini({id: doc.id, ...doc.data()})));
+    const events = querySnapshot.docs.map((doc) => (
+      new EventMini({ ...doc.data(), id: doc.id})));
     this.rootStore.eventStore.add(events);
 } 
 }

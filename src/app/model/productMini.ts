@@ -1,9 +1,9 @@
-export class ProductDto  {
+export class ProductMini  {
     id?: string
     title: string
     description : string
   
-    constructor(product : ProductDto) {
+    constructor(product : ProductMini) {
       this.id = product.id
       this.title = product.title
       this.description = product.description

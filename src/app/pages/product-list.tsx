@@ -1,9 +1,12 @@
 //import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-export interface ProductListProps {}
+import { observer } from "mobx-react-lite";
+//import { useRootStore } from "../state/root-store";
+//import { useNavigate } from "react-router-dom";
 
-//FIXME observable
-export function ProductList(props: ProductListProps) {
+export const ProductList = observer(() => {
+  //const store = useRootStore();
+  //const navigate = useNavigate();
 
   const products = [ 
     { id: 1, title: 'DEH1', description: 'CD' },
@@ -20,5 +23,4 @@ export function ProductList(props: ProductListProps) {
     </div>
   );
 }
-
-export default ProductList;
+)

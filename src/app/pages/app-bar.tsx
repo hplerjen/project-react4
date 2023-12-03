@@ -4,7 +4,8 @@ import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { AccountCircle } from "@mui/icons-material";
-
+import joik from '../images/joik.jpg'
+import avatar from '../images/avatar.jpg'
 export const Appbar = () => {
   const navigate = useNavigate();
 
@@ -40,8 +41,8 @@ export const Appbar = () => {
             <HomeIcon />
           </IconButton>
 
-          <Avatar alt="Hans-Peter Lerjen" src="/public/images/avatar.jpg" />
-          <Avatar alt="Joik" src="/public/images/joik.jpg" />
+          <Avatar alt="Hans-Peter Lerjen" src={avatar} />
+          <Avatar alt="Joik" src={joik} />
 
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
