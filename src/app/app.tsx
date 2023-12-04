@@ -21,7 +21,7 @@ const AppObserver = observer(() => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="event" />} />
             <Route path="event" element={<EventListTable />}/>
-            <Route path="event-update" element={<EventUpdate />} />
+            <Route path="event-update/:id" element={<EventUpdate />} /> 
             <Route path="event-new" element={<EventNew />}/>
             <Route path="product" element={<ProductList />}>
                 <Route path=":id" element={<ProductDetail />} />

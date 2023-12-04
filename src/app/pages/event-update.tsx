@@ -3,7 +3,6 @@ import { useRootStore } from '../state/root-store';
 import { observer } from 'mobx-react-lite';
 import { Button, Card, TextField } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { EventMini } from '../model/eventMini';
 
 export const EventUpdate = observer(() => {
     const store = useRootStore();
@@ -12,15 +11,20 @@ export const EventUpdate = observer(() => {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-
-    async const readEvent(id : string){
-      return await store.eventService.getDoc(param.id as string);
-    }
     
+    /*async const readEvent(id : string){
+      return await store.eventService.getDoc(param.id as string);
+    }*/
+    
+    const readTitle = function (id : string = ""): string {
+      console.log(id);
+      const title = Object.values(store.eventStore.events).find((e) => e?.id === param?.id)?.title
+      return title! 
+    }
 
-    const updateEvent = (event: FormEvent) => {
+    const updateEvent = async (event: FormEvent) => {
         event.preventDefault();
-        store.eventService.update({title, description});
+        await store.eventService.update({title, description});
         navigate("/event");
     };
   
@@ -29,11 +33,10 @@ export const EventUpdate = observer(() => {
     <form
     onSubmit={updateEvent}
     style={{ display: "flex", flexDirection: "column", alignItems: "start"}}>
-    {/*<TextField variant="outlined" type="id" label="Id" className="textField" value={id} onChange={(e) => setId(e.target.value)} name="title" required />*/}
     <TextField 
     variant="outlined" type="title" label="Title" className="textField" value={title} 
     defaultValue={
-      event?.title
+      readTitle(param?.id)
     }
     onChange={(e) => setTitle(e.target.value)} name="title" required />
     <TextField variant="outlined" type="description" label="Description" 
