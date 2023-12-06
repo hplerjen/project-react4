@@ -1,3 +1,4 @@
+//FIMXE copy from Michael
 export interface AuthConnect {
   email: string;
   pwd: string;

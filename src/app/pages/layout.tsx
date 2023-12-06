@@ -1,4 +1,4 @@
-import {Link, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 
 import "./layout.css";
 import { Appbar } from "./app-bar";

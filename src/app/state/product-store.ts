@@ -11,24 +11,28 @@ export class ProductStore {
         makeAutoObservable(this);
 
         autorun(() => {
-            rootStore.eventService.getDocs();
+            rootStore.productService.getDocs();
         });
     }
 
-    add(events: ProductMini[]) {
-        events.forEach((e) => {
+    add(products: ProductMini[]) {
+        products.forEach((e) => {
             this.products[e.id!] = e;
         });
     }
 
-    remove(events: ProductMini[]) {
-        events.forEach((e) => {
+    remove(products: ProductMini[]) {
+        products.forEach((e) => {
             delete this.products[e.id!];
         });
     }
 
     clear() {
         this.products = {};
+    }
+
+    findById(id: string | undefined ): ProductMini | undefined {
+        return Object.values(this.products).find((p) => p.id === id);
     }
 
 }

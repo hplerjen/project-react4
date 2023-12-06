@@ -25,6 +25,10 @@ export const Appbar = () => {
     navigate("/product");
   };
 
+  const navigateProductNew= () => {
+    navigate("/product-new");
+  };
+
   const navigateCart= () => {
     navigate("/shoppingcart");
   };
@@ -63,6 +67,13 @@ export const Appbar = () => {
                     startIcon={ <LinkIcon /> }
                     onClick={navigateProducts}>
               Products
+            </Button>
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Button data-testid="product" sx={{ textTransform: "none" }} color="inherit"
+                    startIcon={ <LinkIcon /> }
+                    onClick={navigateProductNew}>
+              Add a new Product
             </Button>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>

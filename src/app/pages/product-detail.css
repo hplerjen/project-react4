@@ -4,7 +4,7 @@
     max-width: 500px;
   }
   
-  .card .cardTitel {
+  .card .cardTitle {
     font-size: large;
     font-weight: bold;
   }
@@ -18,4 +18,3 @@
     flex-wrap: wrap;
     align-items: baseline;
   }
-  

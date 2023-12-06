@@ -1,15 +1,23 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
+import "./user.css";
+import { useRootStore } from '../state/root-store';
 
 export const User =  observer(() => {
-
+  const store = useRootStore();
   const [pwd, setPassword] = useState("")
   const [email, setEmail] = useState("");
   
+//FIXME from Michael
   const registerUser = (event: FormEvent) => {
     event.preventDefault();
-    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((event.nativeEvent as any).submitter.value === "create") {
+      store.authService.connectUser({ email, pwd });
+    } else {
+      store.authService.login({ email, pwd });
+    }
   };
 
   return (

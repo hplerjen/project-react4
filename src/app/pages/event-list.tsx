@@ -18,7 +18,7 @@ export const EventList = observer(() => {
     navigate("/event");
   };
 
-  const readEvent = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+  const updateEvent = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     navigate(`/event-update/${id}`);  
   };
@@ -39,7 +39,7 @@ export const EventList = observer(() => {
 
                             <ListItemButton>
                             <IconButton
-                                onClick={(e) => readEvent(e, eventM.id!)}>
+                                onClick={(e) => updateEvent(e, eventM.id!)}>
                                 <Editicon />
                             </IconButton>
                           </ListItemButton>

@@ -5,6 +5,7 @@ import { EventMini } from "src/app/model/eventMini";
 
 export class EventStore {
     public events: { [key: string]: EventMini } = observable({});
+    
 
     constructor(private rootStore: RootStore) {
         makeAutoObservable(this);
@@ -29,5 +30,10 @@ export class EventStore {
     clear() {
         this.events = {};
     }
+
+    findById(id: string | undefined ): EventMini | undefined {
+        return Object.values(this.events).find((e) => e.id === id);
+    }
+    
 
 }

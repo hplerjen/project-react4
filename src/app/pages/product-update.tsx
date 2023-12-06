@@ -4,15 +4,15 @@ import { observer } from 'mobx-react-lite';
 import { Button, Card, Paper, TextField } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
-export const EventUpdate = observer(() => {
+export const ProductUpdate = observer(() => {
     const store = useRootStore();
     const navigate = useNavigate();
     const id = useParams().id;
 
-    const [title, setTitle] = useState(store!.eventStore!.findById(id)!.title);
-    const [description, setDescription] = useState(store!.eventStore!.findById(id)!.description);
+    const [title, setTitle] = useState(store!.productStore!.findById(id)!.title);
+    const [description, setDescription] = useState(store!.productStore!.findById(id)!.description);
     
-    const updateEvent = async (event: FormEvent) => {
+    const updateProduct = async (event: FormEvent) => {
         event.preventDefault();
         await store.eventService.update({id, title, description});
         navigate("/event");
@@ -22,7 +22,7 @@ export const EventUpdate = observer(() => {
       <Paper elevation={3}>
       <Card variant="outlined">
     <form
-    onSubmit={updateEvent}
+    onSubmit={updateProduct}
     style={{ display: "flex", flexDirection: "column", alignItems: "start"}}>
     <TextField 
     variant="outlined" type="title" label="Title" className="textField" value={title} 
@@ -35,7 +35,7 @@ export const EventUpdate = observer(() => {
     name="description" required />
     
     <div style={{ paddingTop: "10px" }}>
-      <Button type="submit" value="updateEvent">
+      <Button type="submit" value="updateProduct">
         Update Event 
       </Button>
     </div>

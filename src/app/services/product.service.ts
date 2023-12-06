@@ -1,51 +1,43 @@
 import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, getDoc, getDocs, query, QueryConstraint, updateDoc,} from "firebase/firestore";
-import { EventMini } from "../model/eventMini";
 import { RootStore } from "../state/root-store";
+import { ProductMini } from "../model/productMini";
 
-export class EventService {
-  private collectionName = "eventMini";
+export class ProductService {
+  private collectionName = "productsMini";
 
   public constructor(private rootStore: RootStore, protected db: Firestore) {
     
   }
   
   get collection() {
-    return collection  (this.db, this.collectionName)  as CollectionReference<EventMini, EventMini>; 
+    return collection  (this.db, this.collectionName)  as CollectionReference<ProductMini, ProductMini>; 
   }
 
-  async collectionQuery(...queryConstraints: QueryConstraint[]) {
-    const baseCollection = this.collection;
-    return await query<EventMini, EventMini>(
-        baseCollection,
-        ...queryConstraints
-    );
-  }
 
   async doc(id: string) {
-    return await doc<EventMini, EventMini> (this.collection, `${id}`);
+    return await doc<ProductMini, ProductMini> (this.collection, `${id}`);
   }
 
-  async getDoc(id: string): Promise<EventMini | undefined> {
+  async getDoc(id: string): Promise<ProductMini | undefined> {
     const docRef = await this.doc(id);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
 
   }
 
-  async add(event: EventMini) {
+  async add(event: ProductMini) {
     await addDoc(this.collection, event as DocumentData);
     await this.getDocs();
   }
 
-  //FIXME
-  async update(event: EventMini) {
+  async update(event: ProductMini) {
     const docRef = await this.doc(event.id!);
     await updateDoc(docRef, event as DocumentData);
     await this.getDocs();
   }
 
   async remove(id: string) {
-    const docRef : DocumentReference<EventMini, EventMini> = await this.doc(id);
+    const docRef : DocumentReference<ProductMini, ProductMini> = await this.doc(id);
     await deleteDoc(docRef);
     await this.getDocs();
   }
@@ -54,7 +46,7 @@ export class EventService {
     const q = query(this.collection);
     const querySnapshot = await getDocs(q);
     const events = querySnapshot.docs.map((doc) => (
-      new EventMini({ ...doc.data(), id: doc.id})));
+      new ProductMini({ ...doc.data(), id: doc.id})));
     this.rootStore.eventStore.add(events);
 } 
 }
