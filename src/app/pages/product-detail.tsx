@@ -9,8 +9,8 @@ export function ProductDetail() {
   //const navigate = useNavigate();
   const id = useParams().id;
 
-  //const [title, setTitle] = useState(store!.eventStore!.findById(id)!.title);
-  //const [description, setDescription] = useState(store!.eventStore!.findById(id)!.description);
+  //const [title, setTitle] = useState(store!.productStore!.findById(id)!.title);
+  //const [description, setDescription] = useState(store!.productStore!.findById(id)!.description);
   
   const [product, setProduct] = useState(store!.productStore!.findById(id));
   

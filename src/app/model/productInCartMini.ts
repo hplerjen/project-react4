@@ -1,13 +1,13 @@
-export class ProductMini  {
+export class ProductInCartMini  {
     id?: string
     title: string
     description : string
-    //numberOnStock: number
+    numberInCart: number
   
-    constructor(product : ProductMini) {
+    constructor(product : ProductInCartMini) {
       this.id = product.id
       this.title = product.title
       this.description = product.description
-      //this.numberOnStock = product.numberOnStock
+      this.numberInCart = product.numberInCart
     }
   }

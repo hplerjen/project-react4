@@ -4,6 +4,7 @@ import {AuthConnect, AuthUserSettingsChange} from "../model/auth";
 import { RootStore } from "../state/root-store";
 
 //FIXME copy from Michael
+//FIXME solution for admin
 export class AuthService {
   constructor(public auth: Auth, private rootStore: RootStore) {
     
