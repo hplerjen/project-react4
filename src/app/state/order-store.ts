@@ -1,37 +1,39 @@
 
 import {autorun, makeAutoObservable, observable} from "mobx";
 import {RootStore} from "./root-store";
-
+import { OrderMini } from "../model/orderMini";
 
 export class OrderStore {
-    public order: { [key: string]: OrderMini } = observable({});
+    public orders: { [key: string]: OrderMini } = observable({});
 
     constructor(private rootStore: RootStore) {
         makeAutoObservable(this);
 
         autorun(() => {
-            rootStore.productService.getDocs();
+            rootStore.orderService.getDocs();
         });
     }
 
-    add(products: ProductMini[]) {
-        products.forEach((e) => {
-            this.products[e.id!] = e;
+    add(orders: OrderMini[]) {
+        orders.forEach((e) => {
+            this.orders[e.id!] = e;
         });
     }
 
-    remove(products: ProductMini[]) {
-        products.forEach((e) => {
-            delete this.products[e.id!];
+    
+
+    remove(orders: OrderMini[]) {
+        orders.forEach((e) => {
+            delete this.orders[e.id!];
         });
     }
 
     clear() {
-        this.products = {};
+        this.orders = {};
     }
 
-    findById(id: string | undefined ): ProductMini | undefined {
-        return Object.values(this.products).find((p) => p.id === id);
+    findById(id: string | undefined ): OrderMini | undefined {
+        return Object.values(this.orders).find((p) => p.id === id);
     }
 
 }

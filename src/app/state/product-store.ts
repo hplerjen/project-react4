@@ -3,7 +3,6 @@ import {autorun, makeAutoObservable, observable} from "mobx";
 import {RootStore} from "./root-store";
 import { ProductMini } from "../model/productMini";
 
-
 export class ProductStore {
     public products: { [key: string]: ProductMini } = observable({});
 

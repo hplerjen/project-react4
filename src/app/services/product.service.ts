@@ -25,14 +25,14 @@ export class ProductService {
 
   }
 
-  async add(event: ProductMini) {
-    await addDoc(this.collection, event as DocumentData);
+  async add(product: ProductMini) {
+    await addDoc(this.collection, product as DocumentData);
     await this.getDocs();
   }
 
-  async update(event: ProductMini) {
-    const docRef = await this.doc(event.id!);
-    await updateDoc(docRef, event as DocumentData);
+  async update(product: ProductMini) {
+    const docRef = await this.doc(product.id!);
+    await updateDoc(docRef, product as DocumentData);
     await this.getDocs();
   }
 
@@ -45,8 +45,8 @@ export class ProductService {
   async getDocs(){
     const q = query(this.collection);
     const querySnapshot = await getDocs(q);
-    const events = querySnapshot.docs.map((doc) => (
+    const products = querySnapshot.docs.map((doc) => (
       new ProductMini({ ...doc.data(), id: doc.id})));
-    this.rootStore.eventStore.add(events);
+    this.rootStore.productStore.add(products);
 } 
 }

@@ -15,7 +15,7 @@ export const ProductList = observer(() => {
   
   const deleteProduct = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
-    store.eventService.remove(id);
+    store.productService.remove(id);
     navigate("/product");
   };
 
@@ -31,7 +31,7 @@ export const ProductList = observer(() => {
                         <ListItem
                             disablePadding
                             key={product.id}
-                            className="event"
+                            className="product"
                           > 
                             <ListItemText primary={product.id} />
                             <ListItemText primary={product.title} />

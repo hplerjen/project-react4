@@ -9,13 +9,13 @@ export const ProductUpdate = observer(() => {
     const navigate = useNavigate();
     const id = useParams().id;
 
-    const [title, setTitle] = useState(store!.productStore!.findById(id)!.title);
-    const [description, setDescription] = useState(store!.productStore!.findById(id)!.description);
+    const [title, setTitle] = useState(store.productStore.findById(id)!.title);
+    const [description, setDescription] = useState(store.productStore.findById(id)!.description);
     
     const updateProduct = async (event: FormEvent) => {
         event.preventDefault();
-        await store.eventService.update({id, title, description});
-        navigate("/event");
+        await store.productService.update({id, title, description});
+        navigate("/product");
     };
 
     return (

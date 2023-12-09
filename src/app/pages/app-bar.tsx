@@ -4,6 +4,7 @@ import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { AccountCircle } from "@mui/icons-material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import joik from '../images/joik.jpg'
 import avatar from '../images/avatar.jpg'
 export const Appbar = () => {
@@ -13,8 +14,12 @@ export const Appbar = () => {
     navigate("/");
   };
 
-  const navigateEvents= () => {
-    navigate("/event");
+  const navigateEventsCurr = () => {
+    navigate("/event-curr");
+  };
+
+  const navigateEventsPast= () => {
+    navigate("/event-past");
   };
 
   const navigateEventNew= () => {
@@ -51,8 +56,15 @@ export const Appbar = () => {
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
-                    onClick={navigateEvents}>
-              Events
+                    onClick={navigateEventsCurr}>
+              Events Upcoming
+            </Button>
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
+                    startIcon={ <LinkIcon /> }
+                    onClick={navigateEventsPast}>
+              Events Past
             </Button>
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -82,6 +94,10 @@ export const Appbar = () => {
                     onClick={navigateCart}>
               Shopping Cart
             </Button>
+            <div style={{ display: "flex", alignItems: "center" }}>
+            <FavoriteIcon />
+          
+          </div>
             <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="login_register" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <AccountCircle /> }
