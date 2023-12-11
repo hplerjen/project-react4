@@ -12,11 +12,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export const EventListTable = observer(() => {
   const store = useRootStore();
   const navigate = useNavigate();
 
+  const viewEventDetail = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.stopPropagation();
+    navigate(`/event/${id}`);  
+  };
 
   const deleteEvent = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
@@ -49,6 +54,12 @@ export const EventListTable = observer(() => {
             <TableCell align="right">{eventM.id}</TableCell>
             <TableCell align="right">{eventM.title}</TableCell>
             <TableCell align="right">{eventM.description}</TableCell>
+            <TableCell align="right">
+                            <IconButton
+                                onClick={(e) => viewEventDetail(e, eventM.id!)}>
+                                <VisibilityIcon />
+                            </IconButton>
+            </TableCell>
             <TableCell align="right">
                             <IconButton
                                 onClick={(e) => updateEvent(e, eventM.id!)}>

@@ -15,7 +15,7 @@ export const Appbar = () => {
   };
 
   const navigateEventsCurr = () => {
-    navigate("/event-curr");
+    navigate("/event");
   };
 
   const navigateEventsPast= () => {

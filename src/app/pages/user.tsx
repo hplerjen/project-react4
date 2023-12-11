@@ -6,7 +6,7 @@ import { useRootStore } from '../state/root-store';
 
 export const User =  observer(() => {
   const store = useRootStore();
-  const [pwd, setPassword] = useState("")
+  const [pwd, setPwd] = useState("")
   const [email, setEmail] = useState("");
   
 //FIXME from Michael
@@ -34,17 +34,14 @@ export const User =  observer(() => {
           <Card className="card">
             <CardContent>
               <Typography className="cardTitel">
-                Dieser Account ist nicht mit einer E-Mail verbunden
-              </Typography>
-              <Typography>
-                Listen können verloren gehen! Sie können ihren Account mit einem neuem Account verbinden oder sich mit einem bestehemden Account anmelden.
+                Please register
               </Typography>
               <form
                 onSubmit={registerUser}
                 style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
               >
                 <TextField variant="outlined" type="email" label="E-Mail" className="textField" value={email} onChange={(e) => setEmail(e.target.value)} name="email" required />
-                <TextField variant="outlined" type="password" label="Passwort" className="textField" value={pwd} onChange={(e) => setPassword(e.target.value)} name="password" required/>
+                <TextField variant="outlined" type="password" label="Passwort" className="textField" value={pwd} onChange={(e) => setPwd(e.target.value)} name="password" required/>
                 <div style={{ paddingTop: "10px" }}>
                   <Button type="submit" value="create">
                     Create new account

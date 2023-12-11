@@ -5,8 +5,9 @@ import { useRootStore } from "../state/root-store";
 import { useParams } from "react-router-dom";
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 import CheckIcon from "@mui/icons-material/Check";
+import { observer } from "mobx-react-lite";
 
-export function ProductDetail() {
+export const ProductDetail = observer(() => {
   
   const store = useRootStore();
   //const navigate = useNavigate();
@@ -62,4 +63,4 @@ export function ProductDetail() {
     </CardContent>
   </Card>
   );
-}
+})

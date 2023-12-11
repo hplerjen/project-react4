@@ -12,6 +12,7 @@ import { EventNew } from './pages/event-new';
 import { ProductList } from './pages/product-list';
 import { ProductNew } from './pages/product-new';
 import { ProductUpdate } from './pages/product-update';
+import { EventDetail } from './pages/event-details';
 
 const AppObserver = observer(() => {
 
@@ -21,18 +22,27 @@ const AppObserver = observer(() => {
 <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Navigate to="event-curr" />} />
-            <Route path="event-curr" element={<EventListTable />}/>
+            <Route index element={<Navigate to="event" />} />
+            <Route path="event" element={<EventListTable />}>
+                 <Route path=":id" element={<EventDetail />} /> 
+            </Route>
             <Route path="event-past" element={<EventListTable />}/>
-            <Route path="event-update/:id" element={<EventUpdate />} /> 
-            <Route path="event-new" element={<EventNew />}/>
+            
             <Route path="product" element={<ProductList />}>
                 <Route path=":id" element={<ProductDetail />} />
             </Route>
-            <Route path="product-new" element={<ProductNew />}/>
-            <Route path="product-update/:id" element={<ProductUpdate />} /> 
+
             <Route path="shoppingcart" element={<Cart />}/>
             <Route path="user" element={<User />}/>
+            
+            {/* ADMIN only - FIXME needs to be guarded */}
+
+            
+            <Route path="event-new" element={<EventNew />}/>
+            <Route path="event-update/:id" element={<EventUpdate />} /> 
+            <Route path="product-new" element={<ProductNew />}/>
+            <Route path="product-update/:id" element={<ProductUpdate />} /> 
+
           </Route>
         </Routes>
     </BrowserRouter>
