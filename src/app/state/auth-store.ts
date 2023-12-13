@@ -15,7 +15,8 @@ export class AuthUser implements IAuthUser{
     public email: string | null;
     public displayName: string| null;
 
-    constructor({uid, isAnonymous, email, displayName}: { uid: string, isAnonymous: boolean, email: string | null , displayName: string| null }) {
+    constructor({uid, isAnonymous, email, displayName}: 
+        { uid: string, isAnonymous: boolean,  email: string | null , displayName: string| null }) {
         this.uid = uid;
         this.isAnonymous = isAnonymous;
         this.email = email;

@@ -3,7 +3,6 @@ import {EmailAuthProvider, User} from "firebase/auth";
 import {AuthConnect, AuthUserSettingsChange} from "../model/auth";
 import { RootStore } from "../state/root-store";
 
-
    //Checks if user has admin rights
    //function isAdmin() {
   //  return exists(/databases/$(database)/documents/admins/$(request.auth.uid))

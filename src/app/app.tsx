@@ -23,15 +23,12 @@ const AppObserver = observer(() => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="event" />} />
-            <Route path="event" element={<EventListTable />}>
-                 <Route path=":id" element={<EventDetail />} /> 
-            </Route>
+            <Route path="event" element={<EventListTable />} />
+            <Route path="event/:id" element={<EventDetail />} /> 
             <Route path="event-past" element={<EventListTable />}/>
             
-            <Route path="product" element={<ProductList />}>
-                <Route path=":id" element={<ProductDetail />} />
-            </Route>
-
+            <Route path="product" element={<ProductList />} />
+            <Route path="product/:id" element={<ProductDetail />} />
             <Route path="shoppingcart" element={<Cart />}/>
             <Route path="user" element={<User />}/>
             

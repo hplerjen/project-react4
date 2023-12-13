@@ -14,6 +14,14 @@ export const EventDetail = observer(() => {
   const [description] = useState(store.eventStore.findById(id)!.description);
    
   return (
+    <div
+    style={{
+      padding: "10px",
+      textAlign: "start",
+    }}
+  >
+    <Typography variant="h6">Event Details</Typography>
+    <div className="cardContainer">
     <Card className="card">
     <CardContent>
       <Typography className="cardTitle">
@@ -26,5 +34,7 @@ export const EventDetail = observer(() => {
     
     </CardContent>
   </Card>
+  </div>
+  </div>
   );
 }        )

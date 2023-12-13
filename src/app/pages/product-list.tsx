@@ -6,13 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Editicon from "@mui/icons-material/Edit";
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export const ProductList = observer(() => {
   const store = useRootStore();
   const navigate = useNavigate();
 
-  
+  const viewProductDetails = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    e.stopPropagation();
+    navigate(`/product/${id}`);  
+  };
+
   const deleteProduct = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     store.productService.remove(id);
@@ -37,6 +41,13 @@ export const ProductList = observer(() => {
                             <ListItemText primary={product.title} />
                             <ListItemText primary={product.description} />
 
+
+                            <ListItemButton>
+                            <IconButton
+                                onClick={(e) => viewProductDetails(e, product.id!)}>
+                                <VisibilityIcon />
+                            </IconButton>
+                          </ListItemButton>
 
                             <ListItemButton>
                             <IconButton

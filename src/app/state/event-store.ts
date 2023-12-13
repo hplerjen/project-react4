@@ -34,6 +34,8 @@ export class EventStore {
     findById(id: string | undefined ): EventMini | undefined {
         return Object.values(this.events).find((e) => e.id === id);
     }
+
+    //FIXME filter future / past events
     
 
 }

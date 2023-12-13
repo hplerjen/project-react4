@@ -2,7 +2,7 @@ export class User  {
     id?: string
     displayName: string
     email : string
-    pwd: number
+    pwd: string
   
     constructor(user : User) {
       this.id = user.id

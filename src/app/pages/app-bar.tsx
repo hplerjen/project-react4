@@ -1,4 +1,4 @@
-import {AppBar, Avatar, Box, Button, IconButton, Toolbar} from "@mui/material";
+import {AppBar, Avatar, Box, Button, IconButton, Toolbar, Tooltip} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
@@ -49,10 +49,12 @@ export const Appbar = () => {
           <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 2 }} onClick={navigateHome}>
             <HomeIcon />
           </IconButton>
-
+          <Tooltip title="Developer">
           <Avatar alt="Hans-Peter Lerjen" src={avatar} />
+          </Tooltip>
+          <Tooltip title="Joik logo">
           <Avatar alt="Joik" src={joik} />
-
+          </Tooltip>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }

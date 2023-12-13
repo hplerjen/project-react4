@@ -26,6 +26,14 @@ export const ProductDetail = observer(() => {
 };
   
   return (
+    <div
+    style={{
+      padding: "10px",
+      textAlign: "start",
+    }}
+  >
+    <Typography variant="h6">Product Details</Typography>
+    <div className="cardContainer">
     <Card className="card">
     <CardContent>
       <Typography className="cardTitle">
@@ -35,7 +43,6 @@ export const ProductDetail = observer(() => {
       {product?.description} 
       </Typography>
       <Typography>   
-             // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain, @typescript-eslint/no-non-null-asserted-optional-chain
              {product?.stock!  > 0? (
                 <CheckIcon /> 
             ) : (
@@ -62,5 +69,7 @@ export const ProductDetail = observer(() => {
       </form>
     </CardContent>
   </Card>
+  </div>
+  </div>
   );
 })

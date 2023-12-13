@@ -28,7 +28,7 @@ export const User =  observer(() => {
         textAlign: "start",
       }}
     >
-      <Typography variant="h5">User Registration</Typography>
+      <Typography variant="h6">User Registration</Typography>
       <div className="cardContainer">
         
           <Card className="card">
@@ -43,11 +43,11 @@ export const User =  observer(() => {
                 <TextField variant="outlined" type="email" label="E-Mail" className="textField" value={email} onChange={(e) => setEmail(e.target.value)} name="email" required />
                 <TextField variant="outlined" type="password" label="Passwort" className="textField" value={pwd} onChange={(e) => setPwd(e.target.value)} name="password" required/>
                 <div style={{ paddingTop: "10px" }}>
-                  <Button type="submit" value="create">
+                  <Button type="submit" value="register">
                     Create new account
                   </Button>
-                  <Button type="submit" value="register">
-                    Register
+                  <Button type="submit" value="login">
+                    Login with existing credentials
                   </Button>
                 </div>
               </form>
