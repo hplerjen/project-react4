@@ -12,6 +12,7 @@ import { ProductStore } from "./product-store";
 import { ProductService } from "../services/product.service";
 import { OrderStore } from "./order-store";
 import { OrderService } from "../services/order.service";
+import { MessageStore } from "./message-store";
 
 export class RootStore {
   eventStore: EventStore;
@@ -22,6 +23,7 @@ export class RootStore {
   orderService: OrderService;
   authStore: AuthStore;
   authService: AuthService;
+  messageStore: MessageStore;
 
   get init () {
     return this.authStore.currentUser;
@@ -46,6 +48,8 @@ export class RootStore {
 
     this.authStore = new AuthStore(this);
     this.authService = new AuthService(auth, this);
+
+    this.messageStore = new MessageStore(this);
   }
 }
 

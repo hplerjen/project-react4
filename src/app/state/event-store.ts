@@ -35,7 +35,7 @@ export class EventStore {
         return Object.values(this.events).find((e) => e.id === id);
     }
 
-    //FIXME filter future / past events
+    //FIXME filter future / past events as per event date < date
     
 
 }

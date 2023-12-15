@@ -1,6 +1,7 @@
 import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, getDoc, getDocs, query, QueryConstraint, updateDoc,} from "firebase/firestore";
 import { EventMini } from "../model/eventMini";
 import { RootStore } from "../state/root-store";
+import { Severity } from "../model/message";
 
 export class EventService {
   private collectionName = "eventMini";
@@ -34,10 +35,12 @@ export class EventService {
 
   async add(event: EventMini) {
     await addDoc(this.collection, event as DocumentData);
+    this.rootStore.messageStore.setMessage({
+      text: "Event successfully created",
+      severity: Severity.success})
     await this.getDocs();
   }
 
-  //FIXME
   async update(event: EventMini) {
     const docRef = await this.doc(event.id!);
     await updateDoc(docRef, event as DocumentData);

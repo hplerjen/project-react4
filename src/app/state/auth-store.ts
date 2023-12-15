@@ -1,10 +1,10 @@
 import {makeAutoObservable} from "mobx";
 import {RootStore} from "./root-store";
 
-//FIXME copy from Michael
 export interface IAuthUser{
     uid: string;
     isAnonymous: boolean;
+    isAdmin: boolean;
     email: string | null;
     displayName: string| null;
 }
@@ -12,13 +12,15 @@ export interface IAuthUser{
 export class AuthUser implements IAuthUser{
     public uid: string;
     public isAnonymous: boolean;
+    public isAdmin: boolean;
     public email: string | null;
     public displayName: string| null;
 
-    constructor({uid, isAnonymous, email, displayName}: 
-        { uid: string, isAnonymous: boolean,  email: string | null , displayName: string| null }) {
+    constructor({uid, isAnonymous, isAdmin, email, displayName}: 
+        { uid: string, isAnonymous: boolean,  isAdmin: boolean, email: string | null , displayName: string| null }) {
         this.uid = uid;
         this.isAnonymous = isAnonymous;
+        this.isAdmin = isAdmin;
         this.email = email;
         this.displayName = displayName;
 

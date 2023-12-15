@@ -37,4 +37,5 @@ export const EventDetail = observer(() => {
   </div>
   </div>
   );
-}        )
+}
+)

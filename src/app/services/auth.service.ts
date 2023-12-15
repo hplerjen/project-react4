@@ -17,7 +17,7 @@ export class AuthService {
       if (user === null) {
         signInAnonymously(auth);
       } else {
-        rootStore.authStore.setUser(user);
+        rootStore.authStore.setUser({...user, isAdmin: false});
       }
     });
   }
@@ -27,7 +27,7 @@ export class AuthService {
     linkWithCredential(user, EmailAuthProvider.credential(data.email, data.pwd))
       .then((usercred) => {
         const user = usercred.user;
-        this.rootStore.authStore.setUser(user);
+        this.rootStore.authStore.setUser({...user, isAdmin: false});
       })
       .catch((error) => {
          //
@@ -39,7 +39,7 @@ export class AuthService {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          this.rootStore.authStore.setUser(user);
+          this.rootStore.authStore.setUser({...user, isAdmin: false});
         })
         .catch((error) => {
           
@@ -70,7 +70,7 @@ export class AuthService {
         actions.push(updatePassword(currentUser, data.pwd));
       }
       return Promise.all(actions).then(() => {
-        this.rootStore.authStore.setUser(this.auth.currentUser!);
+        this.rootStore.authStore.setUser({ ...this.auth.currentUser!, isAdmin: false});
       });
     };
   }

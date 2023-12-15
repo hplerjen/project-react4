@@ -4,7 +4,7 @@ import {useRootStore} from "../state/root-store";
 
 
 //FIXME Michael, solve Admin view
-export const OnlyUser = observer(({children} : {children : ReactElement}) => {
+export const LoggedInUser = observer(({children} : {children : ReactElement}) => {
   const store = useRootStore();
   if(!store.authStore.currentUser?.isAnonymous){
     return <>{children}</>
@@ -12,9 +12,17 @@ export const OnlyUser = observer(({children} : {children : ReactElement}) => {
   return <></>
 });
 
-export const OnlyAnonymous = observer(({children} : {children : ReactElement}) => {
+export const AnonymousUser = observer(({children} : {children : ReactElement}) => {
   const store = useRootStore();
   if(store.authStore.currentUser?.isAnonymous){
+    return <>{children}</>
+  }
+  return <></>
+});
+
+export const OnlyAdmin = observer(({children} : {children : ReactElement}) => {
+  const store = useRootStore();
+  if(store.authStore.currentUser?.isAdmin){
     return <>{children}</>
   }
   return <></>

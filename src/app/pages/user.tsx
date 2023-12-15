@@ -13,7 +13,7 @@ export const User =  observer(() => {
   const registerUser = (event: FormEvent) => {
     event.preventDefault();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((event.nativeEvent as any).submitter.value === "create") {
+    if ((event.nativeEvent as any).submitter.value === "register") {
       store.authService.connectUser({ email, pwd });
     } else {
       store.authService.login({ email, pwd });

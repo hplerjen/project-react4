@@ -1,4 +1,4 @@
-import {AppBar, Avatar, Box, Button, IconButton, Toolbar, Tooltip} from "@mui/material";
+import {Alert, AppBar, Avatar, Box, Button, IconButton, Snackbar, Toolbar, Tooltip} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
@@ -7,7 +7,12 @@ import { AccountCircle } from "@mui/icons-material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import joik from '../images/joik.jpg'
 import avatar from '../images/avatar.jpg'
-export const Appbar = () => {
+import { useRootStore } from "../state/root-store";
+import { observer } from "mobx-react-lite";
+import React from "react";
+
+export const Appbar = observer(() => {
+  const store = useRootStore();
   const navigate = useNavigate();
 
   const navigateHome = () => {
@@ -112,7 +117,9 @@ export const Appbar = () => {
       </AppBar>
       </Box>
   );
-};
+}
+)
+
 
 
 

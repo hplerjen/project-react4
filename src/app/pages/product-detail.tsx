@@ -37,10 +37,10 @@ export const ProductDetail = observer(() => {
     <Card className="card">
     <CardContent>
       <Typography className="cardTitle">
-      {product?.title} 
+     Product title: {product?.title} 
       </Typography>
       <Typography>
-      {product?.description} 
+     Product description:  {product?.description} 
       </Typography>
       <Typography>   
              {product?.stock!  > 0? (
