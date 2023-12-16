@@ -4,11 +4,6 @@ import { RootStore } from "../state/root-store";
 import { EmailAuthProvider, linkWithCredential, signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
 import { Severity } from "../model/message";
 
-   //Checks if user has admin rights
-   //function isAdmin() {
-  //  return exists(/databases/$(database)/documents/admins/$(request.auth.uid))
-  //}
-
 export interface Login {
     email: string
     pwd : string
@@ -37,7 +32,7 @@ export class AuthService2 {
                 text: "Error occured: error code : " + error.code 
                 + " error message: " + error.message ,
                 severity: Severity.error
-        });
+            });
     })
     }
 

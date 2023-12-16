@@ -2,11 +2,8 @@ import {Auth, linkWithCredential, reauthenticateWithCredential, sendPasswordRese
 import {EmailAuthProvider, User} from "firebase/auth";
 import {AuthConnect, AuthUserSettingsChange} from "../model/auth";
 import { RootStore } from "../state/root-store";
+import { Severity } from "../model/message";
 
-   //Checks if user has admin rights
-   //function isAdmin() {
-  //  return exists(/databases/$(database)/documents/admins/$(request.auth.uid))
-  //}
 
 //FIXME copy from Michael
 //FIXME solution for admin
@@ -17,20 +14,34 @@ export class AuthService {
       if (user === null) {
         signInAnonymously(auth);
       } else {
-        rootStore.authStore.setUser({...user, isAdmin: false});
+        rootStore.authStore.setUser({...user, isAdmin : this.isAdmin()});
       }
     });
   }
+
+  
 
   connectUser(data: AuthConnect) {
     const user = this.auth.currentUser!;
     linkWithCredential(user, EmailAuthProvider.credential(data.email, data.pwd))
       .then((usercred) => {
         const user = usercred.user;
-        this.rootStore.authStore.setUser({...user, isAdmin: false});
+        this.rootStore.authStore.setUser({...user, isAdmin: this.isAdmin()});
+        this.rootStore.messageStore.setMessage({
+          text: "Registration successful for user: " + data.email  ,
+          severity: Severity.success
+        });
+        //Registration successful for user: laurawinistoerfer@gmx.ch : null
       })
       .catch((error) => {
-         //
+        this.rootStore.messageStore.setMessage({
+          text: "Error occured: error code : " + error.code 
+          + " error message: " + error.message ,
+          severity: Severity.error
+          //Error occured: error code : auth/weak-password error message: Firebase: Password should be at least 6 characters (auth/weak-password).
+          //Error occured: error code : auth/invalid-credential error message: Firebase: Error (auth/invalid-credential).
+          //Error occured: error code : auth/network-request-failed error message: Firebase: Error (auth/network-request-failed).
+        });
       });
   }
 
@@ -39,12 +50,26 @@ export class AuthService {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          this.rootStore.authStore.setUser({...user, isAdmin: false});
+          this.rootStore.authStore.setUser({...user, isAdmin: this.isAdmin()});
+          this.rootStore.messageStore.setMessage({
+            text: "Loggin successful for user: " + data.email +" : "+ user.displayName ,
+            severity: Severity.success
+          });
         })
         .catch((error) => {
-          
+          this.rootStore.messageStore.setMessage({
+            text: "Error occured: error code : " + error.code 
+            + " error message: " + error.message ,
+            severity: Severity.error
+            //Error occured: error code : auth/invalid-credential error message: Firebase: Error (auth/invalid-credential).
+            //Error occured: error code : auth/network-request-failed error message: Firebase: Error (auth/network-request-failed).
+          });  
         });
   }
+
+  isAdmin() : boolean  {
+    return this.rootStore.adminService.isAdmin()
+  };
 
   resetPwdMail(email: string) {
     return sendPasswordResetEmail(this.auth, email);

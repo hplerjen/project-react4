@@ -9,7 +9,7 @@ import joik from '../images/joik.jpg'
 import avatar from '../images/avatar.jpg'
 import { useRootStore } from "../state/root-store";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { Component, ReactElement } from "react";
 
 export const Appbar = observer(() => {
   const store = useRootStore();
@@ -46,6 +46,21 @@ export const Appbar = observer(() => {
   const navigateUser= () => {
     navigate("/user");
   };
+
+  function loginStartIcon(): ReactElement{
+    if (store.authStore.isConnected) {
+        if (store.authStore.currentUser?.email === "hplerjen@gmx.net"){
+          return <Avatar alt="Hans-Peter Lerjen" src={avatar} />
+        } else if (store.authStore.currentUser?.isAdmin){
+          return <Avatar alt="Joik" src={joik} />
+        } else {
+          return <AccountCircle />
+        }
+      } else {
+        return <AccountCircle />
+      }
+    }
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -106,12 +121,19 @@ export const Appbar = observer(() => {
           
           </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-            <Button data-testid="login_register" sx={{ textTransform: "none" }} color="inherit"
-                    startIcon={ <AccountCircle /> }
+            
+            
+            <Button data-testid="login-name" sx={{ textTransform: "none" }} color="inherit"
+                    startIcon={ 
+                      loginStartIcon()
+                    }
                     onClick={navigateUser}>
+              {store.authStore.displayName}
             </Button>
-          
-          </div>
+
+
+            </div>
+
           </div>
         </Toolbar>
       </AppBar>
