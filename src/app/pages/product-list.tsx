@@ -20,7 +20,7 @@ export const ProductList = observer(() => {
   const deleteProduct = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     store.productService.remove(id);
-    navigate("/product");
+    navigate('/product');
   };
 
   const updateProduct = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {

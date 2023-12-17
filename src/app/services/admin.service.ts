@@ -21,7 +21,6 @@ export class AdminService {
     getDocs(q).then((querySnapshot) => {
       const admins = querySnapshot.docs.map((doc) => (
         new Admin({ ...doc.data(), id: doc.id})));
-        //FIXME does not work yet
         const isAdmin = (admins.filter((a: Admin) => a.uid === this.auth.currentUser?.uid)).length > 0
         if (isAdmin) {
           this.rootStore.messageStore.setMessage({
@@ -42,16 +41,4 @@ export class AdminService {
     return false;
   };
     
-    //REM better do a proper error handling here wiht then and catch
-    //const querySnapshot = await getDocs(q);
-     //const admins = querySnapshot.docs.map((doc) => (
-     //  new Admin({ ...doc.data(), id: doc.id})));
-     //const isAdmin = (admins.filter((a: Admin) => a.uid === this.auth.currentUser?.uid)).length > 0
-     //if (isAdmin) {
-     //  this.rootStore.messageStore.setMessage({
-     //  text: "Welcome Admin: " + this.auth.currentUser?.email,
-     //  severity: Severity.success
-     //  });
-     //}
-    //return isAdmin;
 }

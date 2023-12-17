@@ -40,7 +40,7 @@ export const Appbar = observer(() => {
   };
 
   const navigateCart= () => {
-    navigate("/shoppingcart");
+    navigate("/cart");
   };
 
   const navigateUser= () => {

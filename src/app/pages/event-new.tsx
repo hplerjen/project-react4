@@ -25,7 +25,6 @@ export const EventNew = observer(() => {
     <form
     onSubmit={createEvent}
     style={{ display: "flex", flexDirection: "column", alignItems: "start"}}>
-    {/*<TextField variant="outlined" type="id" label="Id" className="textField" value={id} onChange={(e) => setId(e.target.value)} name="title" required />*/}
     <TextField variant="outlined" type="title" label="Title" className="textField" value={title} onChange={(e) => setTitle(e.target.value)} name="title" required />
     <TextField variant="outlined" type="description" label="Description" className="textField" value={description} onChange={(e) => setDescription(e.target.value)} name="description" required/>
     <div style={{ paddingTop: "10px" }}>

@@ -19,8 +19,6 @@ export class AuthService {
     });
   }
 
-  
-
   connectUser(data: AuthConnect) {
     const user = this.auth.currentUser!;
     linkWithCredential(user, EmailAuthProvider.credential(data.email, data.pwd))
@@ -52,7 +50,7 @@ export class AuthService {
           const user = userCredential.user;
           this.rootStore.authStore.setUser({...user, isAdmin: this.isAdmin()});
           this.rootStore.messageStore.setMessage({
-            text: "Loggin successful for user: " + data.email +" : "+ user.displayName ,
+            text: "Loggin successful for user: " + data.email ,
             severity: Severity.success
           });
         })

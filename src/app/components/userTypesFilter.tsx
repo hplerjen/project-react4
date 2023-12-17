@@ -3,8 +3,8 @@ import {observer} from "mobx-react-lite";
 import {useRootStore} from "../state/root-store";
 
 
-//FIXME Michael, solve Admin view
-export const LoggedInUser = observer(({children} : {children : ReactElement}) => {
+//FIXME Michael
+export const OnlyLoggedInUser = observer(({children} : {children : ReactElement}) => {
   const store = useRootStore();
   if(!store.authStore.currentUser?.isAnonymous){
     return <>{children}</>

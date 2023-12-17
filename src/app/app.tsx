@@ -29,7 +29,7 @@ const AppObserver = observer(() => {
             
             <Route path="product" element={<ProductList />} />
             <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="shoppingcart" element={<Cart />}/>
+            <Route path="cart" element={<Cart />}/>
             <Route path="user" element={<User />}/>
             
             {/* ADMIN only - FIXME needs to be guarded */}

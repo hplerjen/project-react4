@@ -1,9 +1,9 @@
-import { CustomerAddress } from "./customerAddress";
+import { AddressMini } from "./addressMini";
 
 export class OrderDto  {
     id?: string
     costumerId: number
-    customerAddress : CustomerAddress
+    customerAddress : AddressMini
     productsInCart :  { [key: string]: number }
     postageCosts : number
     totalCosts: number

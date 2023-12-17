@@ -13,7 +13,6 @@ export class ProductService {
     return collection  (this.db, this.collectionName)  as CollectionReference<ProductMini, ProductMini>; 
   }
 
-
   async doc(id: string) {
     return await doc<ProductMini, ProductMini> (this.collection, `${id}`);
   }

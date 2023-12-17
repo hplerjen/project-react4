@@ -10,7 +10,7 @@ import { AuthService } from "../services/auth.service";
 import { firebaseConfig } from "../firebase.config";
 import { ProductStore } from "./product-store";
 import { ProductService } from "../services/product.service";
-import { OrderStore } from "./order-store";
+import { OrdersStore } from "./orders-store";
 import { OrderService } from "../services/order.service";
 import { MessageStore } from "./message-store";
 import { AdminService } from "../services/admin.service";
@@ -20,7 +20,7 @@ export class RootStore {
   eventService: EventService;
   productStore: ProductStore;
   productService: ProductService;
-  orderStore: OrderStore;
+  orderStore: OrdersStore;
   orderService: OrderService;
   authStore: AuthStore;
   authService: AuthService;
@@ -46,7 +46,7 @@ export class RootStore {
     this.productStore = new ProductStore(this);
 
     this.orderService = new OrderService( this, db );
-    this.orderStore = new OrderStore(this);
+    this.orderStore = new OrdersStore(this);
 
     this.authStore = new AuthStore(this);
     this.authService = new AuthService(auth, this);

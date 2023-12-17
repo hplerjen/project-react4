@@ -1,4 +1,7 @@
+import { Typography } from '@mui/material'
 import React from 'react'
+import { UserLogginRegister } from './user_loggin_register'
+import { Address } from './address'
 
 //FIXME observable
 //user, password
@@ -8,9 +11,21 @@ import React from 'react'
 
 const Cart = () => {
   return (
-    
-    <div>Welcome to ShoppingCart</div>
 
+    <div
+      style={{
+        padding: "10px",
+        textAlign: "start",
+      }}
+    >
+    <Typography variant="h6">Welcome to ShoppingCart</Typography>
+    <div className="cardContainer">
+       <UserLogginRegister />
+       <Address />
+
+
+    </div>
+    </div>
   )
 }
 

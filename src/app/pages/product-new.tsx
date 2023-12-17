@@ -8,7 +8,6 @@ export const ProductNew = observer(() => {
     const store = useRootStore();
     const navigate = useNavigate();
   
-    //const [id, setId] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 

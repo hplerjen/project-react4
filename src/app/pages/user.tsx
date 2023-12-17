@@ -1,23 +1,81 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
-import "./user.css";
+import "./card.css";
 import { useRootStore } from '../state/root-store';
+import { OnlyLoggedInUser } from '../components/userTypesFilter';
+import { Severity } from '../model/message';
+import { UserLogginRegister } from './user_loggin_register';
 
 export const User =  observer(() => {
   const store = useRootStore();
-  const [pwd, setPwd] = useState("")
-  const [email, setEmail] = useState("");
+
+  const [displayName, setDisplayName] = useState("");
+
+  const [oldPwd, setOldPwd] = useState("");
+  const [newPwd, setNewPwd] = useState("");
   
 //FIXME from Michael
-  const registerUser = (event: FormEvent) => {
+  const resetPwd = (event: FormEvent) => {
     event.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((event.nativeEvent as any).submitter.value === "register") {
-      store.authService.connectUser({ email, pwd });
-    } else {
-      store.authService.login({ email, pwd });
+    const email = store.authStore.currentUser?.email;
+    if (email) {
+      store.authService
+        .resetPwdMail(email)
+        .then(() => {
+          store.messageStore.setMessage({
+            text: "Email wurde verschickt",
+            severity: Severity.success,
+          });
+        })
+        .catch(() => {
+          store.messageStore.setMessage({
+            text: "Email konnte nicht verschickt werden",
+            severity: Severity.error,
+          });
+        });
     }
+  };
+
+  const changeDisplayname = (event: FormEvent) => {
+    event.preventDefault();
+    store.authService.changeUser({
+        displayName
+      })()
+      .then(() => {
+        store.messageStore.setMessage({
+          text: "Anzeigename wurde geändert",
+          severity: Severity.success,
+        });
+      })
+      .catch((error: Error) => {
+        store.messageStore.setMessage({
+          text: error.message,
+          severity: Severity.error,
+        });
+      });
+  };
+
+  const changePwd = (event: FormEvent) => {
+    event.preventDefault();
+    store.authService
+      .changeUser({
+        pwd: newPwd,
+        pwdOld: oldPwd,
+        email: store.authStore.currentUser!.email!,
+      })()
+      .then(() => {
+        store.messageStore.setMessage({
+          text: "Password wurde geändert",
+          severity: Severity.success,
+        });
+      })
+      .catch((error: Error) => {
+        store.messageStore.setMessage({
+          text: error.message,
+          severity: Severity.error,
+        });
+      });
   };
 
   return (
@@ -28,31 +86,59 @@ export const User =  observer(() => {
         textAlign: "start",
       }}
     >
-      <Typography variant="h6">User Registration</Typography>
+      <Typography variant="h6">User Information</Typography>
+      
       <div className="cardContainer">
-        
-          <Card className="card">
-            <CardContent>
-              <Typography className="cardTitel">
-                Please register
-              </Typography>
-              <form
-                onSubmit={registerUser}
-                style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
-              >
-                <TextField variant="outlined" type="email" label="E-Mail" className="textField" value={email} onChange={(e) => setEmail(e.target.value)} name="email" required />
-                <TextField variant="outlined" type="password" label="Passwort" className="textField" value={pwd} onChange={(e) => setPwd(e.target.value)} name="password" required/>
-                <div style={{ paddingTop: "10px" }}>
-                  <Button type="submit" value="register">
-                    Create new account
-                  </Button>
-                  <Button type="submit" value="login">
-                    Login with existing credentials
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+          <UserLogginRegister/>
+          <OnlyLoggedInUser>
+            <Card className="card">
+              <CardContent>
+                <Typography className="cardTitel">
+                  Anzeigename ändern
+                </Typography>
+                <form
+                  style={{ display: "flex", flexDirection: "column", alignItems: "start", }}
+                  onSubmit={changeDisplayname}
+                >
+                  <TextField variant="outlined" type="email" label="E-mail" className="textField" value={store.authStore.currentUser?.email} disabled />
+                  <TextField variant="outlined" type="text" label="Anzeigename" className="textField" value={displayName} onChange={(e) => setDisplayName(e.target.value)} required />
+                  <Button type="submit">Änderung übernehmen</Button>
+                </form>
+              </CardContent>
+            </Card>
+          </OnlyLoggedInUser>
+          <OnlyLoggedInUser>
+            <Card className="card">
+              <CardContent>
+                <Typography className="cardTitel">Passwort ändern</Typography>
+                <form
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "start",
+                  }}
+                  onSubmit={changePwd}
+                >
+                  <TextField
+                    variant="outlined" type="password" label="Passwort Alt" className="textField" value={oldPwd} onChange={(e) => setOldPwd(e.target.value)} required
+                  />
+                  <TextField variant="outlined" type="password" label="Passwort Neu" className="textField" value={newPwd} onChange={(e) => setNewPwd(e.target.value)} required />
+                  <Button type="submit">Passwort wechseln</Button>
+                </form>
+              </CardContent>
+            </Card>
+          </OnlyLoggedInUser>
+          <OnlyLoggedInUser>
+            <Card className="card">
+              <CardContent>
+                <Typography className="cardTitel">Passwort vergessen?</Typography>
+                <form style={{ display: "flex", flexDirection: "column", alignItems: "start"}} onSubmit={resetPwd}>
+                  <Button type="submit">Passwort zurücksetzen</Button>
+                </form>
+              </CardContent>
+            </Card>
+          </OnlyLoggedInUser>
+
           </div>
           </div>
   )
