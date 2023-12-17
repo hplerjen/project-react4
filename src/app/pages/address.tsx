@@ -36,7 +36,7 @@ export const Address =  observer(() => {
                 style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
               >
                 <TextField variant="outlined" type="firstName" label="First Name" className="textField" value={firstName} onChange={(e) => setFirstName(e.target.value)} name="firstName" required />
-                <TextField variant="outlined" type="firstName" label="First Name" className="textField" value={firstName} onChange={(e) => setSecondName(e.target.value)} name="secondName" required />
+                <TextField variant="outlined" type="secondName" label="Second Name" className="textField" value={secondName} onChange={(e) => setSecondName(e.target.value)} name="secondName" required />
                 <TextField variant="outlined" type="plz" label="Plz" className="textField" value={plz} onChange={(e) => setPlz(e.target.value)} name="plz" required/>
                 <TextField variant="outlined" type="location" label="Location" className="textField" value={location} onChange={(e) => setLocation(e.target.value)} name="location" required/>
                 <div style={{ paddingTop: "10px" }}>
