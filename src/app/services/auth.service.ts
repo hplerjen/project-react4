@@ -10,11 +10,11 @@ import { Severity } from "../model/message";
 export class AuthService {
   constructor(public auth: Auth, private rootStore: RootStore) {
     
-    auth.onAuthStateChanged((user: User | null) => {
+    auth.onAuthStateChanged(async (user: User | null) => {
       if (user === null) {
         signInAnonymously(auth);
       } else {
-        rootStore.authStore.setUser({...user, isAdmin : this.isAdmin()});
+        rootStore.authStore.setUser({...user, isAdmin : await this.isAdmin()});
       }
     });
   }
@@ -22,9 +22,10 @@ export class AuthService {
   connectUser(data: AuthConnect) {
     const user = this.auth.currentUser!;
     linkWithCredential(user, EmailAuthProvider.credential(data.email, data.pwd))
-      .then((usercred) => {
+      .then(async (usercred) => {
         const user = usercred.user;
-        this.rootStore.authStore.setUser({...user, isAdmin: this.isAdmin()});
+        const isAdmin = await this.isAdmin().then((boolean) => {return boolean});
+        this.rootStore.authStore.setUser({...user, isAdmin: isAdmin});
         this.rootStore.messageStore.setMessage({
           text: "Registration successful for user: " + data.email  ,
           severity: Severity.success
@@ -43,12 +44,13 @@ export class AuthService {
       });
   }
 
-  login(data: AuthConnect) {
+  async login(data: AuthConnect) {
     signInWithEmailAndPassword(this.auth, data.email, data.pwd)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           // Signed in
           const user = userCredential.user;
-          this.rootStore.authStore.setUser({...user, isAdmin: this.isAdmin()});
+          const isAdmin = await this.isAdmin().then((boolean) => {return boolean});
+          this.rootStore.authStore.setUser({...user, isAdmin: isAdmin});
           this.rootStore.messageStore.setMessage({
             text: "Loggin successful for user: " + data.email ,
             severity: Severity.success
@@ -65,8 +67,8 @@ export class AuthService {
         });
   }
 
-  isAdmin() : boolean  {
-    return this.rootStore.adminService.isAdmin()
+  isAdmin(): Promise<boolean> {
+    return this.rootStore.adminService.isAdmin();
   };
 
   resetPwdMail(email: string) {
