@@ -13,7 +13,6 @@ export class OrderService {
     return collection  (this.db, this.collectionName)  as CollectionReference<OrderMini, OrderMini>; 
   }
 
-
   async doc(id: string) {
     return await doc<OrderMini, OrderMini> (this.collection, `${id}`);
   }
@@ -22,7 +21,6 @@ export class OrderService {
     const docRef = await this.doc(id);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
-
   }
 
   async add(order: OrderMini) {
@@ -47,6 +45,6 @@ export class OrderService {
     const querySnapshot = await getDocs(q);
     const orders = querySnapshot.docs.map((doc) => (
       new OrderMini({ ...doc.data(), id: doc.id})));
-    this.rootStore.orderStore.add(orders);
+    this.rootStore.ordersStore.add(orders);
 } 
 }

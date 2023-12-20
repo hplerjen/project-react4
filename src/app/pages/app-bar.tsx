@@ -1,4 +1,4 @@
-import {Alert, AppBar, Avatar, Box, Button, IconButton, Snackbar, Toolbar, Tooltip} from "@mui/material";
+import {AppBar, Avatar, Box, Button, IconButton, Toolbar, Tooltip} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
@@ -9,7 +9,8 @@ import joik from '../images/joik.jpg'
 import avatar from '../images/avatar.jpg'
 import { useRootStore } from "../state/root-store";
 import { observer } from "mobx-react-lite";
-import React, { Component, ReactElement } from "react";
+import React, { ReactElement } from "react";
+import { deepOrange, deepPurple } from "@mui/material/colors";
 
 export const Appbar = observer(() => {
   const store = useRootStore();
@@ -61,7 +62,6 @@ export const Appbar = observer(() => {
       }
     }
 
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -75,6 +75,9 @@ export const Appbar = observer(() => {
           <Tooltip title="Joik logo">
           <Avatar alt="Joik" src={joik} />
           </Tooltip>
+          <Avatar>H</Avatar>
+<Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
+<Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }

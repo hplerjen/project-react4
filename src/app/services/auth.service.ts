@@ -6,7 +6,6 @@ import { Severity } from "../model/message";
 
 
 //FIXME copy from Michael
-//FIXME solution for admin
 export class AuthService {
   constructor(public auth: Auth, private rootStore: RootStore) {
     

@@ -1,4 +1,4 @@
-import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, getDoc, getDocs, query, QueryConstraint, updateDoc, where,} from "firebase/firestore";
+import {addDoc, collection, CollectionReference, doc, DocumentData, Firestore, getDoc, onSnapshot, query, QueryConstraint, updateDoc, where,} from "firebase/firestore";
 import { AddressMini } from "../model/addressMini";
 import { RootStore } from "../state/root-store";
 import { Severity } from "../model/message";
@@ -15,15 +15,18 @@ export class AddressService {
   }
 
 
-  existsAdressForCurrentUser () {
+  async existsAdressForCurrentUser () {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const query = this.collectionQuery(
+    const query = await this.collectionQuery(
       where("uid", "==", this.rootStore.authStore.currentUser?.uid),
-    ).then((address) => {
-       //this.rootStore.orderStore.currentOrder?.addAddress;
-    })
+    )
+    
+
+    
   }
 
+  //this.rootStore.orderStore.addAddress(address);
+  
   async collectionQuery(...queryConstraints: QueryConstraint[]) {
     const baseCollection = this.collection;
     return await query<AddressMini, AddressMini>(

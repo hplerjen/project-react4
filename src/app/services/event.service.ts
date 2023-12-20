@@ -6,8 +6,7 @@ import { Severity } from "../model/message";
 export class EventService {
   private collectionName = "eventMini";
 
-  public constructor(private rootStore: RootStore, protected db: Firestore) {
-    
+  public constructor(private rootStore: RootStore, protected db: Firestore) {   
   }
   
   get collection() {

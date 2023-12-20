@@ -1,8 +1,10 @@
 import React, { FormEvent, useState } from 'react'
 import { useRootStore } from '../state/root-store';
 import { observer } from 'mobx-react-lite';
-import { Button, Card, Paper, TextField } from '@mui/material';
+import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
+import "./card.css";
 
 export const ProductUpdate = observer(() => {
     const store = useRootStore();
@@ -11,28 +13,46 @@ export const ProductUpdate = observer(() => {
 
     const [title, setTitle] = useState(store.productStore.findById(id)!.title);
     const [description, setDescription] = useState(store.productStore.findById(id)!.description);
-    
+    const [stock, setStock] = useState(store.productStore.findById(id)!.stock);
+
     const updateProduct = async (event: FormEvent) => {
         event.preventDefault();
-        await store.productService.update({id, title, description});
+        await store.productService.update({id, title, description, stock});
         navigate("/product");
     };
 
     return (
-      <Paper elevation={3}>
-      <Card variant="outlined">
-    <form
-    onSubmit={updateProduct}
-    style={{ display: "flex", flexDirection: "column", alignItems: "start"}}>
-    <TextField 
-    variant="outlined" type="title" label="Title" className="textField" value={title} 
-    onChange={(e) => setTitle(e.target.value)} 
-    name="title" required />
-    <TextField variant="outlined" type="description" label="Description" 
-    className="textField" 
-    value={description} 
-    onChange={(e) => setDescription(e.target.value)} 
-    name="description" required />
+      <div
+      style={{
+        padding: "10px",
+        textAlign: "start",
+      }}
+    >
+      <Typography variant="h6">Product Update</Typography>
+      <div className="cardContainer">
+        <Card className="card">
+          <Typography className="cardTitel">
+                    update Product 
+                  </Typography>
+        <CardContent>
+          <form
+          onSubmit={updateProduct}
+          style={{ display: "flex", flexDirection: "column", alignItems: "start"}}>
+            <TextField  variant="outlined" type="title" label="Title" className="textField" 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)} 
+              name="title" required />
+            <TextField variant="outlined" type="description" label="Description" className="textField" 
+              value={description} 
+              onChange={(e) => setDescription(e.target.value)} 
+              name="description" required />
+
+        <NumberInput  min={1} max={10} 
+            aria-label="Demo number input"
+            placeholder="Type a number…"
+            value={stock}
+            onChange={(e, val) => setStock(Number(val))}
+          />
     
     <div style={{ paddingTop: "10px" }}>
       <Button type="submit" value="updateProduct">
@@ -40,8 +60,10 @@ export const ProductUpdate = observer(() => {
       </Button>
     </div>
   </form>
+  </CardContent>
   </Card>
-  </Paper>
-  )
+  </div>
+  </div>
+  );
 }
 )

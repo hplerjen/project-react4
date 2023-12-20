@@ -7,9 +7,8 @@ import { IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/m
 import DeleteIcon from "@mui/icons-material/Delete";
 import Editicon from "@mui/icons-material/Edit";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import "./card.css";
 
-export const ProductList = observer(() => {
+export const ProductListCart = observer(() => {
   const store = useRootStore();
   const navigate = useNavigate();
 
@@ -41,7 +40,6 @@ export const ProductList = observer(() => {
                             <ListItemText primary={product.id} />
                             <ListItemText primary={product.title} />
                             <ListItemText primary={product.description} />
-                            <ListItemText primary={product.stock} />
 
 
                             <ListItemButton>

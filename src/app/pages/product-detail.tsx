@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 import CheckIcon from "@mui/icons-material/Check";
 import { observer } from "mobx-react-lite";
+import "./card.css";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export const ProductDetail = observer(() => {
   
@@ -13,16 +15,14 @@ export const ProductDetail = observer(() => {
   //const navigate = useNavigate();
   const productId = useParams().id;
 
-  //const [title, setTitle] = useState(store!.productStore!.findById(id)!.title);
-  //const [description, setDescription] = useState(store!.productStore!.findById(id)!.description);
-  
   const [product] = useState(store.productStore.findById(productId));
-  const [number, setNumber] = useState(1);
+  const [number, setNumber] = useState(2);
   
   const addToCart = async (event: FormEvent) => {
     event.preventDefault();
-   // const onStock = store.productStore.onStock(productId);
-  //  store.orderStore.addProductToCart({userId, product, number});
+    //is product on stock?
+    //is product already in cart?
+    //store.orderStore.addProductToCart({ui, product, number});
 };
   
   return (
@@ -32,24 +32,18 @@ export const ProductDetail = observer(() => {
       textAlign: "start",
     }}
   >
-    <Typography variant="h6">Product Details</Typography>
+    <Typography variant="h6">Product details</Typography>
     <div className="cardContainer">
-    <Card className="card">
-    <CardContent>
-      <Typography className="cardTitle">
-     Product title: {product?.title} 
-      </Typography>
-      <Typography>
-     Product description:  {product?.description} 
-      </Typography>
-      <Typography>   
-             {product?.stock!  > 0? (
-                <CheckIcon /> 
-            ) : (
-              <CheckIcon />
-        )}
-
-      </Typography>
+      <Card className="card">
+        <Typography className="cardTitel">
+                  view Product details & buy
+                </Typography>
+        <CardContent>
+          <Typography className="cardTitle">Product title: {product?.title} </Typography>
+          <Typography>Product description:  {product?.description} </Typography>
+          <Typography>stock:  {product?.stock} </Typography>
+          <Typography>{product?.stock!  > 0? (<CheckIcon />) : ( <CancelIcon /> )}</Typography>
+      
       <form
         onSubmit={addToCart}
         style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
@@ -60,7 +54,7 @@ export const ProductDetail = observer(() => {
         value={number}
         onChange={(e, val) => setNumber(Number(val))}
       />
-     
+
         <div style={{ paddingTop: "10px" }}>
           <Button type="submit" value="buy">
             Buy

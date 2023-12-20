@@ -14,13 +14,15 @@ import { OrdersStore } from "./orders-store";
 import { OrderService } from "../services/order.service";
 import { MessageStore } from "./message-store";
 import { AdminService } from "../services/admin.service";
+import { OrderStore } from "./order-store";
 
 export class RootStore {
   eventStore: EventStore;
   eventService: EventService;
   productStore: ProductStore;
   productService: ProductService;
-  orderStore: OrdersStore;
+  orderStore: OrderStore;
+  ordersStore: OrdersStore;
   orderService: OrderService;
   authStore: AuthStore;
   authService: AuthService;
@@ -46,7 +48,8 @@ export class RootStore {
     this.productStore = new ProductStore(this);
 
     this.orderService = new OrderService( this, db );
-    this.orderStore = new OrdersStore(this);
+    this.ordersStore = new OrdersStore(this);
+    this.orderStore = new OrderStore(this);
 
     this.authStore = new AuthStore(this);
     this.authService = new AuthService(auth, this);

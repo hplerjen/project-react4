@@ -5,7 +5,7 @@ import "./card.css";
 import { useRootStore } from '../state/root-store';
 import { OnlyLoggedInUser } from '../components/userTypesFilter';
 import { Severity } from '../model/message';
-import { UserLogginRegister } from './user_loggin_register';
+import { UserLogginRegister } from './user-loggin-register';
 
 export const User =  observer(() => {
   const store = useRootStore();
