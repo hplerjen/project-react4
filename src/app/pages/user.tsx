@@ -100,7 +100,7 @@ export const User =  observer(() => {
                   style={{ display: "flex", flexDirection: "column", alignItems: "start", }}
                   onSubmit={changeDisplayname}
                 >
-                  <TextField variant="outlined" type="email" label="E-mail" className="textField" value={store.authStore.currentUser?.email} disabled />
+                  <TextField variant="outlined" type="email"  className="textField" value={store.authStore.currentUser?.email} disabled />
                   <TextField variant="outlined" type="text" label="Anzeigename" className="textField" value={displayName} onChange={(e) => setDisplayName(e.target.value)} required />
                   <Button type="submit">Änderung übernehmen</Button>
                 </form>

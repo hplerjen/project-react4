@@ -1,10 +1,9 @@
-import { Address } from "./addressFull"
 import { AddressMini } from "./addressMini"
 
 export class OrderMini  {
     id?: string
     userid : string
-    productsInCart :  { [key: string]: number }
+    productsInCart : Map <string,  number>
     numberOfProducts: number
     totalCostWithoutPostage : number
     costTotal: number

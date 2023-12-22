@@ -2,7 +2,7 @@
 import { Button, Card, CardContent, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import "./card.css";
+//import "./card.css";
 import { useRootStore } from '../state/root-store';
 
 export const Postage =  observer(() => {

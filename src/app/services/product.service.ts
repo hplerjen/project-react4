@@ -21,8 +21,8 @@ export class ProductService {
     const docRef = await this.doc(id);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
-
   }
+
 
   async add(product: ProductMini) {
     await addDoc(this.collection, product as DocumentData);

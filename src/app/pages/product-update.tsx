@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
-import "./card.css";
+//import "./card.css";
 
 export const ProductUpdate = observer(() => {
     const store = useRootStore();
@@ -14,10 +14,11 @@ export const ProductUpdate = observer(() => {
     const [title, setTitle] = useState(store.productStore.findById(id)!.title);
     const [description, setDescription] = useState(store.productStore.findById(id)!.description);
     const [stock, setStock] = useState(store.productStore.findById(id)!.stock);
+    const [price, setPrice] = useState(1);
 
     const updateProduct = async (event: FormEvent) => {
         event.preventDefault();
-        await store.productService.update({id, title, description, stock});
+        await store.productService.update({id, title, description, stock, price});
         navigate("/product");
     };
 
@@ -53,6 +54,8 @@ export const ProductUpdate = observer(() => {
             value={stock}
             onChange={(e, val) => setStock(Number(val))}
           />
+
+<TextField variant="outlined" type="description" label="Price" className="textField" value={stock} onChange={(e) => setPrice(Number(e.target.value))} name="price" required/>
     
     <div style={{ paddingTop: "10px" }}>
       <Button type="submit" value="updateProduct">

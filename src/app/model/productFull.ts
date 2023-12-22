@@ -4,8 +4,9 @@ export class ProductFull  {
     description : string
     artist: string
     mediaType: string
-    onStock: number
     imageUrl: string
+    stock: number
+    price: number
   
     constructor(product : ProductFull) {
       this.id = product.id
@@ -13,7 +14,8 @@ export class ProductFull  {
       this.description = product.description
       this.artist = product.artist
       this.mediaType = product.mediaType
-      this.onStock = product.onStock
       this.imageUrl = product.imageUrl
+      this.stock = product.stock
+      this.price = product.price
     }
   }

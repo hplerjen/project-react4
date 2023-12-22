@@ -12,6 +12,15 @@
   .card .textField {
     margin: 20px 10px 0px 10px;
   }
+
+  .card .numberField {
+    margin: 20px 10px 0px 10px;
+    width: 4000;
+    color: green;
+    height: 50px;
+    border: 1px solid #4CAF50; 
+    
+  }
   
   .cardContainer {
     display: flex;

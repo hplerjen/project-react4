@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 import CheckIcon from "@mui/icons-material/Check";
 import { observer } from "mobx-react-lite";
-import "./card.css";
+//import "./card.css";
 import CancelIcon from '@mui/icons-material/Cancel';
 
 export const ProductDetail = observer(() => {
@@ -22,7 +22,12 @@ export const ProductDetail = observer(() => {
     event.preventDefault();
     //is product on stock?
     //is product already in cart?
-    //store.orderStore.addProductToCart({ui, product, number});
+    if (product?.stock! > 0 ){
+      store.orderStore.addProductToCart(productId!, number);
+    } else {
+//to do message to user
+    }
+
 };
   
   return (
@@ -43,12 +48,12 @@ export const ProductDetail = observer(() => {
           <Typography>Product description:  {product?.description} </Typography>
           <Typography>stock:  {product?.stock} </Typography>
           <Typography>{product?.stock!  > 0? (<CheckIcon />) : ( <CancelIcon /> )}</Typography>
-      
+          <Typography>stock:  {product?.price} </Typography>
       <form
         onSubmit={addToCart}
         style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
       >
-      <NumberInput min={1} max={product?.stock} 
+      <NumberInput  min={1} max={product?.stock} 
         aria-label="Demo number input"
         placeholder="Type a number…"
         value={number}
