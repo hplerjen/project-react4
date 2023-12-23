@@ -24,12 +24,14 @@ export const User =  observer(() => {
         .resetPwdMail(email)
         .then(() => {
           store.messageStore.setMessage({
+            show: true,
             text: "Email wurde verschickt",
             severity: Severity.success,
           });
         })
         .catch(() => {
           store.messageStore.setMessage({
+            show: true,
             text: "Email konnte nicht verschickt werden",
             severity: Severity.error,
           });
@@ -44,12 +46,14 @@ export const User =  observer(() => {
       })()
       .then(() => {
         store.messageStore.setMessage({
+          show: true,
           text: "Anzeigename wurde geändert",
           severity: Severity.success,
         });
       })
       .catch((error: Error) => {
         store.messageStore.setMessage({
+          show: true,
           text: error.message,
           severity: Severity.error,
         });
@@ -66,12 +70,14 @@ export const User =  observer(() => {
       })()
       .then(() => {
         store.messageStore.setMessage({
+          show: true,
           text: "Password wurde geändert",
           severity: Severity.success,
         });
       })
       .catch((error: Error) => {
         store.messageStore.setMessage({
+          show: true,
           text: error.message,
           severity: Severity.error,
         });

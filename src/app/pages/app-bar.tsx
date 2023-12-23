@@ -2,15 +2,16 @@ import {AppBar, Avatar, Box, Button, IconButton, Toolbar, Tooltip} from "@mui/ma
 import HomeIcon from "@mui/icons-material/Home";
 import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+//
 import { AccountCircle } from "@mui/icons-material";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+//import FavoriteIcon from '@mui/icons-material/Favorite';
 import joik from '../images/joik.jpg'
 import avatar from '../images/avatar.jpg'
 import { useRootStore } from "../state/root-store";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement } from "react";
-import { deepOrange, deepPurple } from "@mui/material/colors";
+//import { deepOrange, deepPurple } from "@mui/material/colors";
+import { MiniCart } from "./miniCart";
 
 export const Appbar = observer(() => {
   const store = useRootStore();
@@ -38,10 +39,6 @@ export const Appbar = observer(() => {
 
   const navigateProductNew= () => {
     navigate("/product-new");
-  };
-
-  const navigateCart= () => {
-    navigate("/cart");
   };
 
   const navigateUser= () => {
@@ -75,9 +72,10 @@ export const Appbar = observer(() => {
           <Tooltip title="Joik logo">
           <Avatar alt="Joik" src={joik} />
           </Tooltip>
-          <Avatar>H</Avatar>
+          {/*<Avatar>H</Avatar>
 <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-<Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+  <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>*/}
+          
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
@@ -85,6 +83,7 @@ export const Appbar = observer(() => {
               Events Upcoming
             </Button>
           </div>
+          
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
@@ -92,6 +91,7 @@ export const Appbar = observer(() => {
               Events Past
             </Button>
           </div>
+          
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="eventNew" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
@@ -99,6 +99,7 @@ export const Appbar = observer(() => {
               Add new Event
             </Button>
           </div>
+          
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="product" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
@@ -106,6 +107,7 @@ export const Appbar = observer(() => {
               Products
             </Button>
           </div>
+          
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button data-testid="product" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
@@ -113,17 +115,12 @@ export const Appbar = observer(() => {
               Add a new Product
             </Button>
           </div>
+
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Button data-testid="cart" sx={{ textTransform: "none" }} color="inherit"
-                    startIcon={ <ShoppingCartIcon /> }
-                    onClick={navigateCart}>
-              Shopping Cart
-            </Button>
-            <div style={{ display: "flex", alignItems: "center" }}>
-            <FavoriteIcon />
-          
+             <MiniCart/>
           </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
             
             
             <Button data-testid="login-name" sx={{ textTransform: "none" }} color="inherit"
@@ -137,7 +134,6 @@ export const Appbar = observer(() => {
 
             </div>
 
-          </div>
         </Toolbar>
       </AppBar>
       </Box>

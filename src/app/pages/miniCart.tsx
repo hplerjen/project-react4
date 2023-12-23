@@ -6,15 +6,15 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import { useRootStore } from '../state/root-store';
 
-//show number of items in cart (or products in total?)
-//show sum of product costs
 
 export const MiniCart = observer(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const store = useRootStore();
   const navigate = useNavigate();
 
-const [numbersOfProducts]= useState(store.orderStore.currentOrder?.numberOfProducts);
-const [totalCostWithoutPostage]= useState();
+const [numbersOfProducts]= useState(100);
+  //store.orderStore.currentOrder?.numberOfProducts);
+const [totalCostWithoutPostage]= useState(100);
 
 const navigateCart= () => {
   navigate("/cart");
@@ -24,8 +24,8 @@ const navigateCart= () => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
             <Badge badgeContent={numbersOfProducts} color="primary">
-            {totalCostWithoutPostage}
-
+            {totalCostWithoutPostage} 
+            {totalCostWithoutPostage > 0 && 'CHF' }
             <Button data-testid="cart" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <ShoppingCartIcon /> }
                     onClick={navigateCart}>

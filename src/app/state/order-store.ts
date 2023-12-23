@@ -1,27 +1,44 @@
 import {makeAutoObservable} from "mobx";
 import {RootStore} from "./root-store";
 import { OrderMini } from "../model/orderMini";
-import { AddressMini } from "../model/addressMini";
 
 
 export class OrderStore {
-    public currentOrder?: OrderMini;
+    public currentOrder?: OrderMini | null
 
     constructor(private rootStore: RootStore) {
         makeAutoObservable(this);
     }
 
-    addAddress(address: AddressMini){
-        if (this.currentOrder) this.currentOrder!.address = address;
+    initializeOrder(){
+        this.currentOrder = {
+            id: "",
+            userId: this.rootStore.authStore.currentUser!.uid,
+            productsInCart : new Map <string,  number>,
+            numberOfProducts: 0,
+            costTotalWithoutPostage: 0,
+            costTotal: 0,
+            addressId: ""}
+    }
+    
+    addAddress(addressId: string){
+        this.currentOrder!.addressId = addressId;
     }
 
     addProductToCart(prodId: string, number: number = 0){
+        if (this.currentOrder  === undefined) {
+            this.initializeOrder();
+        }
         this.currentOrder!.productsInCart.set(prodId!,  number);
+        this.calculateNumberOfProductsInCar();
+        this.calculateTotalCostsInCart();
 
     }
 
     updateProductToCart(prodId: string, number: number){
         this.currentOrder!.productsInCart.set(prodId!,  number);
+        this.calculateNumberOfProductsInCar();
+        this.calculateTotalCostsInCart();
     }
 
     calculateNumberOfProductsInCar(){
@@ -39,6 +56,7 @@ export class OrderStore {
             // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
             price = this.rootStore!.productStore!.findById(value)?.price!;
             costs = costs + (price * key);
+            this.currentOrder!.costTotalWithoutPostage = costs;
         });
 
 

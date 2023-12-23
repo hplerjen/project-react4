@@ -8,6 +8,8 @@ import CheckIcon from "@mui/icons-material/Check";
 import { observer } from "mobx-react-lite";
 //import "./card.css";
 import CancelIcon from '@mui/icons-material/Cancel';
+import { Severity } from "../model/message";
+import NumberInputIntroduction from "../components/customer-input-number";
 
 export const ProductDetail = observer(() => {
   
@@ -25,7 +27,11 @@ export const ProductDetail = observer(() => {
     if (product?.stock! > 0 ){
       store.orderStore.addProductToCart(productId!, number);
     } else {
-//to do message to user
+          store.messageStore.setMessage({
+            show: true,
+          text: "Product is out of stock",
+          severity: Severity.warning
+          });
     }
 
 };
@@ -48,7 +54,7 @@ export const ProductDetail = observer(() => {
           <Typography>Product description:  {product?.description} </Typography>
           <Typography>stock:  {product?.stock} </Typography>
           <Typography>{product?.stock!  > 0? (<CheckIcon />) : ( <CancelIcon /> )}</Typography>
-          <Typography>stock:  {product?.price} </Typography>
+          <Typography>price CHF:  {product?.price} </Typography>
       <form
         onSubmit={addToCart}
         style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
@@ -59,6 +65,8 @@ export const ProductDetail = observer(() => {
         value={number}
         onChange={(e, val) => setNumber(Number(val))}
       />
+
+         <NumberInputIntroduction/>
 
         <div style={{ paddingTop: "10px" }}>
           <Button type="submit" value="buy">

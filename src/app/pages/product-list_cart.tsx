@@ -17,13 +17,13 @@ export const ProductListCart = observer(() => {
     navigate(`/product/${id}`);  
   };
 
-  const deleteProduct = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+  const deleteProductFromCart = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     store.productService.remove(id);
     navigate('/product');
   };
 
-  const updateProduct = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+  const updateProductFromCart = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     navigate(`/product-update/${id}`);  
   };
@@ -31,27 +31,28 @@ export const ProductListCart = observer(() => {
   return (
       <div style={{ overflow: "auto", flex: "1 1 100%" }}>
               <List>
-                {Object.values(store.productStore.products).map((product) => (
+                {Object.values(store.orderStore.currentOrder!.productsInCart).map((productId, number) => (
                         <ListItem
                             disablePadding
-                            key={product.id}
+                            key={productId}
                             className="product"
                           > 
-                            <ListItemText primary={product.id} />
-                            <ListItemText primary={product.title} />
-                            <ListItemText primary={product.description} />
+                            <ListItemText primary={productId} />
+                            <ListItemText primary={store.productStore.findById(productId)!.title} />
+                            <ListItemText primary={store.productStore.findById(productId)!.description} />
+                            <ListItemText primary={number} />
 
 
                             <ListItemButton>
                             <IconButton
-                                onClick={(e) => viewProductDetails(e, product.id!)}>
+                                onClick={(e) => viewProductDetails(e, productId!)}>
                                 <VisibilityIcon />
                             </IconButton>
                           </ListItemButton>
 
                             <ListItemButton>
                             <IconButton
-                                onClick={(e) => updateProduct(e, product.id!)}>
+                                onClick={(e) => updateProductFromCart(e, productId!)}>
                                 <Editicon />
                             </IconButton>
                           </ListItemButton>
@@ -60,7 +61,7 @@ export const ProductListCart = observer(() => {
 
                           <ListItemButton>
                             <IconButton
-                                onClick={(e) => deleteProduct(e, product.id!)}>
+                                onClick={(e) => deleteProductFromCart(e, productId!)}>
                                 <DeleteIcon />
                             </IconButton>
                           </ListItemButton>

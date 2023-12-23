@@ -13,11 +13,15 @@ import { ProductList } from './pages/product-list';
 import { ProductNew } from './pages/product-new';
 import { ProductUpdate } from './pages/product-update';
 import { EventDetail } from './pages/event-details';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 const AppObserver = observer(() => {
 
   return (
     <div className="App">
+
+<LocalizationProvider dateAdapter={AdapterDayjs}>
 <CssBaseline />
 <BrowserRouter>
         <Routes>
@@ -43,6 +47,7 @@ const AppObserver = observer(() => {
           </Route>
         </Routes>
     </BrowserRouter>
+    </LocalizationProvider>
     </div>
   );
 });

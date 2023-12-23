@@ -1,22 +1,19 @@
-import {makeAutoObservable} from "mobx";
+import { Timestamp } from "firebase/firestore"
 
-export interface IEventMini  {
+export class EventMini {
   id?: string
   title: string
   description: string
-}
+  dateFrom: Timestamp 
+  dateTo:  Timestamp 
 
-export class EventMini implements IEventMini {
-  id?: string
-  title: string
-  description: string
 
   constructor(event : EventMini) {
     this.id = event.id
     this.title = event.title
     this.description = event.description
-
-    makeAutoObservable(this);
+    this.dateFrom = event.dateFrom
+    this.dateTo = event.dateTo
   }
 }
 

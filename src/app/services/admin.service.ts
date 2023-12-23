@@ -23,6 +23,7 @@ export class AdminService {
     const isAdmin = (admins.filter((a: Admin) => a.uid === this.auth.currentUser?.uid)).length > 0
     if (isAdmin) {
           this.rootStore.messageStore.setMessage({
+          show : true,
           text: "Welcome Admin: " + this.auth.currentUser?.email,
           severity: Severity.success
           });

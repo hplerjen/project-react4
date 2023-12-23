@@ -3,7 +3,7 @@ import { AddressMini } from "./addressMini";
 
 export class Order  {
     id?: string
-    costumerId: number
+    userId: number
     customerAddress : AddressMini
     productsInCart :  { [key: string]: number }
     numberOfProducts: number
@@ -18,7 +18,7 @@ export class Order  {
   
     constructor(order : Order) {
       this.id = order.id
-      this.costumerId = order.costumerId
+      this.userId = order.userId
       this.customerAddress = order.customerAddress
       this.productsInCart = order.productsInCart
       this.numberOfProducts = order.numberOfProducts

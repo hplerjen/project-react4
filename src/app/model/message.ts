@@ -1,4 +1,5 @@
 export interface Message {
+  show: boolean;
   text: string;
   severity: Severity;
 }

@@ -26,6 +26,7 @@ export class AuthService {
         const isAdmin = await this.isAdmin().then((boolean) => {return boolean});
         this.rootStore.authStore.setUser({...user, isAdmin: isAdmin});
         this.rootStore.messageStore.setMessage({
+          show: true,
           text: "Registration successful for user: " + data.email  ,
           severity: Severity.success
         });
@@ -33,6 +34,7 @@ export class AuthService {
       })
       .catch((error) => {
         this.rootStore.messageStore.setMessage({
+          show: true,
           text: "Error occured: error code : " + error.code 
           + " error message: " + error.message ,
           severity: Severity.error
@@ -51,12 +53,14 @@ export class AuthService {
           const isAdmin = await this.isAdmin().then((boolean) => {return boolean});
           this.rootStore.authStore.setUser({...user, isAdmin: isAdmin});
           this.rootStore.messageStore.setMessage({
+            show: true,
             text: "Loggin successful for user: " + data.email ,
             severity: Severity.success
           });
         })
         .catch((error) => {
           this.rootStore.messageStore.setMessage({
+            show: true,
             text: "Error occured: error code : " + error.code 
             + " error message: " + error.message ,
             severity: Severity.error

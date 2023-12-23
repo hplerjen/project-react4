@@ -13,6 +13,7 @@ export class EventService {
     return collection  (this.db, this.collectionName)  as CollectionReference<EventMini, EventMini>; 
   }
 
+  //FIXEME NOT YET USED
   async collectionQuery(...queryConstraints: QueryConstraint[]) {
     const baseCollection = this.collection;
     return await query<EventMini, EventMini>(
@@ -33,8 +34,11 @@ export class EventService {
   }
 
   async add(event: EventMini) {
-    await addDoc(this.collection, event as DocumentData);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const docRef =  await addDoc(this.collection, event as DocumentData);
+    //FIXME UPDATE TO STORE new id in data
     this.rootStore.messageStore.setMessage({
+      show: true,
       text: "Event successfully created",
       severity: Severity.success})
     await this.getDocs();

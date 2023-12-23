@@ -48,6 +48,7 @@ export class AddressService {
   async add(address: AddressMini) {
     await addDoc(this.collection, address as DocumentData);
     this.rootStore.messageStore.setMessage({
+      show: true,
       text: "Address successfully created",
       severity: Severity.success})
   }

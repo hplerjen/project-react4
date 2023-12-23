@@ -4,15 +4,22 @@ import { useRootStore } from "../state/root-store";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
+//import dayjs from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers";
 
 export const EventDetail = observer(() => {
   
-  const store = useRootStore();
+  const mainStore = useRootStore();
   const id = useParams().id;
 
-  const [title] = useState(store.eventStore.findById(id)!.title);
-  const [description] = useState(store.eventStore.findById(id)!.description);
-   
+  const [title] = useState(mainStore.eventStore.findById(id)!.title);
+  const [description] = useState(mainStore.eventStore.findById(id)!.description);
+  const [dateFrom] = useState(mainStore.eventStore.findById(id)!.dateFrom);
+  const [dateTo] = useState(mainStore.eventStore.findById(id)!.dateTo);
+
+
+
+
   return (
     <div
     style={{
@@ -31,7 +38,20 @@ export const EventDetail = observer(() => {
       {description} 
       </Typography>
       
-    
+      <DatePicker />
+
+<DatePicker
+  label="Controlled picker"
+  value={dateFrom}
+  
+/>
+
+<DatePicker
+  label="Controlled picker"
+  value={dateTo}
+  
+/>
+   {/*onChange={(newValue) => setDateFrom(newValue)}*/} 
     </CardContent>
   </Card>
   </div>
