@@ -1,0 +1,33 @@
+[debug] [2023-12-27T14:15:31.973Z] ----------------------------------------------------------------------
+[debug] [2023-12-27T14:15:31.974Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2023-12-27T14:15:31.975Z] CLI Version:   12.7.0
+[debug] [2023-12-27T14:15:31.975Z] Platform:      win32
+[debug] [2023-12-27T14:15:31.975Z] Node Version:  v18.10.0
+[debug] [2023-12-27T14:15:31.976Z] Time:          Wed Dec 27 2023 15:15:31 GMT+0100 (Mitteleuropäische Normalzeit)
+[debug] [2023-12-27T14:15:31.976Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-12-27T14:15:32.055Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-12-27T14:15:32.055Z] > authorizing via signed-in user (hplerjen@gmail.com)
+[debug] [2023-12-27T14:15:32.056Z] [iam] checking project ost-cas-fee-hpl-2023-project2 for permissions ["firebase.projects.get"]
+[debug] [2023-12-27T14:15:32.058Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ost-cas-fee-hpl-2023-project2:testIamPermissions [none]
+[debug] [2023-12-27T14:15:32.058Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ost-cas-fee-hpl-2023-project2:testIamPermissions x-goog-quota-user=projects/ost-cas-fee-hpl-2023-project2
+[debug] [2023-12-27T14:15:32.058Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ost-cas-fee-hpl-2023-project2:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-12-27T14:15:32.907Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ost-cas-fee-hpl-2023-project2:testIamPermissions 200
+[debug] [2023-12-27T14:15:32.907Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ost-cas-fee-hpl-2023-project2:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-12-27T14:15:32.908Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2 [none]
+[debug] [2023-12-27T14:15:33.310Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2 200
+[debug] [2023-12-27T14:15:33.310Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2 {"projectId":"ost-cas-fee-hpl-2023-project2","projectNumber":"5893226944","displayName":"OST-CAS-FEE-HPL-2023-PROJECT2","name":"projects/ost-cas-fee-hpl-2023-project2","resources":{"hostingSite":"ost-cas-fee-hpl-2023-project2"},"state":"ACTIVE","etag":"1_292b6099-78a2-4b0d-8f7d-4b56667e6fa8"}
+[info] 
+[info] === Serving from 'C:\data\wp\js_project2_react_20231120\project-react4'...
+[info] 
+[debug] [2023-12-27T14:15:33.313Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2/sites 
+[debug] [2023-12-27T14:15:34.639Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2/sites 200
+[debug] [2023-12-27T14:15:34.640Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2/sites {"sites":[{"name":"projects/ost-cas-fee-hpl-2023-project2/sites/ost-cas-fee-hpl-2023-project2","defaultUrl":"https://ost-cas-fee-hpl-2023-project2.web.app","appId":"1:5893226944:web:969d68570bb33f9e664825","type":"DEFAULT_SITE"}]}
+[debug] [2023-12-27T14:15:34.640Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2/webApps/1:5893226944:web:969d68570bb33f9e664825/config [none]
+[debug] [2023-12-27T14:15:35.558Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2/webApps/1:5893226944:web:969d68570bb33f9e664825/config 200
+[debug] [2023-12-27T14:15:35.558Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2/webApps/1:5893226944:web:969d68570bb33f9e664825/config {"projectId":"ost-cas-fee-hpl-2023-project2","appId":"1:5893226944:web:969d68570bb33f9e664825","storageBucket":"ost-cas-fee-hpl-2023-project2.appspot.com","apiKey":"AIzaSyA-pf7p45Ckrw7D1Dz74Jjmlv1xhUj4lBs","authDomain":"ost-cas-fee-hpl-2023-project2.firebaseapp.com","messagingSenderId":"5893226944"}
+[debug] [2023-12-27T14:15:35.579Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2 [none]
+[debug] [2023-12-27T14:15:35.966Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2 200
+[debug] [2023-12-27T14:15:35.966Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ost-cas-fee-hpl-2023-project2 {"projectId":"ost-cas-fee-hpl-2023-project2","projectNumber":"5893226944","displayName":"OST-CAS-FEE-HPL-2023-PROJECT2","name":"projects/ost-cas-fee-hpl-2023-project2","resources":{"hostingSite":"ost-cas-fee-hpl-2023-project2"},"state":"ACTIVE","etag":"1_292b6099-78a2-4b0d-8f7d-4b56667e6fa8"}
+[info] i  hosting[ost-cas-fee-hpl-2023-project2]: Serving hosting files from: y {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1my\u001b[22m"}}
+[info] +  hosting[ost-cas-fee-hpl-2023-project2]: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
