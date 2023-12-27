@@ -9,23 +9,23 @@ export const Message = observer(() => {
     const [messages] = useState(store.messageStore.messages);
 
     return (
-      <div
-      style={{
-        padding: "10px",
-        textAlign: "start",
-      }}
+        <div
+          style={{
+            padding: "10px",
+            textAlign: "start",
+          }}
     >
    
-   {messages.map((message) =>
-    <Alert
-        severity={message!.severity}
-        sx={{ width: "100%" }}
-        >
-        {message!.text}
-    </Alert>
-                  )
-}
+          {messages.map((message) =>
+            <Alert
+                severity={message!.severity}
+                sx={{ width: "100%" }}
+                >
+                {message!.text}
+            </Alert>
+            )
+          }
 
-    </div>
+          </div>
     );
-})
+}) 
