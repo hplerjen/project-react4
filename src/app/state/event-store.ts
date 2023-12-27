@@ -15,6 +15,15 @@ export class EventStore {
         });
     }
 
+    /* useEffect(() => {
+        const getUsersData = async () => {
+          const data = await getDocs(UsersCollectionRef)
+          setUsers(data.docs.map((elem) => ({ ...elem.data(), id: elem.id })))
+        }
+    
+        getUsersData()
+    }, [])*/
+
     add(events: EventMini[]) {
         events.forEach((e) => {
             this.events[e.id!] = e;
