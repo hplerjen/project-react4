@@ -4,7 +4,7 @@ export interface Message {
   severity: Severity;
 }
 
-//REM analogous of MUI Alert message types
+//REM analogous of MUI Alert message types - can not be changed
 export enum Severity {
   error = "error",
   warning = "warning",

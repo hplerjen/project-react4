@@ -10,13 +10,9 @@ export class MessageStore {
         makeAutoObservable(this);
     }
 
-    setMessage(message: Message) {
-        this.messages.push(message);
-    }
-
-
-
-    clear() {
-        this.messages = new Array<Message>();
+    setMessage = (message: Message) => (this.messages.push(message))
+        
+    clear = () =>  {
+        this.messages[0].show = false;
     }
 }

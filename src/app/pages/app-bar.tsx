@@ -66,12 +66,6 @@ export const Appbar = observer(() => {
           <IconButton size="large" edge="start" color="inherit" aria-label="home" sx={{ mr: 2 }} onClick={navigateHome}>
             <HomeIcon />
           </IconButton>
-          <Tooltip title="Developer">
-          <Avatar alt="Hans-Peter Lerjen" src={avatar} />
-          </Tooltip>
-          <Tooltip title="Joik logo">
-          <Avatar alt="Joik" src={joik} />
-          </Tooltip>
           {/*<Avatar>H</Avatar>
 <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
   <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>*/}

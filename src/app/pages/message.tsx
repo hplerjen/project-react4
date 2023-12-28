@@ -9,23 +9,27 @@ export const Message = observer(() => {
     const [messages] = useState(store.messageStore.messages);
 
     return (
-        <div
-          style={{
-            padding: "10px",
-            textAlign: "start",
-          }}
+        <
     >
-   
+           
           {messages.map((message) =>
+            <Snackbar
+            anchorOrigin={{horizontal: "left", vertical: "top"}}
+            open = {message.show}
+            autoHideDuration={6000}
+            onClose = {store.messageStore.clear}
+            >
             <Alert
                 severity={message!.severity}
                 sx={{ width: "100%" }}
+                onClose = {store.messageStore.clear}
                 >
                 {message!.text}
             </Alert>
+            </Snackbar>
             )
           }
 
-          </div>
+          </>
     );
 }) 
