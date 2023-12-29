@@ -5,7 +5,7 @@ import "./card.css";
 import { useRootStore } from '../state/root-store';
 import { OnlyLoggedInUser } from '../components/userTypesFilter';
 import { Severity } from '../model/message';
-import { UserLogginRegister } from './user-loggin-register';
+import { UserLogInRegister } from './user-log-in-register';
 
 export const User =  observer(() => {
   const store = useRootStore();
@@ -95,7 +95,7 @@ export const User =  observer(() => {
       <Typography variant="h6">User Information</Typography>
       
       <div className="cardContainer">
-          <UserLogginRegister/>
+          <UserLogInRegister/>
           <OnlyLoggedInUser>
             <Card className="card">
               <CardContent>

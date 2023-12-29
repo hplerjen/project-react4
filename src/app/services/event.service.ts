@@ -35,25 +35,62 @@ export class EventService {
 
   async add(event: EventMini) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const docRef =  await addDoc(this.collection, event as DocumentData);
-    //FIXME UPDATE TO STORE new id in data
-    this.rootStore.messageStore.setMessage({
-      show: true,
-      text: "Event successfully created",
-      severity: Severity.success})
+    const docRef =  await addDoc(this.collection, event as DocumentData)
+      .then(() => {
+        this.rootStore.messageStore.setMessage({
+          show: true,
+          text: "Event created",
+          severity: Severity.success,
+        });
+      })
+      .catch((error: Error) => {
+        this.rootStore.messageStore.setMessage({
+          show: true,
+          text: error.message,
+          severity: Severity.error,
+        });
+      });
     await this.getDocs();
   }
 
   async update(event: EventMini) {
     const docRef = await this.doc(event.id!);
-    await updateDoc(docRef, event as DocumentData);
+    await updateDoc(docRef, event as DocumentData)
+    .then(() => {
+      this.rootStore.messageStore.setMessage({
+        show: true,
+        text: "Event updated",
+        severity: Severity.success,
+      });
+    })
+    .catch((error: Error) => {
+      this.rootStore.messageStore.setMessage({
+        show: true,
+        text: error.message,
+        severity: Severity.error,
+      });
+    });
     await this.getDocs();
   }
 
   async remove(id: string) {
     const docRef : DocumentReference<EventMini, EventMini> = await this.doc(id);
-    await deleteDoc(docRef);
-    await this.getDocs();
+    await deleteDoc(docRef)
+    await this.getDocs()
+    .then(() => {
+      this.rootStore.messageStore.setMessage({
+        show: true,
+        text: "Event deleted",
+        severity: Severity.success,
+      });
+    })
+    .catch((error: Error) => {
+      this.rootStore.messageStore.setMessage({
+        show: true,
+        text: error.message,
+        severity: Severity.error,
+      });
+    });
   }
 
   async getDocs(){

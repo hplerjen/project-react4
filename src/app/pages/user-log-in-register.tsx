@@ -6,7 +6,7 @@ import { AnonymousUser } from '../components/userTypesFilter';
 import "./card.css";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-export const UserLogginRegister =  observer(() => {
+export const UserLogInRegister =  observer(() => {
   const store = useRootStore();
   
   const [pwd, setPwd] = useState("")
@@ -43,19 +43,19 @@ export const UserLogginRegister =  observer(() => {
               >
                 <TextField variant="outlined" type="email" label="E-Mail" className="textField" value={email} onChange={(e) => setEmail(e.target.value)} name="email" required />
                 <TextField variant="outlined" type={showPassword ? "text" : "password"}label="Passwort" className="textField" value={pwd} onChange={(e) => setPwd(e.target.value)} name="password" required
-InputProps={{
-  endAdornment: (
-    <InputAdornment position="end">
-      <IconButton
-        aria-label="toggle password visibility"
-        onClick={handleClickShowPassword}
-        edge="end"
-      >
-        {showPassword ? <VisibilityOff /> : <Visibility />}
-      </IconButton>
-    </InputAdornment>
-  ),
-}}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                 />
                 <div style={{ paddingTop: "10px" }}>
                   <Button type="submit" value="register">

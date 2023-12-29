@@ -35,8 +35,7 @@ export class AuthService {
       .catch((error) => {
         this.rootStore.messageStore.setMessage({
           show: true,
-          text: "Error occured: error code : " + error.code 
-          + " error message: " + error.message ,
+          text: error.message , 
           severity: Severity.error
           //Error occured: error code : auth/weak-password error message: Firebase: Password should be at least 6 characters (auth/weak-password).
           //Error occured: error code : auth/invalid-credential error message: Firebase: Error (auth/invalid-credential).
@@ -61,8 +60,7 @@ export class AuthService {
         .catch((error) => {
           this.rootStore.messageStore.setMessage({
             show: true,
-            text: "Error occured: error code : " + error.code 
-            + " error message: " + error.message ,
+            text: error.message ,
             severity: Severity.error
             //Error occured: error code : auth/invalid-credential error message: Firebase: Error (auth/invalid-credential).
             //Error occured: error code : auth/network-request-failed error message: Firebase: Error (auth/network-request-failed).

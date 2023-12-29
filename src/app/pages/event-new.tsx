@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Timestamp } from 'firebase/firestore';
 import { DatePicker } from '@mui/x-date-pickers';
 
-
+//FIXME merge with Update
 export const EventNew = observer(() => {
     const store = useRootStore();
     const navigate = useNavigate();
@@ -46,12 +46,12 @@ export const EventNew = observer(() => {
             <TextField variant="outlined" type="description" label="Description" className="textField" value={description} onChange={(e) => setDescription(e.target.value)} name="description" required/>
             
             <DatePicker
-              label="Controlled picker"
+              label="Date & Time from"
               value={dateFrom}
             />
 
             <DatePicker
-              label="Controlled picker"
+              label="Date & Time to"
               value={dateTo}
             />        
             
