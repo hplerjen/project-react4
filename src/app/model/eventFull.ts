@@ -12,6 +12,7 @@ export interface IEventFull  {
   organisation: string;
   url: string;
   image: string;
+  imageAltText: string;
   dateFrom: Timestamp; 
   dateTo:  Timestamp;
   createdAt?: Timestamp;
@@ -29,6 +30,7 @@ export class EventFull implements IEventFull {
   organisation: string;
   url: string;
   image: string;
+  imageAltText: string;
   dateFrom: Timestamp; 
   dateTo:  Timestamp; 
   createdAt?: Timestamp;
@@ -45,6 +47,7 @@ export class EventFull implements IEventFull {
     this.organisation = event.organisation
     this.url = event.url
     this.image = event.image
+    this.imageAltText = event.imageAltText
     this.dateFrom = event.dateFrom
     this.dateTo = event.dateTo
     this.createdAt = event.createdAt
@@ -53,14 +56,3 @@ export class EventFull implements IEventFull {
     makeAutoObservable(this);
   }
 }
-  
-
-
-     /*dateCreated: Date;
-    dateDeleted: Date;
-    dateFrom: Date;
-    dateTo: Date;
-    description: string;
-    eventType: string;
-    place: string;
-    url: string;*/

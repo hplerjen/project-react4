@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Timestamp } from 'firebase/firestore';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DatePicker, DateTimePicker } from '@mui/x-date-pickers';
 
 //FIXME merge with Update
 export const EventNew = observer(() => {
@@ -14,8 +14,9 @@ export const EventNew = observer(() => {
     //const [id, setId] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [dateFrom] = useState(Timestamp.fromDate(new Date()));
-    const [dateTo] = useState((Timestamp.fromDate(new Date('2023-12-25'))));
+    const [dateFrom, setDateFrom] = useState(Timestamp.fromDate(new Date()));
+    const [dateTo, setDateTo] = useState((Timestamp.fromDate(new Date('2023-12-25'))));
+
   
 
       const createEvent = (event: FormEvent) => {
@@ -41,19 +42,23 @@ export const EventNew = observer(() => {
                 </Typography>
             <form style={{ display: "flex", flexDirection: "column", alignItems: "start", }}
             onSubmit={createEvent}>
-            {/*style={{ display: "flex", flexDirection: "column", alignItems: "start"}}>*/}
+    
             <TextField variant="outlined" type="title" label="Title" className="textField" value={title} onChange={(e) => setTitle(e.target.value)} name="title" required />
             <TextField variant="outlined" type="description" label="Description" className="textField" value={description} onChange={(e) => setDescription(e.target.value)} name="description" required/>
-            
-            <DatePicker
-              label="Date & Time from"
-              value={dateFrom}
-            />
+               
 
-            <DatePicker
-              label="Date & Time to"
-              value={dateTo}
-            />        
+            
+
+<DateTimePicker label="Date & Time from"
+  value={dateFrom}
+  onChange={(newValue) => newValue && setDateFrom(newValue)}
+/>
+
+    <DatePicker
+        label="Date & Time to"
+        value={dateTo}
+        onChange={(newValue) => newValue && setDateTo(newValue)}
+    />    
             
             <div style={{ paddingTop: "10px" }}>
               <Button type="submit" value="createEvent">

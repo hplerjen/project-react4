@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
 //import dayjs from "dayjs";
-import { DatePicker, DateTimeField } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
 
 export const EventDetail = observer(() => {
   
@@ -16,6 +16,9 @@ export const EventDetail = observer(() => {
   const [description] = useState(mainStore.eventStore.findById(id)!.description);
   const [dateFrom] = useState(mainStore.eventStore.findById(id)!.dateFrom);
   const [dateTo] = useState(mainStore.eventStore.findById(id)!.dateTo);
+
+
+
 
   return (
     <div
@@ -36,17 +39,16 @@ export const EventDetail = observer(() => {
       </Typography>
       
 
-      <DateTimeField
+      <DatePicker
         label="Date & Time from"
         value={dateFrom}
-        format="MM-DD-YYYY HH:MM"
       />
 
-    < DateTimeField
+    <DatePicker
         label="Date & Time to"
         value={dateTo}
-        format="MM-DD-YYYY HH:MM"
     />   
+  
 
    {/*onChange={(newValue) => setDateFrom(newValue)}*/} 
     </CardContent>

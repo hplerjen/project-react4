@@ -34,8 +34,10 @@ export class EventService {
   }
 
   async add(event: EventMini) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const docRef =  await addDoc(this.collection, event as DocumentData)
+    //REM new store id in database
+    await updateDoc(docRef, { ...event, id: docRef.id} as DocumentData)
+    await this.getDocs()
       .then(() => {
         this.rootStore.messageStore.setMessage({
           show: true,
@@ -50,7 +52,7 @@ export class EventService {
           severity: Severity.error,
         });
       });
-    await this.getDocs();
+
   }
 
   async update(event: EventMini) {
@@ -74,7 +76,7 @@ export class EventService {
   }
 
   async remove(id: string) {
-    const docRef : DocumentReference<EventMini, EventMini> = await this.doc(id);
+    const docRef : DocumentReference<EventMini, EventMini>= await this.doc(id);
     await deleteDoc(docRef)
     await this.getDocs()
     .then(() => {

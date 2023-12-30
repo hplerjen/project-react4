@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { RootStore, StoreRootProvider } from './state/root-store';
 import { observer } from 'mobx-react-lite';
 import { User } from './pages/user';
-import { EventListTable } from './pages/event-list-table';
+import { EventListTable } from './pages/event-list-table-cell';
 import { EventUpdate } from './pages/event-update';
 import { EventNew } from './pages/event-new';
 import { ProductList } from './pages/product-list';
@@ -15,6 +15,7 @@ import { ProductUpdate } from './pages/product-update';
 import { EventDetail } from './pages/event-details';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { EventListBoxCard } from './pages/event-list-box-card';
 
 const AppObserver = observer(() => {
 
@@ -27,7 +28,7 @@ const AppObserver = observer(() => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="event" />} />
-            <Route path="event" element={<EventListTable />} />
+            <Route path="event" element={<EventListBoxCard/>} />
             <Route path="event/:id" element={<EventDetail />} /> 
             <Route path="event-past" element={<EventListTable />}/>
             

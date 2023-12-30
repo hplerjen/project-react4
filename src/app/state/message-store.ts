@@ -21,7 +21,7 @@ export class MessageStore {
         //this.messages[0].show = false;
         //this.messages[1].show = false;
         //this.messages =  [];
-        //this.messages.forEach((message) => message.show = false);  
-        this.messages = new Array<Message>(); 
+        this.messages.forEach((message) => message.show = false);  
+        //this.messages = new Array<Message>(); 
     }
 }

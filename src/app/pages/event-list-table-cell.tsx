@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { useRootStore } from "../state/root-store";
-import React, { useEffect } from "react";
+import React from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Editicon from "@mui/icons-material/Edit";
@@ -65,7 +65,6 @@ export const EventListTable = observer(() => {
             <TableCell align="right">Title</TableCell>
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Edit</TableCell>
-            <TableCell align="right">Delete</TableCell>
             <TableCell align="right">Delete with Dialog</TableCell>
           </TableRow>
         </TableHead>
@@ -87,12 +86,6 @@ export const EventListTable = observer(() => {
                             <IconButton
                                 onClick={(e) => updateEvent(e, eventM.id!)}>
                                 <Editicon />
-                            </IconButton>
-            </TableCell>
-            <TableCell align="right">
-                            <IconButton
-                                onClick={(e) => deleteEvent(e, eventM.id!)}>
-                                <DeleteIcon />
                             </IconButton>
             </TableCell>
             <TableCell align="right">

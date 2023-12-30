@@ -16,7 +16,7 @@ export const Message = observer(() => {
             <Snackbar
             anchorOrigin={{horizontal: "left", vertical: "top"}}
             open = {message.show}
-            autoHideDuration={6000}
+            autoHideDuration={2000}
             onClose = {store.messageStore.clear}
             >
             <Alert

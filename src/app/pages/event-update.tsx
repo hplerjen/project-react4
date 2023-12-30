@@ -48,17 +48,17 @@ export const EventUpdate = observer(() => {
         onChange={(e) => setDescription(e.target.value)} 
         name="description" required />
 
-    <DatePicker
-        label="Controlled picker"
+<DatePicker
+        label="Date & Time from"
         value={dateFrom}
         onChange={(newValue) => newValue && setDateFrom(newValue)}
       />
 
     <DatePicker
-        label="Controlled picker"
+        label="Date & Time to"
         value={dateTo}
         onChange={(newValue) => newValue && setDateTo(newValue)}
-    />        
+    />           
     
     <div style={{ paddingTop: "10px" }}>
               <Button type="submit" value="updateEvent">
