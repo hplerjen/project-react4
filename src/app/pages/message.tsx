@@ -9,9 +9,7 @@ export const Message = observer(() => {
     const [messages] = useState(store.messageStore.messages);
 
     return (
-        <
-    >
-           
+        <>
           {messages.map((message) =>
             <Snackbar
             anchorOrigin={{horizontal: "left", vertical: "top"}}
@@ -29,7 +27,6 @@ export const Message = observer(() => {
             </Snackbar>
             )
           }
-
-          </>
+        </>
     );
 }) 

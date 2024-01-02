@@ -76,7 +76,7 @@ export class EventService {
   }
 
   async remove(id: string) {
-    const docRef : DocumentReference<EventMini, EventMini>= await this.doc(id);
+    const docRef = await this.doc(id);
     await deleteDoc(docRef)
     await this.getDocs()
     .then(() => {

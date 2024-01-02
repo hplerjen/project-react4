@@ -1,6 +1,6 @@
 import {Outlet} from "react-router-dom";
 
-import "./layout.css";
+//import "./layout.css";
 import { Appbar } from "./app-bar";
 import { Message } from "./message";
 

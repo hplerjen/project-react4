@@ -2,6 +2,7 @@
 import {autorun, makeAutoObservable, observable} from "mobx";
 import {RootStore} from "./root-store";
 import { EventMini } from "src/app/model/eventMini";
+import { Timestamp } from "firebase/firestore";
 
 export class EventStore {
     public events: { [key: string]: EventMini } = observable({});
@@ -44,7 +45,18 @@ export class EventStore {
         return Object.values(this.events).find((e) => e.id === id);
     }
 
-    //FIXME filter future / past events as per event date < date
+    futureEvents(){
+       return Object.values(this.events).filter((e) => 
+       e.dateFrom.seconds > Timestamp.now().seconds )
+       .sort(( a, b ) => a > b ? 1 : -1 )
+    }
+
+    pastEvents(){
+        return Object.values(this.events).filter((e) => 
+        e.dateFrom.seconds < Timestamp.now().seconds
+        ).sort(( a, b ) => a > b ? 1 : -1 )
+    }
+   
     
 
 }

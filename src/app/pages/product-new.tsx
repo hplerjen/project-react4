@@ -4,7 +4,6 @@ import { observer } from 'mobx-react-lite';
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
-//import "./card.css";
 
 export const ProductNew = observer(() => {
     const store = useRootStore();

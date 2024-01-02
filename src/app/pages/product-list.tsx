@@ -7,7 +7,6 @@ import { IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/m
 import DeleteIcon from "@mui/icons-material/Delete";
 import Editicon from "@mui/icons-material/Edit";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-//import "./card.css";
 
 export const ProductList = observer(() => {
   const store = useRootStore();

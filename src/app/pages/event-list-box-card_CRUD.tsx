@@ -7,6 +7,7 @@ import Editicon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Dialog, DialogContent, DialogTitle, Link, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { formatDateTime } from "../utility/date-utility";
 
 export const EventListBoxCard = observer(() => {
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
@@ -36,13 +37,13 @@ export const EventListBoxCard = observer(() => {
     setOpenDeleteDialog (false);
     store.eventService.remove(id);
     navigate("/event");
-    //FIXME valid implemenation on same page flow?
+    //FIXME valid implementation on same page flow?
     window.location.reload();
   };
 
   const updateEvent = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
-    navigate(`/event-update/${id}`);  
+    navigate(`/event-update/${id}`); 
   };
 
   /* useEffect(() => {
@@ -60,7 +61,7 @@ export const EventListBoxCard = observer(() => {
                 bgcolor: 'background.paper',
                 borderRadius: 1,
         }}>
-          {Object.values(store.eventStore.events).map((eventM) => (
+          {Object.values(store.eventStore.futureEvents()).map((eventM) => (
             <Card className="card" sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography className="cardTitle">
@@ -69,6 +70,12 @@ export const EventListBoxCard = observer(() => {
               <Typography>
                   {eventM.description} 
               </Typography>
+              <Typography>
+                  {formatDateTime(eventM.dateFrom.toDate())} 
+              </Typography>
+              <Typography>
+                  {formatDateTime(eventM.dateTo.toDate())}
+            </Typography>
             </CardContent>
             <CardMedia
               component="img"
@@ -77,7 +84,7 @@ export const EventListBoxCard = observer(() => {
               image="../assets/images/event/aillos.jpg"
             />
             <CardContent>
-              <Link href="{eventM.url} " underline="always" target="_blank" rel="noreferrer">
+              <Link href="{{http//joik.ch}}" underline="always" target="_blank" rel="noreferrer">
                 Event URL
               </Link>
             </CardContent>

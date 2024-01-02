@@ -6,16 +6,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { RootStore, StoreRootProvider } from './state/root-store';
 import { observer } from 'mobx-react-lite';
 import { User } from './pages/user';
-import { EventListTable } from './pages/event-list-table-cell';
-import { EventUpdate } from './pages/event-update';
-import { EventNew } from './pages/event-new';
+import { EventListTable } from './pages/event-list-table-cell_R';
+import { EventUpdate } from './pages/event-cu';
 import { ProductList } from './pages/product-list';
 import { ProductNew } from './pages/product-new';
 import { ProductUpdate } from './pages/product-update';
-import { EventDetail } from './pages/event-details';
+import { EventDetail } from './pages/event-r';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { EventListBoxCard } from './pages/event-list-box-card';
+import { EventListBoxCard } from './pages/event-list-box-card_CRUD';
 
 const AppObserver = observer(() => {
 
@@ -40,7 +39,7 @@ const AppObserver = observer(() => {
             {/* ADMIN only - FIXME needs to be guarded */}
 
             
-            <Route path="event-new" element={<EventNew />}/>
+            <Route path="event-new" element={<EventUpdate />}/>
             <Route path="event-update/:id" element={<EventUpdate />} /> 
             <Route path="product-new" element={<ProductNew />}/>
             <Route path="product-update/:id" element={<ProductUpdate />} /> 

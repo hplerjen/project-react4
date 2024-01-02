@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 import CheckIcon from "@mui/icons-material/Check";
 import { observer } from "mobx-react-lite";
-//import "./card.css";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Severity } from "../model/message";
 import NumberInputIntroduction from "../components/customer-input-number";

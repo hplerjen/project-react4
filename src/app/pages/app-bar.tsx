@@ -30,7 +30,8 @@ export const Appbar = observer(() => {
   };
 
   const navigateEventNew= () => {
-    navigate("/event-new");
+    navigate("/event-new")
+    window.location.reload();
   };
 
   const navigateProducts= () => {
