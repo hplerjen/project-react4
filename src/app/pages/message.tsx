@@ -1,5 +1,5 @@
 import { Alert, Snackbar } from "@mui/material";
-import { useRootStore } from "../state/root-store";
+import { useRootStore } from "../store/root-store";
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
 

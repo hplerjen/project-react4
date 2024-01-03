@@ -3,7 +3,7 @@ import { Layout } from './pages/layout';
 import { ProductDetail } from './pages/product-detail';
 import Cart from './pages/cart';
 import CssBaseline from '@mui/material/CssBaseline';
-import { RootStore, StoreRootProvider } from './state/root-store';
+import { RootStore, StoreRootProvider } from './store/root-store';
 import { observer } from 'mobx-react-lite';
 import { User } from './pages/user';
 import { EventListTable } from './pages/event-list-table-cell_R';
@@ -42,8 +42,7 @@ const AppObserver = observer(() => {
             <Route path="event-new" element={<EventUpdate />}/>
             <Route path="event-update/:id" element={<EventUpdate />} /> 
             <Route path="product-new" element={<ProductNew />}/>
-            <Route path="product-update/:id" element={<ProductUpdate />} /> 
-
+            <Route path="product-update/:id" element={<ProductUpdate />}/> 
           </Route>
         </Routes>
     </BrowserRouter>

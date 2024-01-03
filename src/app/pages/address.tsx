@@ -2,7 +2,7 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
-import { useRootStore } from '../state/root-store';
+import { useRootStore } from '../store/root-store';
 
 export const Address =  observer(() => {
   const store = useRootStore();

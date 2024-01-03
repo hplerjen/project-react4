@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react'
-import { useRootStore } from '../state/root-store';
+import { useRootStore } from '../store/root-store';
 import { observer } from 'mobx-react-lite';
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';

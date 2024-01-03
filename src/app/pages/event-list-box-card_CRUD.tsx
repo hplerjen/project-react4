@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useRootStore } from "../state/root-store";
+import { useRootStore } from "../store/root-store";
 import React  from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Dialog, DialogContent, DialogTitle, Link, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { formatDateTime } from "../utility/date-utility";
+import { convertFireStoreToStringFormattedEventType } from "../model/event";
+
 
 export const EventListBoxCard = observer(() => {
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
@@ -50,6 +52,16 @@ export const EventListBoxCard = observer(() => {
     store.eventService.getDocs()
   }, [store.eventService]);*/
 
+  const imageRootPath = '../assets/images/';
+
+  function concatImagePath (image : string) : string  {
+    const path = imageRootPath + image;
+    console.log(path);
+    return path;
+
+  }
+
+
   return (
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -62,31 +74,52 @@ export const EventListBoxCard = observer(() => {
                 borderRadius: 1,
         }}>
           {Object.values(store.eventStore.futureEvents()).map((eventM) => (
-            <Card className="card" sx={{ maxWidth: 345 }}>
+            
+            
+              <Card key={eventM.id} className="card" sx={{ maxWidth: 345 }}>
               <CardContent>
-                <Typography className="cardTitle">
-                  {eventM.title} 
-                </Typography>
-              <Typography>
-                  {eventM.description} 
-              </Typography>
               <Typography>
                   {formatDateTime(eventM.dateFrom.toDate())} 
               </Typography>
               <Typography>
                   {formatDateTime(eventM.dateTo.toDate())}
             </Typography>
+            <Typography className="textField" >
+                  {convertFireStoreToStringFormattedEventType(eventM.eventType)} 
+              </Typography>
             </CardContent>
+
             <CardMedia
               component="img"
-              alt="green iguana"
+              alt={eventM.imageAltText}
               height="140"
-              image="../assets/images/event/aillos.jpg"
+              image = {concatImagePath(eventM.image)}
             />
+            
+              
+              <CardContent>
+                <Typography className="cardTitle">
+                  {eventM.title} 
+                </Typography>
+              <Typography className="textField" >
+                  {eventM.description} 
+              </Typography>
+
+              <Typography className="textField" >
+                  {eventM.artist} 
+              </Typography>
+              <Typography className="textField" >
+                  {eventM.place} 
+              </Typography>
+            </CardContent>
+
             <CardContent>
-              <Link href="{{http//joik.ch}}" underline="always" target="_blank" rel="noreferrer">
-                Event URL
-              </Link>
+              <div>
+              <a href={eventM.url} target="_blank" rel="noreferrer">
+                 Event link (extern)
+              </a>
+              </div>
+
             </CardContent>
             <CardActions>
               <IconButton onClick={(e) => viewEventDetail(e, eventM.id!)}>

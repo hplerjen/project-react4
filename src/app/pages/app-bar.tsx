@@ -7,7 +7,7 @@ import { AccountCircle } from "@mui/icons-material";
 //import FavoriteIcon from '@mui/icons-material/Favorite';
 import joik from '../images/joik.jpg'
 import avatar from '../images/avatar.jpg'
-import { useRootStore } from "../state/root-store";
+import { useRootStore } from "../store/root-store";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement } from "react";
 //import { deepOrange, deepPurple } from "@mui/material/colors";

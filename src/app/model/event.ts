@@ -1,12 +1,40 @@
 import {makeAutoObservable} from "mobx";
 import {Timestamp} from "firebase/firestore";
 
-export interface IEventFull  {
+export enum EventType {
+    workshop = 1,
+    concert = 2,
+    presentation = 3
+}
+
+export function convertEventTypeFromFireStore(eventTypFireStore : EventType): EventType { 
+  switch(eventTypFireStore) { 
+    case EventType.workshop: { 
+       return EventType.workshop;
+    } 
+    case EventType.concert:{ 
+      return EventType.concert;
+    } 
+    case EventType.presentation:{ 
+      return EventType.presentation;
+    }
+    default: { 
+       return EventType.workshop;
+    } 
+ } 
+}
+
+export function convertFireStoreToStringFormattedEventType (eventTypeFireStore: number): string {
+    return Object.keys(EventType)[Object.values(EventType).indexOf(eventTypeFireStore)];
+}
+
+
+export interface IEvent  {
   id?: string;
   title: string;
   description: string;
-  eventType: string;
-  artists: string;
+  eventType: EventType;
+  artist: string;
   location: string;
   place: string;
   organisation: string;
@@ -16,15 +44,15 @@ export interface IEventFull  {
   dateFrom: Timestamp; 
   dateTo:  Timestamp;
   createdAt?: Timestamp;
-  deletedAt?: Timestamp;
+  //deletedAt?: Timestamp;
 }
 
-export class EventFull implements IEventFull {
+export class EventM implements IEvent {
   id?: string;
   title: string;
   description: string;
-  eventType: string;
-  artists: string;
+  eventType: EventType;
+  artist: string;
   location: string;
   place: string;
   organisation: string;
@@ -33,15 +61,14 @@ export class EventFull implements IEventFull {
   imageAltText: string;
   dateFrom: Timestamp; 
   dateTo:  Timestamp; 
-  createdAt?: Timestamp;
-  deletedAt?: Timestamp;
+  createdAt: Timestamp;
 
-  constructor(event : EventFull) {
+  constructor(event : EventM) {
     this.id = event.id
     this.title = event.title
     this.description = event.description
     this.eventType = event.eventType
-    this.artists = event.artists
+    this.artist = event.artist
     this.location = event.location
     this.place = event.place
     this.organisation = event.organisation
@@ -51,7 +78,6 @@ export class EventFull implements IEventFull {
     this.dateFrom = event.dateFrom
     this.dateTo = event.dateTo
     this.createdAt = event.createdAt
-    this.deletedAt = event.deletedAt
    
     makeAutoObservable(this);
   }

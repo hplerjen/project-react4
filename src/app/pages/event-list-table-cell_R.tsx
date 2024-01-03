@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useRootStore } from "../state/root-store";
+import { useRootStore } from "../store/root-store";
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { formatDateTime } from "../utility/date-utility";
 
 export const EventListTable = observer(() => {
   const store = useRootStore();
@@ -47,6 +48,9 @@ export const EventListTable = observer(() => {
             <TableCell align="right">{eventM.id}</TableCell>
             <TableCell align="right">{eventM.title}</TableCell>
             <TableCell align="right">{eventM.description}</TableCell>
+            <TableCell align="right">{eventM.artist}</TableCell>
+            <TableCell align="right"> {formatDateTime(eventM.dateFrom.toDate())} </TableCell>
+            <TableCell align="right"> {formatDateTime(eventM.dateTo.toDate())} </TableCell>
             <TableCell align="right">
                             <IconButton
                                 onClick={(e) => viewEventDetail(e, eventM.id!)}>

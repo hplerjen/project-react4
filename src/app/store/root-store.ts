@@ -15,10 +15,11 @@ import { OrderService } from "../services/order.service";
 import { MessageStore } from "./message-store";
 import { AdminService } from "../services/admin.service";
 import { OrderStore } from "./order-store";
+import { EventService2 } from "../services/event.service copy";
 
 export class RootStore {
   eventStore: EventStore;
-  eventService: EventService;
+  eventService: EventService2;
   productStore: ProductStore;
   productService: ProductService;
   orderStore: OrderStore;
@@ -41,7 +42,7 @@ export class RootStore {
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    this.eventService = new EventService( this, db );
+    this.eventService = new EventService2( this, db );
     this.eventStore = new EventStore(this);
 
     this.productService = new ProductService( this, db );

@@ -1,11 +1,11 @@
 
 import {autorun, makeAutoObservable, observable} from "mobx";
 import {RootStore} from "./root-store";
-import { EventMini } from "src/app/model/eventMini";
 import { Timestamp } from "firebase/firestore";
+import { EventM } from "../model/event";
 
 export class EventStore {
-    public events: { [key: string]: EventMini } = observable({});
+    public events: { [key: string]: EventM } = observable({});
     
 
     constructor(private rootStore: RootStore) {
@@ -25,13 +25,13 @@ export class EventStore {
         getUsersData()
     }, [])*/
 
-    add(events: EventMini[]) {
+    add(events: EventM[]) {
         events.forEach((e) => {
             this.events[e.id!] = e;
         });
     }
 
-    remove(events: EventMini[]) {
+    remove(events: EventM[]) {
         events.forEach((e) => {
             delete this.events[e.id!];
         });
@@ -41,7 +41,7 @@ export class EventStore {
         this.events = {};
     }
 
-    findById(id: string | undefined ): EventMini | undefined {
+    findById(id: string | undefined ): EventM | undefined {
         return Object.values(this.events).find((e) => e.id === id);
     }
 

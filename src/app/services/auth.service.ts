@@ -1,7 +1,7 @@
 import {Auth, linkWithCredential, reauthenticateWithCredential, sendPasswordResetEmail, signInAnonymously, signInWithEmailAndPassword, updatePassword, updateProfile,} from "@firebase/auth";
 import {EmailAuthProvider, User} from "firebase/auth";
 import {AuthConnect, AuthUserSettingsChange} from "../model/auth";
-import { RootStore } from "../state/root-store";
+import { RootStore } from "../store/root-store";
 import { Severity } from "../model/message";
 
 

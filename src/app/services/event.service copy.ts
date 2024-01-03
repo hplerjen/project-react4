@@ -1,39 +1,39 @@
-import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, getDoc, getDocs, query, QueryConstraint, updateDoc,} from "firebase/firestore";
-import { EventMini } from "../model/eventMini";
+import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData,  Firestore, getDoc, getDocs, query, QueryConstraint, updateDoc,} from "firebase/firestore";
 import { RootStore } from "../store/root-store";
 import { Severity } from "../model/message";
+import { EventM } from "../model/event";
 
-export class EventService {
-  private collectionName = "eventMini";
+export class EventService2 {
+  private collectionName = "events";
 
   public constructor(private rootStore: RootStore, protected db: Firestore) {   
   }
   
   get collection() {
-    return collection  (this.db, this.collectionName)  as CollectionReference<EventMini, EventMini>; 
+    return collection  (this.db, this.collectionName)  as CollectionReference<EventM, EventM>; 
   }
 
-  //FIXEME NOT YET USED
+  //FIXME NOT YET USED
   async collectionQuery(...queryConstraints: QueryConstraint[]) {
     const baseCollection = this.collection;
-    return await query<EventMini, EventMini>(
+    return await query<EventM, EventM>(
         baseCollection,
         ...queryConstraints
     );
   }
 
   async doc(id: string) {
-    return await doc<EventMini, EventMini> (this.collection, `${id}`);
+    return await doc<EventM, EventM> (this.collection, `${id}`);
   }
 
-  async getDoc(id: string): Promise<EventMini | undefined> {
+  async getDoc(id: string): Promise<EventM | undefined> {
     const docRef = await this.doc(id);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
 
   }
 
-  async add(event: EventMini) {
+  async add(event: EventM) {
     const docRef =  await addDoc(this.collection, event as DocumentData)
     //REM new store id in database
     await updateDoc(docRef, { ...event, id: docRef.id} as DocumentData)
@@ -55,7 +55,7 @@ export class EventService {
 
   }
 
-  async update(event: EventMini) {
+  async update(event: EventM) {
     const docRef = await this.doc(event.id!);
     await updateDoc(docRef, event as DocumentData)
     .then(() => {
@@ -98,8 +98,8 @@ export class EventService {
   async getDocs(){
     const q = query(this.collection);
     const querySnapshot = await getDocs(q);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const events = querySnapshot.docs.map((doc) => (new EventMini({ ...doc.data(), id: doc.id})));
-    //this.rootStore.eventStore.add(events);
+    const events = querySnapshot.docs.map((doc) => (
+      new EventM({ ...doc.data(), id: doc.id})));
+    this.rootStore.eventStore.add(events);
 } 
 }

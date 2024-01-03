@@ -1,6 +1,6 @@
 import React, {ReactElement} from "react";
 import {observer} from "mobx-react-lite";
-import {useRootStore} from "../state/root-store";
+import {useRootStore} from "../store/root-store";
 
 //REM guards the routes
 export const OnlyLoggedInUser = observer(({children} : {children : ReactElement}) => {

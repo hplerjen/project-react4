@@ -2,7 +2,7 @@
 //import {EmailAuthProvider, User} from "firebase/auth";
 import { Auth, sendPasswordResetEmail } from "firebase/auth";
 import {AuthConnect, AuthUserSettingsChange} from "../model/auth";
-import { RootStore } from "../state/root-store";
+import { RootStore } from "../store/root-store";
 //import { Severity } from "../model/message";
 
 //scope:

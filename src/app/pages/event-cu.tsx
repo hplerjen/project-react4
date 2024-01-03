@@ -1,5 +1,4 @@
 import React, { FormEvent, useState } from 'react'
-import { useRootStore } from '../state/root-store';
 import { observer } from 'mobx-react-lite';
 import { Box, Button, Card, CardContent, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,6 +6,8 @@ import { DateTimePicker, DateValidationError } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { Timestamp } from 'firebase/firestore';
 import { Severity } from '../model/message';
+import { useRootStore } from '../store/root-store';
+import { EventType, convertEventTypeFromFireStore } from '../model/event';
 
 export const EventUpdate = observer(() => {
     const store = useRootStore();
@@ -15,9 +16,23 @@ export const EventUpdate = observer(() => {
     
     const [title, setTitle] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.title : "");
     const [description, setDescription] = useState(store.eventStore.findById(id)?store.eventStore.findById(id)!.description : "");
+    
+    const [eventType, setEventType] = useState(store.eventStore.findById(id)?convertEventTypeFromFireStore(store.eventStore.findById(id)!.eventType): EventType.workshop)
+  
+    const [artist, setArtist] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.artist : "");
+    const [location, setLocation] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.location : "");
+    const [place, setPlace] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.place : "");
+    const [organisation, setOrganisation] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.organisation : "");
+  
+    const [url, setUrl] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.url : "");
+    const [image, setImage] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.image : "");
+    const [imageAltText, setImageAltText] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.imageAltText : "");
+    
     const [dateFrom, setDateFrom] = useState(store.eventStore.findById(id)?store.eventStore.findById(id)!.dateFrom : Timestamp.fromDate(tomorrow()));
     const [dateTo, setDateTo] = useState(store.eventStore.findById(id)?store!.eventStore.findById(id)!.dateTo : 
     Timestamp.fromDate(tomorrow()));
+
+    const [createdAt, ] = useState(store.eventStore.findById(id)?store!.eventStore.findById(id)!.createdAt : Timestamp.now());
 
     const [dateError, setDateError] =  useState<DateValidationError | null>(null);
 
@@ -28,17 +43,18 @@ export const EventUpdate = observer(() => {
       return tomorrow}
 
 
+
     const createEvent = (event: FormEvent) => {
       event.preventDefault();
       if (dateFrom && dateTo && dateFrom > dateTo) { 
-        fireDateRangeValidtionError() }
+        fireDateRangeValidationError() }
       else {
-        store.eventService.add({id : "", title, description, dateFrom, dateTo});
+        store.eventService.add({id : "", title, description, eventType, artist, location, place, organisation, url, image, imageAltText, dateFrom, dateTo, createdAt});
         navigate("/event");
       }
     };
 
-    function fireDateRangeValidtionError(){
+    function fireDateRangeValidationError(){
       store.messageStore.setMessage({
         show: true,
         text: "Date To should be after Date From",
@@ -49,8 +65,10 @@ export const EventUpdate = observer(() => {
     const updateEvent = async (event: FormEvent) => {
         event.preventDefault();
         if (dateFrom && dateTo && dateFrom > dateTo) 
-        { fireDateRangeValidtionError() } else {
-        await store.eventService.update({id, title, description, dateFrom, dateTo});
+        { fireDateRangeValidationError() } else {
+        await store.eventService.update({id, title, description, eventType,
+          artist, location, place, organisation, url, image, imageAltText, dateFrom, dateTo,
+          createdAt});
         navigate("/event");
         }
       }
@@ -100,32 +118,88 @@ export const EventUpdate = observer(() => {
         <form style={{ display: "flex", flexDirection: "column", alignItems: "start", }}
             onSubmit={id? updateEvent : createEvent}>
     
-          <TextField variant="outlined" type="title" label="Title" className="textField" 
+          <TextField variant="outlined" type="text"  label="Title" className="textField" 
               value={title} 
               onChange={(e) => setTitle(e.target.value)} 
               name="title" required />
     
-          <TextField variant="outlined" type="description" 
+          <TextField variant="outlined" type="text" 
               label="Description" className="textField" 
               value={description} 
               onChange={(e) => setDescription(e.target.value)} 
               name="description" required 
           />
 
-{/*<InputLabel id="eventtype">Age</InputLabel>
+<div style={{ paddingTop: "30px" }}>
+<InputLabel id="eventType">Event type</InputLabel>
   <Select
     labelId="eventtype"
     id="eventtype"
     value={eventType}
-    label="Age"
-    onChange={handleChange}
+    label="Event Type"
+    onChange={(e) => setEventType(e.target.value as EventType)}
   >
-    <MenuItem value={10}>Concert</MenuItem>
-    <MenuItem value={20}>Workshop</MenuItem>
-    <MenuItem value={30}>Presentation</MenuItem>
-  </Select> */}
-  
-          <div style={{ paddingTop: "20px" }}>
+    <MenuItem value={EventType.workshop}>Workshop</MenuItem>
+    <MenuItem value={EventType.concert}>Concert</MenuItem>
+    <MenuItem value={EventType.presentation}>Presentation</MenuItem>
+  </Select> 
+  </div>
+  <div style={{ paddingTop: "30px" }}>
+<TextField variant="outlined" type="text" 
+              label="Artist" className="textField" 
+              value={artist} 
+              onChange={(e) => setArtist(e.target.value)} 
+              name="description" required 
+          />
+
+<TextField variant="outlined" type="text" 
+              label="Location" className="textField" 
+              value={location} 
+              onChange={(e) => setLocation(e.target.value)} 
+              name="location" required 
+              helperText = "Building etc."
+          />
+
+<TextField variant="outlined" type="text" 
+              label="Place" className="textField" 
+              value={place} 
+              onChange={(e) => setPlace(e.target.value)} 
+              name="place" required 
+              helperText = "Village/ Town etc."
+          />
+
+<TextField variant="outlined"  type="text" 
+              label="Organisation" className="textField" 
+              value={organisation} 
+              onChange={(e) => setOrganisation(e.target.value)} 
+              name="organsation" required 
+              helperText = "Organizer etc."
+          />
+
+<TextField variant="outlined"  type="text" 
+              label="URL" className="textField" 
+              value={url} 
+              onChange={(e) => setUrl(e.target.value)} 
+              name="url" required 
+              helperText = "http://"
+          />
+
+<TextField variant="outlined"  type="text" 
+              label="Image path" className="textField" 
+              value={image} 
+              onChange={(e) => setImage(e.target.value)} 
+              name="image" required 
+              helperText = "event/*.jpg"
+          />
+
+<TextField variant="outlined"  type="text" 
+              label="Image Alt-Text" className="textField" 
+              value={imageAltText} 
+              onChange={(e) => setImageAltText(e.target.value)} 
+              name="imageAltText" required 
+          />
+    </div>
+          <div style={{ paddingTop: "30px" }}>
               <DateTimePicker 
                   label="Date & Time from"
                   value={dayjs(dateFrom.toDate())}
@@ -144,7 +218,7 @@ export const EventUpdate = observer(() => {
                     },
                   }}   /> 
               </div>
-              <div style={{ paddingTop: "20px" }}>
+              <div style={{ paddingTop: "30px" }}>
                 <DateTimePicker
                     label="Date & Time to"
                     value={dayjs(dateTo.toDate())}
