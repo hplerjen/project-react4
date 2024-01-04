@@ -4,7 +4,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { observer } from 'mobx-react-lite';
 //import { useRootStore } from '../state/root-store';
 import { useNavigate } from 'react-router-dom';
-import { useRootStore } from '../store/root-store';
+import { useRootStore } from '../state/root-store';
 
 
 export const MiniCart = observer(() => {

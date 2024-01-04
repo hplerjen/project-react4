@@ -1,7 +1,7 @@
 //import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { observer } from "mobx-react-lite";
-import { useRootStore } from "../store/root-store";
+import { useRootStore } from "../state/root-store";
 import { useNavigate } from "react-router-dom";
 import { IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";

@@ -2,7 +2,7 @@
 
 export class OrderMini  {
     id?: string
-    userId : string
+    userId? : string
     productsInCart : Map <string,  number>
     numberOfProducts: number
     costTotalWithoutPostage : number

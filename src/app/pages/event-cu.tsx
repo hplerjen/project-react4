@@ -6,19 +6,16 @@ import { DateTimePicker, DateValidationError } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { Timestamp } from 'firebase/firestore';
 import { Severity } from '../model/message';
-import { useRootStore } from '../store/root-store';
+import { useRootStore } from '../state/root-store';
 import { EventType, convertEventTypeFromFireStore } from '../model/event';
 
-export const EventUpdate = observer(() => {
+export const EventCRU = observer(() => {
     const store = useRootStore();
     const navigate = useNavigate();
     const id = useParams().id;
     
     const [title, setTitle] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.title : "");
     const [description, setDescription] = useState(store.eventStore.findById(id)?store.eventStore.findById(id)!.description : "");
-    
-    const [eventType, setEventType] = useState(store.eventStore.findById(id)?convertEventTypeFromFireStore(store.eventStore.findById(id)!.eventType): EventType.workshop)
-  
     const [artist, setArtist] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.artist : "");
     const [location, setLocation] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.location : "");
     const [place, setPlace] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.place : "");
@@ -28,6 +25,8 @@ export const EventUpdate = observer(() => {
     const [image, setImage] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.image : "");
     const [imageAltText, setImageAltText] = useState(store.eventStore.findById(id)? store.eventStore.findById(id)!.imageAltText : "");
     
+    const [eventType, setEventType] = useState(store.eventStore.findById(id)?convertEventTypeFromFireStore(store.eventStore.findById(id)!.eventType): EventType.workshop)
+
     const [dateFrom, setDateFrom] = useState(store.eventStore.findById(id)?store.eventStore.findById(id)!.dateFrom : Timestamp.fromDate(tomorrow()));
     const [dateTo, setDateTo] = useState(store.eventStore.findById(id)?store!.eventStore.findById(id)!.dateTo : 
     Timestamp.fromDate(tomorrow()));
@@ -40,9 +39,8 @@ export const EventUpdate = observer(() => {
       const today = new Date() // get today's date
       const tomorrow = new Date(today)
       tomorrow.setDate(today.getDate() + 1)
-      return tomorrow}
-
-
+      return tomorrow
+    }
 
     const createEvent = (event: FormEvent) => {
       event.preventDefault();
@@ -98,10 +96,8 @@ export const EventUpdate = observer(() => {
         padding: "10px",
         textAlign: "start",
       }} >
-
-
     
-<Box sx={{
+      <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
                 p: 1,
@@ -123,11 +119,14 @@ export const EventUpdate = observer(() => {
               onChange={(e) => setTitle(e.target.value)} 
               name="title" required />
     
-          <TextField variant="outlined" type="text" 
-              label="Description" className="textField" 
+          <TextField
+              className="textField" 
               value={description} 
               onChange={(e) => setDescription(e.target.value)} 
-              name="description" required 
+              name="description" required
+              multiline
+              rows={4}
+              helperText = "Max. 50 signs"
           />
 
 <div style={{ paddingTop: "30px" }}>
@@ -144,14 +143,17 @@ export const EventUpdate = observer(() => {
     <MenuItem value={EventType.presentation}>Presentation</MenuItem>
   </Select> 
   </div>
-  <div style={{ paddingTop: "30px" }}>
+
+
+<div style={{ paddingTop: "30px" }}>
 <TextField variant="outlined" type="text" 
               label="Artist" className="textField" 
               value={artist} 
               onChange={(e) => setArtist(e.target.value)} 
               name="description" required 
           />
-
+</div>
+<div style={{ paddingTop: "30px" }}>
 <TextField variant="outlined" type="text" 
               label="Location" className="textField" 
               value={location} 
@@ -183,7 +185,8 @@ export const EventUpdate = observer(() => {
               name="url" required 
               helperText = "http://"
           />
-
+          </div>
+<div style={{ paddingTop: "30px" }}>
 <TextField variant="outlined"  type="text" 
               label="Image path" className="textField" 
               value={image} 
@@ -199,7 +202,7 @@ export const EventUpdate = observer(() => {
               name="imageAltText" required 
           />
     </div>
-          <div style={{ paddingTop: "30px" }}>
+    <div style={{ paddingTop: "30px" }}>
               <DateTimePicker 
                   label="Date & Time from"
                   value={dayjs(dateFrom.toDate())}
@@ -218,7 +221,7 @@ export const EventUpdate = observer(() => {
                     },
                   }}   /> 
               </div>
-              <div style={{ paddingTop: "30px" }}>
+            <div style={{ paddingTop: "30px" }}>
                 <DateTimePicker
                     label="Date & Time to"
                     value={dayjs(dateTo.toDate())}
@@ -237,7 +240,7 @@ export const EventUpdate = observer(() => {
                       },
                     }}   />  
                     </div>         
-              <div style={{ paddingTop: "10px" }}>
+            <div style={{ paddingTop: "10px" }}>
                   <Button type="submit"  value={ id? "updateEvent":"createEvent"} > 
                   { id? 'Update Event to Eventlist':'Create new event'}
                   </Button>

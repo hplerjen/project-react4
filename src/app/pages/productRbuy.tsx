@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { Button, Card,  CardContent, Typography } from "@mui/material";
 import { FormEvent, useState } from "react";
-import { useRootStore } from "../store/root-store";
+import { useRootStore } from "../state/root-store";
 import { useParams } from "react-router-dom";
 import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
 import CheckIcon from "@mui/icons-material/Check";

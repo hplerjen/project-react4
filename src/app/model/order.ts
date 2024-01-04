@@ -1,20 +1,22 @@
 import { Timestamp } from "firebase/firestore";
-import { AddressMini } from "./addressMini";
+import { Address } from "./addressFull";
 
 export class Order  {
     id?: string
-    userId: number
-    customerAddress : AddressMini
+    userId: string
+    customerAddress : Address
     productsInCart :  { [key: string]: number }
     numberOfProducts: number
     totalCostWithoutPostage : number
-    postage: string
+    postageType: string
     postageCost : number
     totalCost: number
     paid : boolean
+    delivered : boolean
     creationDate: Timestamp
     deliveryDate: Timestamp
     dueDate: Timestamp
+    paidDate: Timestamp
   
     constructor(order : Order) {
       this.id = order.id
@@ -23,11 +25,13 @@ export class Order  {
       this.productsInCart = order.productsInCart
       this.numberOfProducts = order.numberOfProducts
       this.totalCostWithoutPostage = order.totalCostWithoutPostage
-      this.postage = order.postage
+      this.postageType = order.postageType
       this.postageCost = order.postageCost
       this.totalCost = order.totalCost
       this.paid = order.paid
+      this.delivered = order.delivered
       this.creationDate = order.creationDate
+      this.paidDate = order.paidDate
       this.deliveryDate = order.deliveryDate
       this.dueDate = order.dueDate
     }

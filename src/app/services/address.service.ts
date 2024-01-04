@@ -1,6 +1,6 @@
 import {addDoc, collection, CollectionReference, doc, DocumentData, Firestore, getDoc, onSnapshot, query, QueryConstraint, updateDoc, where,} from "firebase/firestore";
 import { AddressMini } from "../model/addressMini";
-import { RootStore } from "../store/root-store";
+import { RootStore } from "../state/root-store";
 import { Severity } from "../model/message";
 
 export class AddressService {

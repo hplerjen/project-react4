@@ -35,6 +35,10 @@ export class AuthStore {
         makeAutoObservable(this);
     }
 
+    isUserAdmin(){
+        return this.currentUser?.isAdmin;
+    }
+
     setUser(user: IAuthUser) {
         this.currentUser = new AuthUser(user);
     }

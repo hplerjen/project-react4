@@ -7,18 +7,20 @@ export class OrderStore {
     public currentOrder?: OrderMini | null
 
     constructor(private rootStore: RootStore) {
+        //this.initializeOrder();
         makeAutoObservable(this);
     }
 
     initializeOrder(){
         this.currentOrder = {
             id: "",
-            userId: this.rootStore.authStore.currentUser!.uid,
-            productsInCart : new Map <string,  number>,
+            userId: this.rootStore.authStore.currentUser?.uid,
+            productsInCart : new Map <string,  number>(),
             numberOfProducts: 0,
             costTotalWithoutPostage: 0,
             costTotal: 0,
             addressId: ""}
+        console.log(this.currentOrder);
     }
     
     addAddress(addressId: string){

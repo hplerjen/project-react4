@@ -1,7 +1,7 @@
 import {collection, CollectionReference, Firestore, getDocs, query, } from "firebase/firestore";
 import { Admin } from "../model/admin";
 import { Auth } from "firebase/auth";
-import { RootStore } from "../store/root-store";
+import { RootStore } from "../state/root-store";
 import { Severity } from "../model/message";
 
 export class AdminService {

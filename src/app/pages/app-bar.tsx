@@ -7,7 +7,7 @@ import { AccountCircle } from "@mui/icons-material";
 //import FavoriteIcon from '@mui/icons-material/Favorite';
 import joik from '../images/joik.jpg'
 import avatar from '../images/avatar.jpg'
-import { useRootStore } from "../store/root-store";
+import { useRootStore } from "../state/root-store";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement } from "react";
 //import { deepOrange, deepPurple } from "@mui/material/colors";
@@ -40,6 +40,10 @@ export const Appbar = observer(() => {
 
   const navigateProductNew= () => {
     navigate("/product-new");
+  };
+
+  const navigateOrders= () => {
+    navigate("/order");
   };
 
   const navigateUser= () => {
@@ -80,7 +84,7 @@ export const Appbar = observer(() => {
           </div>
           
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Button data-testid="eventlistCurr" sx={{ textTransform: "none" }} color="inherit"
+            <Button data-testid="eventlistPast" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
                     onClick={navigateEventsPast}>
               Events Past
@@ -91,12 +95,12 @@ export const Appbar = observer(() => {
             <Button data-testid="eventNew" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
                     onClick={navigateEventNew}>
-              Add new Event
+              Add new Event (admin only)
             </Button>
           </div>
           
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Button data-testid="product" sx={{ textTransform: "none" }} color="inherit"
+            <Button data-testid="products" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
                     onClick={navigateProducts}>
               Products
@@ -104,10 +108,18 @@ export const Appbar = observer(() => {
           </div>
           
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Button data-testid="product" sx={{ textTransform: "none" }} color="inherit"
+            <Button data-testid="productNew" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <LinkIcon /> }
                     onClick={navigateProductNew}>
-              Add a new Product
+              Add a new Product (admin only)
+            </Button>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Button data-testid="orders" sx={{ textTransform: "none" }} color="inherit"
+                    startIcon={ <LinkIcon /> }
+                    onClick={navigateOrders}>
+              Orders (admin only)
             </Button>
           </div>
 

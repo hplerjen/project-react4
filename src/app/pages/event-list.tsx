@@ -1,22 +1,28 @@
 import { observer } from "mobx-react-lite";
-import { useRootStore } from "../store/root-store";
+import { useRootStore } from "../state/root-store";
 import React  from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Editicon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Dialog, DialogContent, DialogTitle, Link, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Dialog, DialogContent, DialogTitle,  Typography } from "@mui/material";
 import { formatDateTime } from "../utility/date-utility";
 import { convertFireStoreToStringFormattedEventType } from "../model/event";
+import { concatImagePath } from "../utility/gui-helper";
 
+export interface Props {
+  future: boolean
+}
 
-export const EventListBoxCard = observer(() => {
+export const EventList = observer(({future}: Props) => {
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [id, setId] = React.useState("");
   const store = useRootStore();
   const navigate = useNavigate();
 
+  const eventList = future? store.eventStore.futureEvents(): store.eventStore.pastEvents();
+  
 
   const viewEventDetail = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
@@ -52,19 +58,12 @@ export const EventListBoxCard = observer(() => {
     store.eventService.getDocs()
   }, [store.eventService]);*/
 
-  const imageRootPath = '../assets/images/';
-
-  function concatImagePath (image : string) : string  {
-    const path = imageRootPath + image;
-    console.log(path);
-    return path;
-
-  }
 
 
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center" }}>
+       <div style={{ display: "flex", alignItems: "center" }}>
+
         <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -73,19 +72,22 @@ export const EventListBoxCard = observer(() => {
                 bgcolor: 'background.paper',
                 borderRadius: 1,
         }}>
-          {Object.values(store.eventStore.futureEvents()).map((eventM) => (
-            
+          {Object.values(eventList).map((eventM) => (
             
               <Card key={eventM.id} className="card" sx={{ maxWidth: 345 }}>
               <CardContent>
-              <Typography>
-                  {formatDateTime(eventM.dateFrom.toDate())} 
+                <Typography className="cardTitle">
+                  {eventM.title} 
+                </Typography>
+              <Typography className="textField" >
+                  {eventM.artist} 
               </Typography>
-              <Typography>
-                  {formatDateTime(eventM.dateTo.toDate())}
-            </Typography>
+
             <Typography className="textField" >
                   {convertFireStoreToStringFormattedEventType(eventM.eventType)} 
+              </Typography>
+              <Typography className="textField" >
+                  {eventM.place} 
               </Typography>
             </CardContent>
 
@@ -96,39 +98,35 @@ export const EventListBoxCard = observer(() => {
               image = {concatImagePath(eventM.image)}
             />
             
-              
-              <CardContent>
-                <Typography className="cardTitle">
-                  {eventM.title} 
-                </Typography>
-              <Typography className="textField" >
-                  {eventM.description} 
-              </Typography>
-
-              <Typography className="textField" >
-                  {eventM.artist} 
-              </Typography>
-              <Typography className="textField" >
-                  {eventM.place} 
-              </Typography>
-            </CardContent>
-
             <CardContent>
-              <div>
-              <a href={eventM.url} target="_blank" rel="noreferrer">
-                 Event link (extern)
-              </a>
-              </div>
-
+            <Typography className="textField" >
+                  {formatDateTime(eventM.dateFrom.toDate())} 
+              </Typography>
+              <Typography className="textField" >
+                  {formatDateTime(eventM.dateTo.toDate())}
+            </Typography>    
             </CardContent>
+
+            {future && 
+              <CardContent>
+                      <a href={eventM.url} target="_blank" rel="noreferrer">
+                          Event link (extern)
+                      </a>
+              </CardContent> 
+            }
+
             <CardActions>
               <IconButton onClick={(e) => viewEventDetail(e, eventM.id!)}>
                 <VisibilityIcon />
               </IconButton>
+
               <IconButton onClick={(e) => updateEvent(e, eventM.id!)}>
+                admin
                 <Editicon />
               </IconButton>
+              
               <IconButton onClick={(e) => deleteConfirmDialog(e, eventM.id!)}>
+                admin
                 <DeleteIcon />
               </IconButton>
       </CardActions>
@@ -168,4 +166,4 @@ onClose={(e) => navigateBackAfterCancelEventDeletion()}
 </Dialog>
 </>
 )
-        })
+})

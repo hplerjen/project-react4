@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import App from './app/app';
-import { RootStore } from './app/store/root-store';
+import { RootStore } from './app/state/root-store';
 
 const rootStore = new RootStore()
 

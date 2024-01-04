@@ -1,5 +1,5 @@
 import {addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, getDoc, getDocs, query, updateDoc,} from "firebase/firestore";
-import { RootStore } from "../store/root-store";
+import { RootStore } from "../state/root-store";
 import { OrderMini } from "../model/orderMini";
 
 export class OrderService {

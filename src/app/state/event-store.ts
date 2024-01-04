@@ -46,17 +46,14 @@ export class EventStore {
     }
 
     futureEvents(){
-       return Object.values(this.events).filter((e) => 
-       e.dateFrom.seconds > Timestamp.now().seconds )
-       .sort(( a, b ) => a > b ? 1 : -1 )
+       return Object.values(this.events)
+       .filter((e) => e.dateFrom.seconds > Timestamp.now().seconds)
+       .sort(( a, b ) => a.dateFrom.seconds > b.dateFrom.seconds ? 1 : -1 )
     }
 
     pastEvents(){
-        return Object.values(this.events).filter((e) => 
-        e.dateFrom.seconds < Timestamp.now().seconds
-        ).sort(( a, b ) => a > b ? 1 : -1 )
+        return Object.values(this.events)
+        .filter((e) => e.dateFrom.seconds < Timestamp.now().seconds)
+        .sort(( a, b ) => a.dateFrom.seconds > b.dateFrom.seconds ? 1 : -1 )
     }
-   
-    
-
 }

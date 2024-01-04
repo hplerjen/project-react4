@@ -1,11 +1,10 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
-//import "./card.css";
-import { useRootStore } from '../store/root-store';
+import { useRootStore } from '../state/root-store';
 import { OnlyLoggedInUser } from '../components/userTypesFilter';
 import { Severity } from '../model/message';
-import { UserLogInRegister } from './user-log-in-register';
+import { UserLogInRegister } from './user-log-XX';
 
 export const User =  observer(() => {
   const store = useRootStore();

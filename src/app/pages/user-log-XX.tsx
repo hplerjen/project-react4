@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
-import { useRootStore } from '../store/root-store';
+import { useRootStore } from '../state/root-store';
 import { AnonymousUser } from '../components/userTypesFilter';
 import "./card.css";
 import { Visibility, VisibilityOff } from '@mui/icons-material';

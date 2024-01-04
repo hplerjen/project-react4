@@ -1,20 +1,20 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from './pages/layout';
-import { ProductDetail } from './pages/product-detail';
+import { ProductDetail } from './pages/productRbuy';
 import Cart from './pages/cart';
 import CssBaseline from '@mui/material/CssBaseline';
-import { RootStore, StoreRootProvider } from './store/root-store';
+import { RootStore, StoreRootProvider } from './state/root-store';
 import { observer } from 'mobx-react-lite';
-import { User } from './pages/user';
-import { EventListTable } from './pages/event-list-table-cell_R';
-import { EventUpdate } from './pages/event-cu';
+import { User } from './pages/user_XX';
 import { ProductList } from './pages/product-list';
-import { ProductNew } from './pages/product-new';
-import { ProductUpdate } from './pages/product-update';
-import { EventDetail } from './pages/event-r';
+import { ProductNew } from './pages/productC';
+import { ProductUpdate } from './pages/productRU';
+import { EventR } from './pages/event-r';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { EventListBoxCard } from './pages/event-list-box-card_CRUD';
+import { EventList } from './pages/event-list';
+import { EventCRU } from './pages/event-cu';
+import { Orders } from './pages/orders';
 
 const AppObserver = observer(() => {
 
@@ -27,9 +27,9 @@ const AppObserver = observer(() => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="event" />} />
-            <Route path="event" element={<EventListBoxCard/>} />
-            <Route path="event/:id" element={<EventDetail />} /> 
-            <Route path="event-past" element={<EventListTable />}/>
+            <Route path="event" element={<EventList future={true} />} />
+            <Route path="event/:id" element={<EventR />} /> 
+            <Route path="event-past" element={<EventList future={false}/>}/>
             
             <Route path="product" element={<ProductList />} />
             <Route path="product/:id" element={<ProductDetail />} />
@@ -39,8 +39,11 @@ const AppObserver = observer(() => {
             {/* ADMIN only - FIXME needs to be guarded */}
 
             
-            <Route path="event-new" element={<EventUpdate />}/>
-            <Route path="event-update/:id" element={<EventUpdate />} /> 
+            <Route path="event-new" element={<EventCRU />}/>
+            <Route path="event-update/:id" element={<EventCRU />} /> 
+            
+            <Route path="order" element={<Orders />} /> 
+            
             <Route path="product-new" element={<ProductNew />}/>
             <Route path="product-update/:id" element={<ProductUpdate />}/> 
           </Route>

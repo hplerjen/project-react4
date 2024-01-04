@@ -5,8 +5,7 @@ import {makeAutoObservable} from "mobx";
 import {EventStore} from "./event-store";
 import { AuthStore } from "./auth-store";
 import { getAuth } from "firebase/auth";
-import { EventService } from "../services/event.service";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../services/auth.service_XX";
 import { firebaseConfig } from "../firebase.config";
 import { ProductStore } from "./product-store";
 import { ProductService } from "../services/product.service";
@@ -15,11 +14,11 @@ import { OrderService } from "../services/order.service";
 import { MessageStore } from "./message-store";
 import { AdminService } from "../services/admin.service";
 import { OrderStore } from "./order-store";
-import { EventService2 } from "../services/event.service copy";
+import { EventService } from "../services/event.service";
 
 export class RootStore {
   eventStore: EventStore;
-  eventService: EventService2;
+  eventService: EventService;
   productStore: ProductStore;
   productService: ProductService;
   orderStore: OrderStore;
@@ -42,7 +41,7 @@ export class RootStore {
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    this.eventService = new EventService2( this, db );
+    this.eventService = new EventService( this, db );
     this.eventStore = new EventStore(this);
 
     this.productService = new ProductService( this, db );

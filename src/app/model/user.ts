@@ -5,7 +5,7 @@ export class User  {
     pwd: string
     isAnonymous : boolean
   
-    //REM 
+    //REM - don't change - this structure is required by firebase
     constructor(user : User) {
       this.id = user.id
       this.displayName = user.displayName
