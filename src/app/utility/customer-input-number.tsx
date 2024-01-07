@@ -6,7 +6,7 @@ import {
 import { styled } from '@mui/system';
 import React from 'react';
 
-const CustomNumberInput = React.forwardRef(function CustomNumberInput(
+export const CustomNumberInput = React.forwardRef(function CustomNumberInput(
   props: NumberInputProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
@@ -32,11 +32,6 @@ const CustomNumberInput = React.forwardRef(function CustomNumberInput(
   );
 });
 
-export default function NumberInputIntroduction() {
-  return (
-    <CustomNumberInput aria-label="Demo number input" placeholder="Type a number…" />
-  );
-}
 
 const blue = {
   100: '#DAECFF',

@@ -7,30 +7,31 @@ export class OrderStore {
     public currentOrder?: OrderMini | null
 
     constructor(private rootStore: RootStore) {
-        //this.initializeOrder();
         makeAutoObservable(this);
     }
 
-    initializeOrder(){
-        this.currentOrder = {
+     initializeOrder(){
+        if (this.currentOrder  === undefined ){
+            this.currentOrder = {
             id: "",
-            userId: this.rootStore.authStore.currentUser?.uid,
+            userId: this.rootStore!.authStore!.currentUser?
+            this.rootStore.authStore.currentUser!.uid : "",
             productsInCart : new Map <string,  number>(),
             numberOfProducts: 0,
-            costTotalWithoutPostage: 0,
-            costTotal: 0,
-            addressId: ""}
-        console.log(this.currentOrder);
+            costTotalWithoutPostage: 0}
+            console.log(this.currentOrder);
+        }
     }
     
-    addAddress(addressId: string){
+    /*addAddress(addressId: string){
         this.currentOrder!.addressId = addressId;
-    }
+    }*/
 
     addProductToCart(prodId: string, number: number = 0){
         if (this.currentOrder  === undefined) {
             this.initializeOrder();
         }
+        this.currentOrder!.userId =  this.rootStore.authStore.currentUser!.uid
         this.currentOrder!.productsInCart.set(prodId!,  number);
         this.calculateNumberOfProductsInCar();
         this.calculateTotalCostsInCart();
@@ -43,6 +44,7 @@ export class OrderStore {
         this.calculateTotalCostsInCart();
     }
 
+    //test schreiben
     calculateNumberOfProductsInCar(){
         let counter = 0;
         this.currentOrder!.productsInCart!.forEach((key, value) => {
@@ -51,12 +53,12 @@ export class OrderStore {
         });
     }
 
+    //test schreiben
     calculateTotalCostsInCart(){
         let costs = 0;
         this.currentOrder!.productsInCart!.forEach((key, value) => {
-            let price = 0;
-            // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-            price = this.rootStore!.productStore!.findById(value)?.price!;
+            const price = this.rootStore!.productStore!.findById(value) ?
+            this.rootStore!.productStore!.findById(value)!.price : 0;
             costs = costs + (price * key);
             this.currentOrder!.costTotalWithoutPostage = costs;
         });

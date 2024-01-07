@@ -19,9 +19,10 @@ export const AnonymousUser = observer(({children} : {children : ReactElement}) =
   return <></>
 });
 
-export const OnlyAdmin = observer(({children} : {children : ReactElement}) => {
-  const store = useRootStore();
-  if(store.authStore.currentUser?.isAdmin){
+
+
+export const AdminRoute2 = observer(({children} : {children : ReactElement}) => {
+  if(useRootStore().authStore.currentUser?.isAdmin){
     return <>{children}</>
   }
   return <></>

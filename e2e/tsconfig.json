@@ -4,7 +4,8 @@
     "allowJs": true,
     "outDir": "../dist/out-tsc",
     "module": "commonjs",
-    "types": ["cypress", "node"],
+    "types": ["cypress", "node", "jest"],
+    "include": ["src/**/*"],
     "sourceMap": false
   },
   "include": [

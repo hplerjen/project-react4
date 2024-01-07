@@ -8,23 +8,20 @@ import CheckIcon from "@mui/icons-material/Check";
 import { observer } from "mobx-react-lite";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Severity } from "../model/message";
-import NumberInputIntroduction from "../components/customer-input-number";
 
 export const ProductDetail = observer(() => {
   
   const store = useRootStore();
-  //const navigate = useNavigate();
   const productId = useParams().id;
 
   const [product] = useState(store.productStore.findById(productId));
-  const [number, setNumber] = useState(2);
-  
+  const [number, setNumber] = useState(1);
+
   const addToCart = async (event: FormEvent) => {
     event.preventDefault();
-    //is product on stock?
-    //is product already in cart?
+    //tbd: is product already in cart? Dialog
     if (product?.stock! > 0 ){
-      store.orderStore.addProductToCart(productId!, number);
+        store.orderStore.addProductToCart(productId!, number);
     } else {
           store.messageStore.setMessage({
             show: true,
@@ -35,6 +32,7 @@ export const ProductDetail = observer(() => {
 
 };
   
+
   return (
     <div
     style={{
@@ -44,6 +42,10 @@ export const ProductDetail = observer(() => {
   >
     <Typography variant="h6">Product details</Typography>
     <div className="cardContainer">
+    <form
+        onSubmit={addToCart}
+        style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
+      >
       <Card className="card">
         <Typography className="cardTitel">
                   view Product details & buy
@@ -51,30 +53,35 @@ export const ProductDetail = observer(() => {
         <CardContent>
           <Typography className="cardTitle">Product title: {product?.title} </Typography>
           <Typography>Product description:  {product?.description} </Typography>
-          <Typography>stock:  {product?.stock} </Typography>
-          <Typography>{product?.stock!  > 0? (<CheckIcon />) : ( <CancelIcon /> )}</Typography>
+          <Typography>stock:  {product?.stock} {product?.stock!  > 0? (<CheckIcon />) : ( <CancelIcon /> )}</Typography>
           <Typography>price CHF:  {product?.price} </Typography>
-      <form
-        onSubmit={addToCart}
-        style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
-      >
-      <NumberInput  min={1} max={product?.stock} 
+      
+
+      <NumberInput 
         aria-label="Demo number input"
         placeholder="Type a number…"
         value={number}
         onChange={(e, val) => setNumber(Number(val))}
+        error
       />
 
-         <NumberInputIntroduction/>
+{/*}
+         <CustomNumberInput min={1} max={product?.stock} 
+                 aria-label="Buy product"
+                 placeholder="Type a number…"
+         value={number}
+         onChange={(e, val) => setNumber(Number(val))}
+  />*/}
 
         <div style={{ paddingTop: "10px" }}>
           <Button type="submit" value="buy">
             Buy
           </Button>
         </div>
-      </form>
+
     </CardContent>
   </Card>
+  </form>
   </div>
   </div>
   );

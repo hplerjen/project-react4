@@ -2,9 +2,9 @@ import { Button, Card, CardContent, IconButton, InputAdornment, TextField, Typog
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
 import { useRootStore } from '../state/root-store';
-import { AnonymousUser } from '../components/userTypesFilter';
 import "./card.css";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { AnonymousUser } from '../components/userTypesFilter';
 
 export const UserLogInRegister =  observer(() => {
   const store = useRootStore();
@@ -18,9 +18,9 @@ export const UserLogInRegister =  observer(() => {
     event.preventDefault();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((event.nativeEvent as any).submitter.value === "register") {
-      store.authService.connectUser({ email, pwd });
+      store.authService.connectUser( email, pwd);
     } else {
-      store.authService.login({ email, pwd });
+      store.authService.login( email, pwd );
     }
   };
 
@@ -31,7 +31,7 @@ export const UserLogInRegister =  observer(() => {
 
   return (
       <div className="cardContainer">
-      <AnonymousUser>
+        <AnonymousUser>
           <Card className="card">
             <CardContent>
               <Typography className="cardTitel">
@@ -42,6 +42,8 @@ export const UserLogInRegister =  observer(() => {
                 style={{ display: "flex", flexDirection: "column", alignItems: "start"}}
               >
                 <TextField variant="outlined" type="email" label="E-Mail" className="textField" value={email} onChange={(e) => setEmail(e.target.value)} name="email" required />
+                
+                {/*Password make it visible */}
                 <TextField variant="outlined" type={showPassword ? "text" : "password"}label="Passwort" className="textField" value={pwd} onChange={(e) => setPwd(e.target.value)} name="password" required
                     InputProps={{
                       endAdornment: (
@@ -69,7 +71,6 @@ export const UserLogInRegister =  observer(() => {
             </CardContent>
           </Card>
           </AnonymousUser>
-          
           </div>
   )
 }

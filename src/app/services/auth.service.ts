@@ -1,11 +1,10 @@
 import {Auth, linkWithCredential, reauthenticateWithCredential, sendPasswordResetEmail, signInAnonymously, signInWithEmailAndPassword, updatePassword, updateProfile,} from "@firebase/auth";
 import {EmailAuthProvider, User} from "firebase/auth";
-import {AuthConnect, AuthUserSettingsChange} from "../model/auth";
 import { RootStore } from "../state/root-store";
 import { Severity } from "../model/message";
 
 
-//FIXME copy from Michael
+//FIXME from Michael
 export class AuthService {
   constructor(public auth: Auth, private rootStore: RootStore) {
     
@@ -18,16 +17,18 @@ export class AuthService {
     });
   }
 
-  connectUser(data: AuthConnect) {
+  connectUser(email: string, pwd : string) {
     const user = this.auth.currentUser!;
-    linkWithCredential(user, EmailAuthProvider.credential(data.email, data.pwd))
+    linkWithCredential(user, EmailAuthProvider.credential(email, pwd))
       .then(async (usercred) => {
         const user = usercred.user;
+        
+        //REM isAdmin logic
         const isAdmin = await this.isAdmin().then((boolean) => {return boolean});
         this.rootStore.authStore.setUser({...user, isAdmin: isAdmin});
         this.rootStore.messageStore.setMessage({
           show: true,
-          text: "Registration successful for user: " + data.email  ,
+          text: "Registration successful for user: " + email  ,
           severity: Severity.success
         });
         //Registration successful for user: laurawinistoerfer@gmx.ch : null
@@ -44,19 +45,21 @@ export class AuthService {
       });
   }
 
-  async login(data: AuthConnect) {
-    signInWithEmailAndPassword(this.auth, data.email, data.pwd)
-        .then(async (userCredential) => {
+  async login(email: string, pwd : string) {
+    signInWithEmailAndPassword(this.auth, email, pwd)
+        .then(async (cred) => {
           // Signed in
-          const user = userCredential.user;
+          const user = cred.user;
+          //is user admin
           const isAdmin = await this.isAdmin().then((boolean) => {return boolean});
           this.rootStore.authStore.setUser({...user, isAdmin: isAdmin});
           this.rootStore.messageStore.setMessage({
             show: true,
-            text: "Loggin successful for user: " + data.email ,
+            text: "Loggin successful for user: " + email ,
             severity: Severity.success
           });
         })
+        //error handling for firestore
         .catch((error) => {
           this.rootStore.messageStore.setMessage({
             show: true,
@@ -68,36 +71,39 @@ export class AuthService {
         });
   }
 
+  //Admin check is delegated to differnt table
   isAdmin(): Promise<boolean> {
     return this.rootStore.adminService.isAdmin();
   };
 
+  //firebase functionality that sends email to user
   resetPwdMail(email: string) {
     return sendPasswordResetEmail(this.auth, email);
   }
 
-  changeUser(data: Partial<AuthUserSettingsChange>) {
-    return async () => {
-      const currentUser = await this.auth.currentUser!;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const actions = [] as Array<Promise<any>>;
+  //get credential
+  //reauthenticate
+  //update password
+  updatePassword( email: string, pw: string, pwdNew: string){
+    return async() => {
+      const user = await this.auth.currentUser!;
+      const cred = EmailAuthProvider.credential(email, pw);
+      reauthenticateWithCredential(user,cred);
+      updatePassword(user, pwdNew);
+    }
+  }
 
-      if (data.displayName && data.displayName !== currentUser.displayName) {
-        actions.push(
-          updateProfile(currentUser, {
-            displayName: data.displayName,
+  changeDisplayName(displayName : string) {
+    return async () => {
+      const user = await this.auth.currentUser!;
+      updateProfile(user, {
+            displayName: displayName,
+            //REM activate user picture?
             photoURL: "",
-          })
-        );
-      }
-      if (data.email && data.pwd && data.pwdOld) {
-        const cred = EmailAuthProvider.credential(data.email, data.pwdOld);
-        actions.push(reauthenticateWithCredential(currentUser, cred));
-        actions.push(updatePassword(currentUser, data.pwd));
-      }
-      return Promise.all(actions).then(() => {
-        this.rootStore.authStore.setUser({ ...this.auth.currentUser!, isAdmin: false});
-      });
-    };
+      })
+      //refresh is user admin
+      const isAdmin = await this.isAdmin().then((boolean) => {return boolean});
+      this.rootStore.authStore.setUser({... this.auth.currentUser!, isAdmin: isAdmin});        
+    }
   }
 }

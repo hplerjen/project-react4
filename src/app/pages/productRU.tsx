@@ -13,7 +13,7 @@ export const ProductUpdate = observer(() => {
     const [title, setTitle] = useState(store.productStore.findById(id)!.title);
     const [description, setDescription] = useState(store.productStore.findById(id)!.description);
     const [stock, setStock] = useState(store.productStore.findById(id)!.stock);
-    const [price, setPrice] = useState(1);
+    const [price, setPrice] = useState(store.productStore.findById(id)!.price);
 
     const updateProduct = async (event: FormEvent) => {
         event.preventDefault();
@@ -52,6 +52,13 @@ export const ProductUpdate = observer(() => {
             placeholder="Type a number…"
             value={stock}
             onChange={(e, val) => setStock(Number(val))}
+          />
+
+        <NumberInput  min={1} 
+            aria-label="Demo number input"
+            placeholder="Type a number…"
+            value={price}
+            onChange={(e, val) => setPrice(Number(val))}
           />
 
 <TextField variant="outlined" type="description" label="Price" className="textField" value={stock} onChange={(e) => setPrice(Number(e.target.value))} name="price" required/>

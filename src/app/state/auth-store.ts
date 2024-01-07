@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {RootStore} from "./root-store";
 
+//FIXME from Michael
 export interface IAuthUser{
     uid: string;
     isAnonymous: boolean;

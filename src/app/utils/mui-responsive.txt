@@ -1,0 +1,40 @@
+source: 
+https://medium.com/@egwuchinedu69/how-to-build-a-responsive-web-app-with-material-ui-fd6b9f0cdce6
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+
+const Wrapper = styled(Box)(({ theme }) => ({
+  background: "#1976d2",
+  height: "100vh",
+  [theme.breakpoints.down("md")]: {
+    background: "orange",
+  },
+  [theme.breakpoints.down("sm")]: {
+    background: "blue",
+  },
+  [theme.breakpoints.up("lg")]: {
+    background: "purple",
+  },
+}));
+
+const Heading = styled(Typography)(({ theme }) => ({
+  textAlign: "center",
+  color: "white",
+  fontWeight: 600,
+  paddingTop: "2em",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "1.5rem",
+  },
+}));
+
+function App() {
+  return (
+    <Wrapper>
+      <Heading variant="h1">This is an Heading tag</Heading>
+    </Wrapper>
+  );
+}
+
+export default App;

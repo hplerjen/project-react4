@@ -1,10 +1,9 @@
 import { Timestamp } from "firebase/firestore";
-import { Address } from "./addressFull";
 
 export class Order  {
     id?: string
     userId: string
-    customerAddress : Address
+    addressId : string
     productsInCart :  { [key: string]: number }
     numberOfProducts: number
     totalCostWithoutPostage : number
@@ -21,7 +20,7 @@ export class Order  {
     constructor(order : Order) {
       this.id = order.id
       this.userId = order.userId
-      this.customerAddress = order.customerAddress
+      this.addressId = order.addressId
       this.productsInCart = order.productsInCart
       this.numberOfProducts = order.numberOfProducts
       this.totalCostWithoutPostage = order.totalCostWithoutPostage

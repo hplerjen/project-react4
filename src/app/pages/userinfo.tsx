@@ -2,19 +2,18 @@ import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
 import { useRootStore } from '../state/root-store';
-import { OnlyLoggedInUser } from '../components/userTypesFilter';
 import { Severity } from '../model/message';
-import { UserLogInRegister } from './user-log-XX';
+import { UserLogInRegister } from './user-log-in-register';
+import { OnlyLoggedInUser } from '../components/userTypesFilter';
 
-export const User =  observer(() => {
+export const UserInfo =  observer(() => {
   const store = useRootStore();
-
   const [displayName, setDisplayName] = useState("");
-
-  const [oldPwd, setOldPwd] = useState("");
-  const [newPwd, setNewPwd] = useState("");
+  const [pwdOld, setPwdOld] = useState("");
+  const [pwdNew, setPwdNew] = useState("");
   
-//FIXME from Michael
+
+  //FIXME from Michael
   const resetPwd = (event: FormEvent) => {
     event.preventDefault();
     const email = store.authStore.currentUser?.email;
@@ -40,17 +39,15 @@ export const User =  observer(() => {
 
   const changeDisplayname = (event: FormEvent) => {
     event.preventDefault();
-    store.authService.changeUser({
-        displayName
-      })()
-      .then(() => {
+    store.authService.changeDisplayName(displayName)()
+    .then(() => {
         store.messageStore.setMessage({
           show: true,
           text: "Anzeigename wurde geändert",
           severity: Severity.success,
         });
-      })
-      .catch((error: Error) => {
+    })
+    .catch((error: Error) => {
         store.messageStore.setMessage({
           show: true,
           text: error.message,
@@ -61,12 +58,11 @@ export const User =  observer(() => {
 
   const changePwd = (event: FormEvent) => {
     event.preventDefault();
-    store.authService
-      .changeUser({
-        pwd: newPwd,
-        pwdOld: oldPwd,
-        email: store.authStore.currentUser!.email!,
-      })()
+    store.authService.updatePassword(
+        store.authStore.currentUser!.email!,
+        pwdOld,
+        pwdNew
+      )()
       .then(() => {
         store.messageStore.setMessage({
           show: true,
@@ -125,9 +121,9 @@ export const User =  observer(() => {
                   onSubmit={changePwd}
                 >
                   <TextField
-                    variant="outlined" type="password" label="Passwort Alt" className="textField" value={oldPwd} onChange={(e) => setOldPwd(e.target.value)} required
+                    variant="outlined" type="password" label="Passwort Alt" className="textField" value={pwdOld} onChange={(e) => setPwdOld(e.target.value)} required
                   />
-                  <TextField variant="outlined" type="password" label="Passwort Neu" className="textField" value={newPwd} onChange={(e) => setNewPwd(e.target.value)} required />
+                  <TextField variant="outlined" type="password" label="Passwort Neu" className="textField" value={pwdNew} onChange={(e) => setPwdNew(e.target.value)} required />
                   <Button type="submit">Passwort wechseln</Button>
                 </form>
               </CardContent>

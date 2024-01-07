@@ -62,12 +62,14 @@ export const EventCRU = observer(() => {
 
     const updateEvent = async (event: FormEvent) => {
         event.preventDefault();
-        if (dateFrom && dateTo && dateFrom > dateTo) 
-        { fireDateRangeValidationError() } else {
-        await store.eventService.update({id, title, description, eventType,
+        if (dateFrom && dateTo && dateFrom > dateTo) { 
+          fireDateRangeValidationError() } 
+        else {
+          await store.eventService.update(
+            {id, title, description, eventType,
           artist, location, place, organisation, url, image, imageAltText, dateFrom, dateTo,
-          createdAt});
-        navigate("/event");
+          createdAt });
+          navigate("/event");
         }
       }
 

@@ -5,7 +5,6 @@ import Cart from './pages/cart';
 import CssBaseline from '@mui/material/CssBaseline';
 import { RootStore, StoreRootProvider } from './state/root-store';
 import { observer } from 'mobx-react-lite';
-import { User } from './pages/user_XX';
 import { ProductList } from './pages/product-list';
 import { ProductNew } from './pages/productC';
 import { ProductUpdate } from './pages/productRU';
@@ -15,9 +14,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { EventList } from './pages/event-list';
 import { EventCRU } from './pages/event-cu';
 import { Orders } from './pages/orders';
+import { AdminRoute } from './components/admin-route';
+import { UserInfo } from './pages/userinfo';
+import { Page404 } from './pages/page_404';
 
 const AppObserver = observer(() => {
-
+  
+  
   return (
     <div className="App">
 
@@ -34,19 +37,20 @@ const AppObserver = observer(() => {
             <Route path="product" element={<ProductList />} />
             <Route path="product/:id" element={<ProductDetail />} />
             <Route path="cart" element={<Cart />}/>
-            <Route path="user" element={<User />}/>
+            <Route path="user" element={<UserInfo/>}/>
             
-            {/* ADMIN only - FIXME needs to be guarded */}
+            {/* ADMIN only  */}
 
-            
-            <Route path="event-new" element={<EventCRU />}/>
-            <Route path="event-update/:id" element={<EventCRU />} /> 
-            
-            <Route path="order" element={<Orders />} /> 
-            
-            <Route path="product-new" element={<ProductNew />}/>
-            <Route path="product-update/:id" element={<ProductUpdate />}/> 
+            {/*<Route element={<AdminRoute/>} >*/}
+              <Route path="event-new" element={<EventCRU />}/>
+              <Route path="event-update/:id" element={<EventCRU />} /> 
+              <Route path="order" element={<Orders />} /> 
+              <Route path="product-new" element={<ProductNew />}/>
+              <Route path="product-update/:id" element={<ProductUpdate />}/> 
+             {/*</Route>*/}
+            <Route path="*" element={<Page404/>}/>
           </Route>
+
         </Routes>
     </BrowserRouter>
     </LocalizationProvider>

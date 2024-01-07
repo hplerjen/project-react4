@@ -1,0 +1,9 @@
+source: https://elad.medium.com/a-complete-guide-for-responsive-images-b13db359c6c7
+
+<img src="cat-200px.jpg" alt="sugar free cat" width="200"
+     srcset="cat-200px.jpg 1x, 
+             cat-400px.jpg 2x, 
+             cat-600px.jpg 3x,
+             cat-800px.jpg 4x">
+
+
