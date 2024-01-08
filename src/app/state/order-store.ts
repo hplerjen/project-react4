@@ -32,7 +32,8 @@ export class OrderStore {
             this.initializeOrder();
         }
         this.currentOrder!.userId =  this.rootStore.authStore.currentUser!.uid
-        this.currentOrder!.productsInCart.set(prodId!,  number);
+        const alreadyInOrder = this.currentOrder!.productsInCart.get(prodId!);
+        this.currentOrder!.productsInCart.set(prodId!, (alreadyInOrder && alreadyInOrder > 0? number + alreadyInOrder: number));
         this.calculateNumberOfProductsInCar();
         this.calculateTotalCostsInCart();
 

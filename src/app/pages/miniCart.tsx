@@ -6,6 +6,11 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import { useRootStore } from '../state/root-store';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface Props {
+  numberOfProducts: number
+  totalCostWithoutPosage: number
+}
 
 export const MiniCart = observer(() => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,7 +33,6 @@ const navigateCart= () => {
             <Button data-testid="cart" sx={{ textTransform: "none" }} color="inherit"
                     startIcon={ <ShoppingCartIcon /> }
                     onClick={navigateCart}>
-              Shopping Cart
             </Button>
             </Badge>
       </div>

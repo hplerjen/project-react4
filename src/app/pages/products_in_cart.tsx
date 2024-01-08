@@ -12,18 +12,11 @@ export const ProductsInCart = observer(() => {
   const store = useRootStore();
   const navigate = useNavigate();
 
-
-  /*REM this requires user set in auth
-  useEffect(() => {
-    store.orderStore.initializeOrder()
-  }, [store.orderStore]) */
-
   function getOrderFromStore () {
     if (store.orderStore.currentOrder === undefined){
       store.orderStore.initializeOrder();
     }
     return store.orderStore.currentOrder;
-
   }
 
   const viewProductDetails = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
@@ -31,31 +24,25 @@ export const ProductsInCart = observer(() => {
     navigate(`/product/${id}`);  
   };
 
-  const deleteProductFromCart = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+  const deleteProductFromOrder = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
     e.stopPropagation();
     store.productService.remove(id);
     navigate('/product');
-  };
-
-  const updateProductFromCart = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
-    e.stopPropagation();
-    navigate(`/product-update/${id}`);  
   };
 
   return (
       <div style={{ overflow: "auto", flex: "1 1 100%" }}>
               { getOrderFromStore()!.productsInCart.size > 0 ? (
               <List>
-                {getOrderFromStore()!.productsInCart.size > 0 && 
-                 Object.values(getOrderFromStore()!.productsInCart).map((productId, number) => (
+              {Object.values(getOrderFromStore()!.productsInCart).map((productId, number) => (
                         <ListItem
                             disablePadding
                             key={productId}
                             className="product"
                           > 
                             <ListItemText primary={productId} />
-                            <ListItemText primary={store.productStore.findById(productId)!.title} />
-                            <ListItemText primary={store.productStore.findById(productId)!.description} />
+                            {/*<ListItemText primary={store.productStore.findById(productId)!.title} />*/}
+                            {/*<ListItemText primary={store.productStore.findById(productId)!.description} */}
                             <ListItemText primary={number} />
 
 
@@ -66,18 +53,9 @@ export const ProductsInCart = observer(() => {
                             </IconButton>
                           </ListItemButton>
 
-                            <ListItemButton>
-                            <IconButton
-                                onClick={(e) => updateProductFromCart(e, productId!)}>
-                                <Editicon />
-                            </IconButton>
-                          </ListItemButton>
-                      
-
-
                           <ListItemButton>
                             <IconButton
-                                onClick={(e) => deleteProductFromCart(e, productId!)}>
+                                onClick={(e) => deleteProductFromOrder(e, productId!)}>
                                 <DeleteIcon />
                             </IconButton>
                           </ListItemButton>
@@ -95,7 +73,7 @@ export const ProductsInCart = observer(() => {
                     height: "100%",
                   }}
                 >
-                  Liste ist noch Leer!
+                  Product list is empty
                 </Typography>
               )}
            

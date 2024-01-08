@@ -2,7 +2,6 @@ import {AppBar, Avatar, Box, Button, IconButton, Toolbar, Tooltip} from "@mui/ma
 import HomeIcon from "@mui/icons-material/Home";
 import LinkIcon from "@mui/icons-material/Link";
 import {useNavigate} from "react-router-dom";
-//
 import { AccountCircle } from "@mui/icons-material";
 //import FavoriteIcon from '@mui/icons-material/Favorite';
 import joik from '../images/joik.jpg'
@@ -10,8 +9,8 @@ import avatar from '../images/avatar.jpg'
 import { useRootStore } from "../state/root-store";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement } from "react";
-//import { deepOrange, deepPurple } from "@mui/material/colors";
 import { MiniCart } from "./miniCart";
+import { LetterAvatar } from "../components/letter-avatar";
 
 export const Appbar = observer(() => {
   const store = useRootStore();
@@ -29,19 +28,22 @@ export const Appbar = observer(() => {
     navigate("/event-past");
   };
 
+  //admin only
   const navigateEventNew= () => {
     navigate("/event-new")
-    window.location.reload();
+    //window.location.reload();
   };
 
   const navigateProducts= () => {
     navigate("/product");
   };
 
+  //admin only 
   const navigateProductNew= () => {
     navigate("/product-new");
   };
 
+  //admin only
   const navigateOrders= () => {
     navigate("/order");
   };
@@ -56,7 +58,10 @@ export const Appbar = observer(() => {
           return <Avatar alt="Hans-Peter Lerjen" src={avatar} />
         } else if (store.authStore.currentUser?.isAdmin){
           return <Avatar alt="Joik" src={joik} />
-        } else {
+        } else if (store.authStore.currentUser?.displayName){
+           return <LetterAvatar displayName = {store.authStore.currentUser?.displayName} />
+        }
+        else {
           return <AccountCircle />
         }
       } else {

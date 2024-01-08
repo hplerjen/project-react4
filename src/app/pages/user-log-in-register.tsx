@@ -30,7 +30,6 @@ export const UserLogInRegister =  observer(() => {
 
 
   return (
-      <div className="cardContainer">
         <AnonymousUser>
           <Card className="card">
             <CardContent>
@@ -71,7 +70,6 @@ export const UserLogInRegister =  observer(() => {
             </CardContent>
           </Card>
           </AnonymousUser>
-          </div>
   )
 }
 )

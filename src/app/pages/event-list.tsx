@@ -54,12 +54,6 @@ export const EventList = observer(({future}: Props) => {
     navigate(`/event-update/${id}`); 
   };
 
-  /* useEffect(() => {
-    store.eventService.getDocs()
-  }, [store.eventService]);*/
-
-
-
   return (
     <>
        <div style={{ display: "flex", alignItems: "center" }}>
@@ -74,7 +68,7 @@ export const EventList = observer(({future}: Props) => {
         }}>
           {Object.values(eventList).map((eventM) => (
             
-              <Card key={eventM.id} className="card" sx={{ maxWidth: 345 }}>
+          <Card key={eventM.id} className="card" sx={{ maxWidth: 345 }}>
               <CardContent>
                 <Typography className="cardTitle">
                   {eventM.title} 
@@ -129,9 +123,9 @@ export const EventList = observer(({future}: Props) => {
                 admin
                 <DeleteIcon />
               </IconButton>
-      </CardActions>
-  </Card>     
-                      )
+          </CardActions>
+          </Card>     
+                  )
                 )
                 }
               </Box>

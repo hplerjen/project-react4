@@ -2,6 +2,7 @@
 export default {
   displayName: 'project-react4',
   preset: './jest.preset.js',
+  globals: { TextEncoder: TextEncoder, TextDecoder: TextDecoder },
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],

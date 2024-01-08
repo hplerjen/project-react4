@@ -1,14 +1,17 @@
 import 'jest';
-import { describe, expect, test } from '@jest/globals';
+import { expect, test } from '@jest/globals';
+import { TextEncoder, TextDecoder } from 'util';
 
 import { OrderStore } from "../app/state/order-store";
-import { useRootStore } from "../app/state/root-store";
+import { RootStore} from "../app/state/root-store";
 import { ProductStore } from 'src/app/state/product-store';
+
+Object.assign(global, { TextDecoder, TextEncoder });
 
 //test fails
 test("number of products", () => {
-    
-    const orderStore = new OrderStore(useRootStore());
+    const rootStore = new RootStore();
+    const orderStore = new OrderStore(rootStore);
     const productsInCart = new Map<string, number>();
     productsInCart.set("1", 2); 
     productsInCart.set("2", 4);
@@ -20,9 +23,10 @@ test("number of products", () => {
         numberOfProducts: 0,
         costTotalWithoutPostage: 0}
     orderStore.calculateNumberOfProductsInCar();
-    expect(orderStore.currentOrder.numberOfProducts === 2);
 
-    const productStore = new ProductStore(useRootStore());
+    expect(orderStore.currentOrder.numberOfProducts === 6);
+
+    const productStore = new ProductStore(rootStore);
     const prod1 = {
         id: "",
         title: "",

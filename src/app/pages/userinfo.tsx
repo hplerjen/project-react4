@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { FormEvent, useState } from 'react'
 import { useRootStore } from '../state/root-store';
@@ -89,7 +89,14 @@ export const UserInfo =  observer(() => {
     >
       <Typography variant="h6">User Information</Typography>
       
-      <div className="cardContainer">
+      <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                p: 1,
+                m: 1,
+                bgcolor: 'background.paper',
+                borderRadius: 1,
+        }}>
           <UserLogInRegister/>
           <OnlyLoggedInUser>
             <Card className="card">
@@ -140,7 +147,7 @@ export const UserInfo =  observer(() => {
             </Card>
           </OnlyLoggedInUser>
 
-          </div>
+          </Box>
           </div>
   )
 }
