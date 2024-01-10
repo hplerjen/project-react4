@@ -21,15 +21,15 @@ function stringToColor(string: string) {
   return color;
 }
 
-function cutDisplayName(name: string){
-   if (name.indexOf(' ')> 0  && name.split(' ')[0][0] !== undefined 
-   && name.split(' ')[1][0] !== undefined) {
-      return name.split(' ')[0][0] + name.split(' ')[1][0];
-   }  else if (name.charAt(0) && name.charAt(1)){
-      return name.charAt(0) + name.charAt(1);
-   } else {
+function cutDisplayName(name: string) {
+  if (name.indexOf(' ') > 0 && name.split(' ')[0][0] !== undefined
+    && name.split(' ')[1][0] !== undefined) {
+    return name.split(' ')[0][0] + name.split(' ')[1][0];
+  } else if (name.charAt(0) && name.charAt(1)) {
+    return name.charAt(0) + name.charAt(1);
+  } else {
     return name;
-   }
+  }
 
 }
 
@@ -46,8 +46,8 @@ interface Props {
   displayName: string
 }
 
-export const LetterAvatar = ({displayName}: Props) => {
+export const LetterAvatar = ({ displayName }: Props) => {
   return (
-      <Avatar {...stringAvatar(cutDisplayName(displayName))} />
+    <Avatar {...stringAvatar(cutDisplayName(displayName))} />
   );
 }

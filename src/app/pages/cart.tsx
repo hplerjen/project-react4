@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material'
 import React from 'react'
-import { UserLogInRegister } from './user-log-in-register'
+import { UserLogInRegister } from './user-log'
 import { Address } from './address'
-import { ProductsInCart } from './products_in_cart'
+import { ProductsInCart } from './products-in-cart'
 
 //FIXME observable
 //user, password
@@ -19,14 +19,14 @@ const Cart = () => {
         textAlign: "start",
       }}
     >
-    <Typography variant="h6">Welcome to ShoppingCart</Typography>
-    <div className="cardContainer">
-       <UserLogInRegister />
-       <Address />
-       <ProductsInCart/>
+      <Typography variant="h6">Welcome to ShoppingCart</Typography>
+      <div className="cardContainer">
+        {/*<UserLogInRegister />
+       <Address />*/}
+        <ProductsInCart />
 
 
-    </div>
+      </div>
     </div>
   )
 }

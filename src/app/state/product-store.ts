@@ -1,37 +1,35 @@
-
-import {autorun, makeAutoObservable, observable} from "mobx";
-import {RootStore} from "./root-store";
-import { ProductMini } from "../model/productMini";
+import { autorun, makeAutoObservable, observable } from 'mobx';
+import { RootStore } from './root-store';
+import { ProductMini } from '../model/product-mini';
 
 export class ProductStore {
-    public products: { [key: string]: ProductMini } = observable({});
+  public products: { [key: string]: ProductMini } = observable({});
 
-    constructor(private rootStore: RootStore) {
-        makeAutoObservable(this);
+  constructor(private rootStore: RootStore) {
+    makeAutoObservable(this);
 
-        autorun(() => {
-            rootStore.productService.getDocs();
-        });
-    }
+    autorun(() => {
+      rootStore.productService.getDocs();
+    });
+  }
 
-    add(products: ProductMini[]) {
-        products.forEach((e) => {
-            this.products[e.id!] = e;
-        });
-    }
+  add(products: ProductMini[]) {
+    products.forEach((e) => {
+      this.products[e.id!] = e;
+    });
+  }
 
-    remove(products: ProductMini[]) {
-        products.forEach((e) => {
-            delete this.products[e.id!];
-        });
-    }
+  remove(products: ProductMini[]) {
+    products.forEach((e) => {
+      delete this.products[e.id!];
+    });
+  }
 
-    clear() {
-        this.products = {};
-    }
+  clear() {
+    this.products = {};
+  }
 
-    findById(id: string | undefined ): ProductMini | undefined {
-        return Object.values(this.products).find((p) => p.id === id);
-    }
-
+  findById(id: string | undefined): ProductMini | undefined {
+    return Object.values(this.products).find((p) => p.id === id);
+  }
 }

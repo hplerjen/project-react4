@@ -1,29 +1,28 @@
 .card {
-    margin: 10px 5px;
-    text-align: start;
-    max-width: 500px;
-  }
-  
-  .card .cardTitle {
-    font-size: large;
-    font-weight: bold;
-  }
-  
-  .card .textField {
-    margin: 20px 10px 0px 10px;
-  }
+  margin: 10px 5px;
+  text-align: start;
+  max-width: 500px;
+}
 
-  .card .numberField {
-    margin: 20px 10px 0px 10px;
-    width: 4000;
-    color: green;
-    height: 50px;
-    border: 1px solid #4CAF50; 
-    
-  }
-  
-  .cardContainer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-  }
+.card .cardTitle {
+  font-size: large;
+  font-weight: bold;
+}
+
+.card .textField {
+  margin: 20px 10px 0px 10px;
+}
+
+.card .numberField {
+  margin: 20px 10px 0px 10px;
+  width: 4000;
+  color: green;
+  height: 50px;
+  border: 1px solid #4caf50;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}

@@ -1,20 +1,20 @@
-import {initializeApp} from "firebase/app";
-import {getFirestore} from "firebase/firestore";
-import {createContext, useContext} from "react";
-import {makeAutoObservable} from "mobx";
-import {EventStore} from "./event-store";
-import { AuthStore } from "./auth-store";
-import { getAuth } from "firebase/auth";
-import { AuthService } from "../services/auth.service";
-import { firebaseConfig } from "../firebase.config";
-import { ProductStore } from "./product-store";
-import { ProductService } from "../services/product.service";
-import { OrdersStore } from "./orders-store";
-import { OrderService } from "../services/order.service";
-import { MessageStore } from "./message-store";
-import { AdminService } from "../services/admin.service";
-import { OrderStore } from "./order-store";
-import { EventService } from "../services/event.service";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { createContext, useContext } from 'react';
+import { makeAutoObservable } from 'mobx';
+import { EventStore } from './event-store';
+import { AuthStore } from './auth-store';
+import { getAuth } from 'firebase/auth';
+import { AuthService } from '../services/auth-service';
+import { firebaseConfig } from '../firebase.config';
+import { ProductStore } from './product-store';
+import { ProductService } from '../services/product-service';
+import { OrdersStore } from './orders-store';
+import { OrderService } from '../services/order-service';
+import { MessageStore } from './message-store';
+import { AdminService } from '../services/admin-service';
+import { OrderStore } from './order-store';
+import { EventService } from '../services/event-service';
 
 export class RootStore {
   eventStore: EventStore;
@@ -29,7 +29,7 @@ export class RootStore {
   adminService: AdminService;
   messageStore: MessageStore;
 
-  get init () {
+  get init() {
     return this.authStore.currentUser;
   }
 
@@ -41,20 +41,18 @@ export class RootStore {
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    this.eventService = new EventService( this, db );
+    this.eventService = new EventService(this, db);
     this.eventStore = new EventStore(this);
 
-    this.productService = new ProductService( this, db );
+    this.productService = new ProductService(this, db);
     this.productStore = new ProductStore(this);
 
-
-  
     this.authStore = new AuthStore(this);
     this.authService = new AuthService(auth, this);
 
     this.adminService = new AdminService(this, auth, db);
 
-    this.orderService = new OrderService( this, db );
+    this.orderService = new OrderService(this, db);
     this.ordersStore = new OrdersStore(this);
     this.orderStore = new OrderStore(this);
 

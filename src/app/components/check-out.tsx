@@ -6,13 +6,12 @@ import React from 'react'
 const Checkout = () => {
   return (
     <div>
-
-    <FormGroup>
-  <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-  <FormControlLabel required control={<Checkbox />} label="Required" />
-  <FormControlLabel disabled control={<Checkbox />} label="Disabled" />
-</FormGroup>
-</div>
+      <FormGroup>
+        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+        <FormControlLabel required control={<Checkbox />} label="Required" />
+        <FormControlLabel disabled control={<Checkbox />} label="Disabled" />
+      </FormGroup>
+    </div>
   )
 }
 
